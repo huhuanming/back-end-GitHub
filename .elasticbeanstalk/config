@@ -1,0 +1,16 @@
+[global]
+ApplicationName=back-end
+AwsCredentialFile=/Users/hu/.elasticbeanstalk/aws_credential_file
+DevToolsEndpoint=git.elasticbeanstalk.ap-northeast-1.amazonaws.com
+EnvironmentName=back-end-env
+EnvironmentTier=WebServer::Standard::1.0
+EnvironmentType=LoadBalanced
+InstanceProfileName=aws-elasticbeanstalk-ec2-role
+OptionSettingFile=/Users/hu/Documents/RailsProjects/back-end/.elasticbeanstalk/optionsettings.back-end-env
+RdsDeletionPolicy=Snapshot
+RdsEnabled=Yes
+RdsSourceSnapshotName=
+Region=ap-northeast-1
+ServiceEndpoint=https://elasticbeanstalk.ap-northeast-1.amazonaws.com
+SolutionStack=64bit Amazon Linux 2014.03 v1.0.5 running Ruby 2.0 (Puma)
+

@@ -1,0 +1,32 @@
+production:
+  adapter: em_mysql2
+  encoding: utf8mb4
+  reconnect: false
+  pool: 5
+  database: <%= ENV['RDS_DB_NAME'] %>
+  username: <%= ENV['RDS_USERNAME'] %>
+  password: <%= ENV['RDS_PASSWORD'] %>
+  host: <%= ENV['RDS_HOSTNAME'] %>
+  port: <%= ENV['RDS_PORT'] %>
+
+development:
+  adapter: em_mysql2
+  encoding: utf8mb4
+  reconnect: false
+  database: ebdb
+  pool: 5
+  username: root
+  password: 'lib217217'
+  host: localhost
+  port: 3306
+
+test:
+  adapter: em_mysql2
+  encoding: utf8mb4
+  reconnect: false
+  database: ebdb
+  pool: 5
+  username: root
+  password: 'lib217217'
+  host: localhost
+  port: 3306
