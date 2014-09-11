@@ -53,6 +53,8 @@ module Restfuls
 				types.each do |type_name|
 					the_type = FoodType.find_or_initialize_by(:type_name => type_name)
 					if the_type.restaurant_id.nil? || the_type.restaurant_id != restaurant_id
+						the_type = FoodType.new
+						the_type.type_name = type_name
 						the_type.restaurant_id = restaurant_id
 						the_type.save
 					end
