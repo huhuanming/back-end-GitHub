@@ -10,6 +10,7 @@ module Restfuls
 		#
 		# = 操作
 		# * 创建餐馆
+		# * 读取餐馆菜单
 		#
 		#
 		# == 创建餐馆
@@ -61,6 +62,57 @@ module Restfuls
 		# 	地推帐号 AccessToken 不存在
 		# ====== 501:
 		# 	数据存储错误
+		# 
+		# 
+		# == 读取餐馆菜单
+		# 	读取指定餐馆的菜单
+	    # ==== GET
+	    # 	restaurants/:id/menu
+		# ==== Params
+		# ====== :id
+		# 	餐馆的id
+	    # ==== Response Status Code
+		# 	200
+		# ==== Response Body
+		# ====== type_name:
+		# 	菜品种类名
+		# ====== foods:
+		# ======== food_name:
+		# 	菜名
+		# ======== shop_price:
+		# 	销售价格
+		# ==== Response Body Example:
+	    # 	[
+	    #     {
+	    # 		"type_name":"菜品二",
+	    # 		"foods":
+	    # 		[
+	    # 			{
+	    # 				"food_name":"翔啊",
+	    # 				"shop_price":"3.0"
+	   	# 			},
+	    # 			{
+	    # 				"food_name":"鐧借彍",
+	    # 				"shop_price":"2.0"
+	    # 			}
+	    # 		]
+	    #  	 },
+	    # 	 {
+	    # 		"type_name":"翔类",
+	    # 		"foods":
+	    # 		[
+	    # 			{
+	    # 				"food_name":"好菜",
+	    # 				"shop_price":"2.0"
+	    # 			},
+	    # 			{
+	    # 				"food_name":"花菜",
+	    # 				"shop_price":"1.0"
+	    # 			}
+	    # 		]
+	    # 	 }
+	    #  ]
+		# 
 		resource :restaurants do
 			desc "Create a restaurant"
 			post do	
@@ -129,7 +181,10 @@ module Restfuls
 				present:'response_status', 'successed to create a restaurant'
 			end
 
+			get ":id/menu" do
+				menu = FoodType.where(:restaurant_id => params[:id])
+				present menu, with: APIEntities::Menu
+			end
 		end
-
 	end
 end

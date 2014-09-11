@@ -249,4 +249,28 @@ describe ApplicationApi do
     end
   end
 
+  it ':id/menu: params is valid' do
+    with_api(ApplicationApi, api_options) do |option|
+      params = Hash.new
+      params[:access_token] = @access_token
+      params[:menu_json] = "{\"菜品二\":{\"翔啊\":{\"price\":\"3.0\"},\"白菜\":{\"price\":\"2.0\"}},\"翔类\":{\"好菜\":{\"price\":\"2.5\"},\"花菜\":{\"price\":\"10.5\"}}}"
+      post_request(:path => '/v1/menus', :body => params) do |async|  
+        params = Hash.new
+        get_request(:path => '/v1/restaurants/1/menu', :body => params) do |async|
+          response = JSON.parse(async.response)
+          expect_response = "[{\"type_name\"=>\"菜品二\", \"foods\"=>[{\"food_name\"=>\"翔啊\", \"shop_price\"=>\"3.0\"}, {\"food_name\"=>\"白菜\", \"shop_price\"=>\"2.0\"}]}, {\"type_name\"=>\"翔类\", \"foods\"=>[{\"food_name\"=>\"好菜\", \"shop_price\"=>\"2.5\"}, {\"food_name\"=>\"花菜\", \"shop_price\"=>\"10.5\"}]}]"
+          expect(response.to_s).to eq(expect_response)
+          
+          get_request(:path => '/v1/restaurants/3/menu', :body => params) do |async|
+            response = JSON.parse(async.response)
+            expect_response = "[]"
+            expect(response.to_s).to eq(expect_response)
+          end
+        
+        end
+
+      end
+    end
+  end
+
 end

@@ -1,6 +1,6 @@
 namespace :deploy do
 
-	  desc 'Development environment console'
+	  desc 'build this app'
 	  task(:build =>[:environment]) do
 	  		require 'fileutils'
 	  		FileUtils.rm_r '../back-end/.ebextensions'
@@ -64,8 +64,8 @@ namespace :deploy do
 			FileUtils.copy('README.md', '../back-end/README.md')
 	  end
 
-	  desc 'Development environment console'
-	  task(:push =>[:environment]) do
+	  desc 'build and deploy this app'
+	  task :push, [:commit_message] => :environment do |task, args|
 	    	
 	  		require 'fileutils'
 	  		FileUtils.rm_r '../back-end/.ebextensions'
@@ -127,8 +127,12 @@ namespace :deploy do
 
 	  		FileUtils.rm_r '../back-end/README.md'
 			FileUtils.copy('README.md', '../back-end/README.md')
+
+			args.with_defaults(:commit_message => Time.new.to_s)
+			commit_message = args.commit_message
+
 	    	system("cd ../back-end; git add -A")
-	    	system("cd ../back-end; git commit -m '" << Time.new.to_s << "'")
+	    	system("cd ../back-end; git commit -m '" << commit_message << "'")
 	    	system("cd ../back-end; git aws.push")
 	  end
 end

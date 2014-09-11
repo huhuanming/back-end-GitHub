@@ -5,6 +5,7 @@ namespace :doc do
 	    	require 'fileutils'
 			FileUtils.cp('tasks/lib/darkfish.js', 'doc/js/darkfish.js')
 			FileUtils.copy_entry('doc','/Users/hu/Project/promotioner_ios/0km_Popularize/doc')
+			FileUtils.copy_entry('doc','/Users/hu/Project/restaurant_ios/doc')
 			FileUtils.copy_entry('doc','/Users/hu/WorkSpace/promotioner_android/doc')
 			FileUtils.copy_entry('doc','/Users/hu/WorkSpace/Merchants/doc')
 	  end

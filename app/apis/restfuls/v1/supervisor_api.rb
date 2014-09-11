@@ -30,6 +30,11 @@ module Restfuls
 		# 	餐厅管理员的token
 		# ======== key:
 		# 	餐厅管理员的key
+		# ====== restaurant:
+		# ======== restaurant_id:
+		# 	餐馆的id
+		# ======== restaurant_name:
+		# 	餐馆的名字
 		# ==== Response Body Example:
 		# 		{
 		# 			login_count: 3
@@ -38,6 +43,9 @@ module Restfuls
 		# 				token: "a88257bc-16d0-47ac-8833-4b356e90d8a3"
 		# 				key: "FG9K6bqS2OjtHM6EriAfUg"
 		# 			}
+		# 			restaurant: {
+		# 	           restaurant_id: 1
+		# 			   restaurant_name: "这个店很奇怪"
 		# 		}
 	    # ==== Error Status Code
 		# ====== 401:

@@ -31,6 +31,9 @@ describe ApplicationApi do
         access_token = response["access_token"]
         expect(access_token['token'].length).to eq(36)
         expect(access_token['key'].length).to eq(22)
+        restaurant =  response["restaurant"]
+        expect(restaurant['restaurant_id']).not_to eq(nil)
+        expect(restaurant['restaurant_name']).to eq("这个店很奇怪")
       end
     end
   end

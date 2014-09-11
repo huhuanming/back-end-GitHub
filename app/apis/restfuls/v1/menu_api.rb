@@ -20,7 +20,7 @@ module Restfuls
 		# 	餐厅管理人员的 access_token
 		# ====== menu_json:
 		# 	菜单的json数据,格式如下:
-		#   {"菜品一":{"青菜":{"price":"3.00"},"白菜":{"price":"2:00"}},"菜品二":{"紫菜":{"price":"2.00"},"花菜":{"price":"1:00"}}}
+		#   {"菜品一":{"青菜":{"price":"3.00"},"白菜":{"price":"2.00"}},"菜品二":{"紫菜":{"price":"2.00"},"花菜":{"price":"1.00"}}}
 	    # ==== Response Status Code
 		# 	201
 	    # ==== Response Body
@@ -52,8 +52,10 @@ module Restfuls
 				
 				types.each do |type_name|
 					the_type = FoodType.find_or_initialize_by(:type_name => type_name)
-					the_type.restaurant_id = restaurant_id
-					the_type.save
+					if the_type.restaurant_id.nil? || the_type.restaurant_id != restaurant_id
+						the_type.restaurant_id = restaurant_id
+						the_type.save
+					end
 					the_food_of_type = menu[type_name]
 				    begin
 				       	food_names = the_food_of_type.keys
