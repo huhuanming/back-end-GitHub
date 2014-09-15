@@ -8,19 +8,21 @@ module Restfuls
 		#
 		# = 操作
 		# * 创建订单（测试接口，不开放）
+		# * 读取订单
 		#
-		# == 创建订单
-		# 	为餐厅创建一份订单
-	    # ==== POST
-	    # 	/menus
+		# == 读取订单
+		# 	读取餐厅订单
+	    # ==== GET
+	    # 	/orders
 		# ==== Params
 		# ====== access_token:
 		# 	餐厅管理人员的 access_token
-		# ====== order_good_json:
-		# 	菜单的json数据,格式如下:
-		#   {"菜品一":{"青菜":{"price":"3.00"},"白菜":{"price":"2:00"}},"菜品二":{"紫菜":{"price":"2.00"},"花菜":{"price":"1:00"}}}
+		# ====== page:
+		# 	可选，页码，默认为0
+		# ====== per_page:
+		# 	可选，每页订单条数，默认为10
 	    # ==== Response Status Code
-		# 	201
+		# 	200
 	    # ==== Response Body
 		# ====== response_status:
 		# 	'successed to create order of this restaurant'
@@ -31,5 +33,14 @@ module Restfuls
 		# 	数据库存储错误
 		# ====== 502:
 		# 	menu_json格式错误
+		resource :orders do
+			desc "Create a order"
+			get do
+				authenticate_supervisor!
+				order = Order.where(:restaurant_id => current_supervisor.restaurant_id).page(params[:page])
+				# order = Order.where(:restaurant_id => current_supervisor.restaurant_id).page(params[:page]).per(params[:per_page]||10)
+				present order, with: APIEntities::Order
+			end
+		end
 	end
 end

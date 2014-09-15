@@ -9,5 +9,12 @@ FactoryGirl.define do
     trait :supervisor_with_login do
       nick_name   "John Doe"
     end
+
+
+    trait :second_supervisor do
+      nick_name "John Snow"
+      phone_number "1313"
+      encrypted_password "$2a$10$1g1TVWOQAZmDDVCM37N5DeZTy79A.K6uscv23MSngO9nlpEmzr5TO"
+    end
   end
 end

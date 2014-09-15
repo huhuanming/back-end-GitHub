@@ -4,6 +4,6 @@ namespace :doc do
 	    	system("rdoc app/apis/restfuls/v1/")
 	    	require 'fileutils'
 			FileUtils.cp('tasks/lib/darkfish.js', 'doc/js/darkfish.js')
-			FileUtils.copy_entry('doc','../api_doc')
+			FileUtils.copy_entry('doc','../api_doc/doc')
 	  end
 end

@@ -26,6 +26,15 @@ FactoryGirl.define do
       zone_id 0
     end
 
+    trait :second_promotioner do
+      phone_number "1313"
+      encrypted_password "$2a$10$1g1TVWOQAZmDDVCM37N5DeZTy79A.K6uscv23MSngO9nlpEmzr5TO"
+      nick_name "1313"
+      sign_in_count 0
+      failed_attempts 0
+      zone_id 0
+    end
+
     trait :promotioner_with_access_token do
       phone_number "1212"
       encrypted_password "$2a$10$1g1TVWOQAZmDDVCM37N5DeZTy79A.K6uscv23MSngO9nlpEmzr5TO"

@@ -12,7 +12,14 @@ module ApiHelper
       token = token_array[0]
       encode_signed = token_array[1]
       encoded = token_array[2]
-      error!("AccessToken is invalid", 401) if token_array.length != 3
+
+      if token_array.length != 3
+        token_array.delete_at(0)
+        token_array.delete_at(0)
+        encoded = token_array.join(":")
+        encoded = CGI::escape(encoded)
+        encode_signed = CGI::escape(encode_signed)
+      end
 
       data = CGI::unescape(encoded)
 
@@ -33,8 +40,7 @@ module ApiHelper
       promotioner_token = PromotionerToken.find_by(:token => token)
 
       error!("AccessToken is not found", 404) if promotioner_token.nil?
-
-      error!("AccessToken is invalid", 401) if encode_signed != encoded_sign(promotioner_token.key, encoded)
+      error!("AccessToken is invalid"+encode_signed, 401) if encode_signed != encoded_sign(promotioner_token.key, encoded)
   end
 
   def authenticate_supervisor!

@@ -32,5 +32,12 @@ module Restfuls
          present:ping, Time.new
     end
 
+
+    get '/authenticate_promotioner' do 
+         authenticate_promotioner!
+         present:ping, Time.new
+    end
+
+
   end
 end

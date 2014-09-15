@@ -18,6 +18,8 @@ require 'digest/md5'
 require 'open-uri'
 require 'json'
 require "grape-entity"
+require "will_paginate"
+require 'will_paginate/active_record'
 
 module GGA
   class << self

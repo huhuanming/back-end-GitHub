@@ -215,12 +215,20 @@ describe ApplicationApi do
     end
   end
 
-  it '/v1/menus: exsit before' do
+  it '/v1/menus: same menu json' do
     @food_type = FactoryGirl.create(:food_type, restaurant_id: @restaurant_id)
     expect(FoodType.find_by(:type_name => "翔类").nil?).to eq(false)
 
     @food = FactoryGirl.create(:food, food_type_id: @food_type.id)
     expect(Food.find_by(:food_name => "翔啊").nil?).to eq(false)
+
+
+    @second_promotioner = FactoryGirl.create(:promotioner, :second_promotioner)
+    @second_restaurant = FactoryGirl.create(:restaurant, promotioner_id: @second_promotioner.id, restaurant_name: "这个店不奇怪", back_account: "000000000", phone_number: "1231312131")
+    @second_restaurant_id = @second_restaurant.id
+    @second_supervisor = FactoryGirl.create(:supervisor, :second_supervisor, restaurant_id: @second_restaurant_id)
+    @second_supervisor_token = @second_supervisor.generate_access_token
+    @second_access_token = generate_access_token(@second_supervisor_token)
 
     with_api(ApplicationApi, api_options) do |option|
       params = Hash.new
@@ -243,8 +251,34 @@ describe ApplicationApi do
            the_food = Food.find_by(:food_name => key)
            food = foods[key]
            expect(the_food.shop_price).to eq(food["price"].to_f)
-          end 
+          end
         end
+
+          params[:access_token] = @second_access_token
+          post_request(:path => '/v1/menus', :body => params) do |async|
+              response = JSON.parse(async.response)
+              pp FoodType.all
+              expect(response['response_status']).to eq("successed to update menu of this restaurant")
+              expect(FoodType.find_by(:type_name => "翔类").nil?).to eq(false)
+              expect(Food.find_by(:food_name => "翔啊").nil?).to eq(false)
+
+              menu = JSON.parse(params[:menu_json])
+              types = menu.keys
+              the_types = FoodType.all.pluck(:type_name)
+              expect(the_types.sort!).to eq(types.sort!)
+
+              types.each do |type_name|
+                foods = menu[type_name]
+                foods.keys.each do |key|
+                 the_food = Food.find_by(:food_name => key)
+                 food = foods[key]
+                 expect(the_food.shop_price).to eq(food["price"].to_f)
+                end
+              end
+
+              
+            end
+
       end
     end
   end
@@ -258,6 +292,7 @@ describe ApplicationApi do
         params = Hash.new
         get_request(:path => '/v1/restaurants/1/menu', :body => params) do |async|
           response = JSON.parse(async.response)
+          pp response
           expect_response = "[{\"type_name\"=>\"菜品二\", \"foods\"=>[{\"food_name\"=>\"翔啊\", \"shop_price\"=>\"3.0\"}, {\"food_name\"=>\"白菜\", \"shop_price\"=>\"2.0\"}]}, {\"type_name\"=>\"翔类\", \"foods\"=>[{\"food_name\"=>\"好菜\", \"shop_price\"=>\"2.5\"}, {\"food_name\"=>\"花菜\", \"shop_price\"=>\"10.5\"}]}]"
           expect(response.to_s).to eq(expect_response)
           

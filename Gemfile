@@ -16,7 +16,7 @@ gem 'grape', '0.8.0'
 gem 'grape-entity', '0.4.3'
 gem 'goliath', '1.0.4'
 gem 'tilt', '2.0.1'
-gem 'kaminari', '0.16.1'
+gem 'will_paginate'
 
 gem 'mysql2', '0.3.16'
 gem 'protected_attributes', '1.0.8'

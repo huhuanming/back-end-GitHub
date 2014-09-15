@@ -75,7 +75,7 @@ module Restfuls
 					end
 					Food.where(:food_type_id => the_type.id).where.not(:food_name => food_names).delete_all
 				end
-				ids = FoodType.where.not(:type_name => types).pluck(:id)
+				ids = FoodType.where(:restaurant_id => restaurant_id).where.not(:type_name => types).pluck(:id)
 				if ids.length > 0
 					Food.where(:food_type_id => ids).delete_all
 					FoodType.where(:id => ids).delete_all

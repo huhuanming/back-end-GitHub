@@ -67,9 +67,9 @@ module Restfuls
 		# == 读取餐馆菜单
 		# 	读取指定餐馆的菜单
 	    # ==== GET
-	    # 	restaurants/:id/menu
+	    # 	restaurants/{:id}/menu
 		# ==== Params
-		# ====== :id
+		# ====== {:id}
 		# 	餐馆的id
 	    # ==== Response Status Code
 		# 	200
