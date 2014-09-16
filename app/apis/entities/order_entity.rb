@@ -8,9 +8,10 @@ module Restfuls
       		expose :shipping_address, as: :shipping_address
       		expose :total_price, as: :total_price
       		expose :actual_total_price, as: :actual_total_price
-      		expose :created_at, as: :created_at
-      		expose :updated_at, as: :updated_at
-      		expose :shipping_at, as: :shipping_at
-    	end
+      		expose :created_at, as: :created_at, format_with: :iso_timestamp
+      		expose :updated_at, as: :updated_at, format_with: :iso_timestamp
+      		expose :shipping_at, as: :shipping_at, format_with: :iso_timestamp
+                  format_with(:iso_timestamp) { |date| date.iso8601 }
+    	       end
 	end
 end

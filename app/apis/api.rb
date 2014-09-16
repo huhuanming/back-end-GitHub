@@ -11,6 +11,5 @@ module Application
     mount Restfuls::Restaurantv1 => '/v1'
     mount Restfuls::Supervisorv1 => '/v1'
     mount Restfuls::Menuv1 => '/v1'
-    mount Restfuls::Orderv1 => '/v1'
   end
 end
