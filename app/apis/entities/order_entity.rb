@@ -5,7 +5,9 @@ module Restfuls
       		expose :ship_type, as: :ship_type
       		expose :order_type, as: :order_type
       		expose :phone_number, as: :phone_number
-      		expose :shipping_address, as: :shipping_address
+                  expose :food_count, as: :food_count
+                  expose :shipping_user, as: :shipping_user
+                  expose :shipping_address, as: :shipping_address
       		expose :total_price, as: :total_price
       		expose :actual_total_price, as: :actual_total_price
       		expose :created_at, as: :created_at, format_with: :iso_timestamp

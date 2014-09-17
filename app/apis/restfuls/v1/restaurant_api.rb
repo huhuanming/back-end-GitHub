@@ -68,9 +68,9 @@ module Restfuls
 		# == 读取餐馆菜单
 		# 	读取指定餐馆的菜单
 	    # ==== GET
-	    # 	restaurants/{:id}/menu
+	    # 	restaurants/{:restaurant_id}/menus
 		# ==== Params
-		# ====== {:id}
+		# ====== {:restaurant_id}
 		# 	餐馆的id
 	    # ==== Response Status Code
 		# 	200
@@ -117,8 +117,10 @@ module Restfuls
 		# == 读取餐馆订单
 		# 	读取餐馆订单
 	    # ==== GET
-	    # 	/orders
+	    # 	restaurants/{:restaurant_id}/orders
 		# ==== Params
+		# ====== {:restaurant_id}:
+		# 	餐厅id
 		# ====== access_token:
 		# 	餐厅管理人员的 access_token
 		# ====== page:
@@ -136,8 +138,12 @@ module Restfuls
 		# 	订单状态，0 是未确认， 1 是已确认。
 		# ====== phone_number:
 		# 	下单人手机号
+		# ====== shipping_user
+		#  	收货人姓名
 		# ====== shipping_address:
-		# 	运货地址
+		# 	收货地址
+		# ====== food_count:
+		# 	预订的的菜品个数
 		# ====== total_price:
 		# 	订单总价
 		# ====== actual_total_price:
@@ -147,7 +153,7 @@ module Restfuls
 		# ====== updated_at:
 		# 	订单更新时间(时间格式 iso8601, "yyyy-MM-dd'T'HH:mm:ssZ")
 		# ====== shipping_at:
-		# 	订单指定运怂到达时间(时间格式 iso8601, "yyyy-MM-dd'T'HH:mm:ssZ")
+		# 	预计收货时间(时间格式 iso8601, "yyyy-MM-dd'T'HH:mm:ssZ")
 		# ==== Response Body Example:(page: 1,per_page: 2)
 		# 	[
 		#  		{
