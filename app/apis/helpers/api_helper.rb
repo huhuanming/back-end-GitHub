@@ -8,17 +8,18 @@ module ApiHelper
         error!("AccessToken is invalid", 401)
       end
 
+      error!("AccessToken is invalid", 401) if token_array.length < 3
 
-      token = token_array[0]
-      encode_signed = token_array[1]
-      encoded = token_array[2]
-
-      if token_array.length != 3
+      if token_array.length > 3
         token_array.delete_at(0)
         token_array.delete_at(0)
         encoded = token_array.join(":")
         encoded = CGI::escape(encoded)
         encode_signed = CGI::escape(encode_signed)
+      else
+        token = token_array[0]
+        encode_signed = token_array[1]
+        encoded = token_array[2]
       end
 
       data = CGI::unescape(encoded)
@@ -51,17 +52,19 @@ module ApiHelper
       rescue Exception => e
         error!("AccessToken is invalid", 401)
       end
+      
+      error!("AccessToken is invalid", 401) if token_array.length < 3
 
-      token = token_array[0]
-      encode_signed = token_array[1]
-      encoded = token_array[2]
-
-      if token_array.length != 3
+      if token_array.length > 3
         token_array.delete_at(0)
         token_array.delete_at(0)
         encoded = token_array.join(":")
         encoded = CGI::escape(encoded)
         encode_signed = CGI::escape(encode_signed)
+      else
+        token = token_array[0]
+        encode_signed = token_array[1]
+        encoded = token_array[2]
       end
 
       data = CGI::unescape(encoded)

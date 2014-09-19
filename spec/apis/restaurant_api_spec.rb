@@ -12,7 +12,6 @@ describe ApplicationApi do
     with_api(ApplicationApi, api_options) do |option|
     	params = Hash.new
       	params[:access_token] = @access_token
-      	params[:password] = "2888"
       	post_request(:path => '/v1/restaurants', :body => params) do |async|
       		response = JSON.parse(async.response)
         	expect(response['error']).to eq("Data is invalid or exist")

@@ -6,6 +6,7 @@ module Restfuls
       		expose :order_type, as: :order_type
       		expose :phone_number, as: :phone_number
                   expose :food_count, as: :food_count
+                  expose :remark, as: :order_remark
                   expose :shipping_user, as: :shipping_user
                   expose :shipping_address, as: :shipping_address
       		expose :total_price, as: :total_price

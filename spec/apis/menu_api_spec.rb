@@ -25,7 +25,7 @@ describe ApplicationApi do
     end
   end
 
-  it '/v1/menus: menu_json is invalid, json is invalid, no keys' do
+  it '/v1/menus: menu_json and json is invalid without keys' do
     with_api(ApplicationApi, api_options) do |option|
       params = Hash.new
       params[:access_token] = @access_token
@@ -257,14 +257,13 @@ describe ApplicationApi do
           params[:access_token] = @second_access_token
           post_request(:path => '/v1/menus', :body => params) do |async|
               response = JSON.parse(async.response)
-              pp FoodType.all
               expect(response['response_status']).to eq("successed to update menu of this restaurant")
               expect(FoodType.find_by(:type_name => "翔类").nil?).to eq(false)
               expect(Food.find_by(:food_name => "翔啊").nil?).to eq(false)
 
               menu = JSON.parse(params[:menu_json])
               types = menu.keys
-              the_types = FoodType.all.pluck(:type_name)
+              the_types = FoodType.where(:restaurant_id => @second_restaurant.id).pluck(:type_name)
               expect(the_types.sort!).to eq(types.sort!)
 
               types.each do |type_name|
@@ -292,7 +291,6 @@ describe ApplicationApi do
         params = Hash.new
         get_request(:path => '/v1/restaurants/1/menu', :body => params) do |async|
           response = JSON.parse(async.response)
-          pp response
           expect_response = "[{\"type_name\"=>\"菜品二\", \"foods\"=>[{\"food_name\"=>\"翔啊\", \"shop_price\"=>\"3.0\"}, {\"food_name\"=>\"白菜\", \"shop_price\"=>\"2.0\"}]}, {\"type_name\"=>\"翔类\", \"foods\"=>[{\"food_name\"=>\"好菜\", \"shop_price\"=>\"2.5\"}, {\"food_name\"=>\"花菜\", \"shop_price\"=>\"10.5\"}]}]"
           expect(response.to_s).to eq(expect_response)
           
