@@ -9,12 +9,24 @@ module Restfuls
 		# 餐馆接口
 		#
 		# = 操作
+		# == C
 		# * 创建餐馆
+		# == U
+		# * 确认餐馆某条订单
+		# * 更新餐馆开店状态
+		# * 更新餐馆关店时间
+		# * 更新餐馆公告
+		# * 更新餐馆起送价
+		# * 更新餐馆送餐费
+		# * 更新餐馆送达时间
+		# * 更新餐馆送餐电话
+		# * 更新餐馆短信接单状态
+		# * 更新餐馆客户端接单状态
+		# == R
 		# * 读取餐馆菜单
 		# * 读取餐馆订单列表
 		# * 读取餐馆设置
 		# * 读取餐馆某条订单
-		# * 确认餐馆某条订单
 		#
 		#
 		# == 创建餐馆
@@ -139,6 +151,12 @@ module Restfuls
 		# 	快递方式，默认是 0。
 		# ====== order_type:
 		# 	订单状态，0 是未确认， 1 是已确认。
+		# ====== is_ticket:
+		# 	小票状态，0 是不需要， 1 是需要。
+		# ====== is_receipt:
+		# 	发票状态，0 是不需要， 1 是需要。
+		# ====== is_now:
+		# 	立即送状态，0 不是， 1 是。
 		# ====== phone_number:
 		# 	下单人手机号
 		# ====== phone_number:
@@ -305,6 +323,191 @@ module Restfuls
 		# 	帐号验证错误，用户名或密码错误
 		# ====== 404:
 		# 	没有找到相应的订单
+		#
+		# == 更新餐馆开店状态
+		# 	更新餐馆开店状态
+	    # ==== PUT
+	    # 	restaurants/{:restaurant_id}/open
+		# ==== Params
+		# ====== {:restaurant_id}:
+		# 	餐厅id
+		# ====== access_token:
+		# 	餐厅管理人员的 access_token
+	    # ==== Response Status Code
+		# 	200
+	    # ==== Response Body
+		# ====== response_status:
+		# 	"restaurant was opened"
+		# ====== 401:
+		# 	帐号验证错误，用户名或密码错误
+		# ====== 404:
+		# 	没有找到相应的订单
+		#
+		# == 更新餐馆关店时间
+		# 	更新餐馆关店时间
+	    # ==== PUT
+	    # 	restaurants/{:restaurant_id}/close_time
+		# ==== Params
+		# ====== {:restaurant_id}:
+		# 	餐厅id
+		# ====== access_token:
+		# 	餐厅管理人员的 access_token
+		# ====== close_hour:
+		# 	餐馆关闭时的小时数，假如餐馆关闭时间是 22:02，close_hour 就是 22
+		# ====== close_min:
+		# 	餐馆关闭时的小时数，假如餐馆关闭时间是 22:02，close_hour 就是 2
+	    # ==== Response Status Code
+		# 	200
+	    # ==== Response Body
+		# ====== response_status:
+		# 	"close time was updated"
+		# ====== 401:
+		# 	帐号验证错误，用户名或密码错误
+		# ====== 404:
+		# 	没有找到相应的订单
+		#
+		# == 更新餐馆公告
+		# 	更新餐馆公告
+	    # ==== PUT
+	    # 	restaurants/{:restaurant_id}/board
+		# ==== Params
+		# ====== {:restaurant_id}:
+		# 	餐厅id
+		# ====== access_token:
+		# 	餐厅管理人员的 access_token
+		# ====== board:
+		# 	商店公告
+	    # ==== Response Status Code
+		# 	200
+	    # ==== Response Body
+		# ====== response_status:
+		# 	"board was updated"
+		# ====== 401:
+		# 	帐号验证错误，用户名或密码错误
+		# ====== 404:
+		# 	没有找到相应的订单
+		#
+		# == 更新餐馆起送价
+		# 	更新餐馆起送价
+	    # ==== PUT
+	    # 	restaurants/{:restaurant_id}/start_shipping_fee
+		# ==== Params
+		# ====== {:restaurant_id}:
+		# 	餐厅id
+		# ====== access_token:
+		# 	餐厅管理人员的 access_token
+		# ====== start_shipping_fee:
+		# 	起送价
+	    # ==== Response Status Code
+		# 	200
+	    # ==== Response Body
+		# ====== response_status:
+		# 	"start_shipping_fee was updated"
+		# ====== 401:
+		# 	帐号验证错误，用户名或密码错误
+		# ====== 404:
+		# 	没有找到相应的订单
+		#
+		# == 更新餐馆送餐费
+		# 	更新餐馆送餐费
+	    # ==== PUT
+	    # 	restaurants/{:restaurant_id}/shipping_fee
+		# ==== Params
+		# ====== {:restaurant_id}:
+		# 	餐厅id
+		# ====== access_token:
+		# 	餐厅管理人员的 access_token
+		# ====== shipping_fee:
+		# 	送餐费
+	    # ==== Response Status Code
+		# 	200
+	    # ==== Response Body
+		# ====== response_status:
+		# 	"shipping_fee was updated"
+		# ====== 401:
+		# 	帐号验证错误，用户名或密码错误
+		# ====== 404:
+		# 	没有找到相应的订单
+		#
+		# == 更新餐馆配送时间
+		# 	更新餐馆配送时间
+	    # ==== PUT
+	    # 	restaurants/{:restaurant_id}/shipping_time
+		# ==== Params
+		# ====== {:restaurant_id}:
+		# 	餐厅id
+		# ====== access_token:
+		# 	餐厅管理人员的 access_token
+		# ====== shipping_time:
+		# 	送餐时间
+	    # ==== Response Status Code
+		# 	200
+	    # ==== Response Body
+		# ====== response_status:
+		# 	"shipping_time was updated"
+		# ====== 401:
+		# 	帐号验证错误，用户名或密码错误
+		# ====== 404:
+		# 	没有找到相应的订单
+		#
+		# == 更新餐馆送餐电话
+		# 	更新餐馆送餐电话
+	    # ==== PUT
+	    # 	restaurants/{:restaurant_id}/shipping_phone_number
+		# ==== Params
+		# ====== {:restaurant_id}:
+		# 	餐厅id
+		# ====== access_token:
+		# 	餐厅管理人员的 access_token
+		# ====== shipping_phone_number:
+		# 	送餐电话
+	    # ==== Response Status Code
+		# 	200
+	    # ==== Response Body
+		# ====== response_status:
+		# 	"phone_number was updated"
+		# ====== 401:
+		# 	帐号验证错误，用户名或密码错误
+		# ====== 404:
+		# 	没有找到相应的订单
+		#
+		# == 更新餐馆短信接单状态
+		# 	更新餐馆短信接单状态
+	    # ==== PUT
+	    # 	restaurants/{:restaurant_id}/is_sms
+		# ==== Params
+		# ====== {:restaurant_id}:
+		# 	餐厅id
+		# ====== access_token:
+		# 	餐厅管理人员的 access_token
+	    # ==== Response Status Code
+		# 	200
+	    # ==== Response Body
+		# ====== response_status:
+		# 	"sms push service is active"  或者 "sms push service is inactive"
+		# ====== 401:
+		# 	帐号验证错误，用户名或密码错误
+		# ====== 404:
+		# 	没有找到相应的订单
+		#
+		# == 更新餐馆客户端接单状态
+		# 	更新餐馆客户端接单状态
+	    # ==== PUT
+	    # 	restaurants/{:restaurant_id}/is_client
+		# ==== Params
+		# ====== {:restaurant_id}:
+		# 	餐厅id
+		# ====== access_token:
+		# 	餐厅管理人员的 access_token
+	    # ==== Response Status Code
+		# 	200
+	    # ==== Response Body
+		# ====== response_status:
+		# 	"client push service is active"  或者 "client push service is inactive"
+		# ====== 401:
+		# 	帐号验证错误，用户名或密码错误
+		# ====== 404:
+		# 	没有找到相应的订单
 		resource :restaurants do
 			desc "Create a restaurant"
 			post do	
@@ -420,11 +623,125 @@ module Restfuls
 				present:'response_status', 'This order was checked'
 			end
 
+			#读取餐馆设置
 			get ":restaurant_id/setting" do
 				authenticate_supervisor!
 				error!("supervisor is invaild", 401) if current_supervisor.restaurant_id.to_i != params[:restaurant_id].to_i 
 				restaurant_status = RestaurantStatus.find_by(:restaurant_id => params[:restaurant_id])
 				present restaurant_status, with: APIEntities::RestaurantStatus
+			end
+
+			#更新餐馆开店状态
+			put ":restaurant_id/open" do
+				authenticate_supervisor!
+				error!("supervisor is invaild", 401) if current_supervisor.restaurant_id.to_i != params[:restaurant_id].to_i 
+				restaurant_status = RestaurantStatus.find_by(:restaurant_id => params[:restaurant_id])
+				error!("not found", 404) if restaurant_status.nil?
+				restaurant_status.checked_at = Time.now
+				restaurant_status.save
+				present:'response_status', 'restaurant was opened'
+			end
+
+			#更新餐馆关店时间
+			put ":restaurant_id/close_time" do
+				authenticate_supervisor!
+				error!("supervisor is invaild", 401) if current_supervisor.restaurant_id.to_i != params[:restaurant_id].to_i 
+				restaurant_status = RestaurantStatus.find_by(:restaurant_id => params[:restaurant_id])
+				error!("not found", 404) if restaurant_status.nil?
+				restaurant_status.close_hour = params[:close_hour]
+				restaurant_status.close_min = params[:close_min]
+				restaurant_status.save
+				present:'response_status', 'close time was updated'
+			end
+
+			#店铺公告
+			put ":restaurant_id/board" do
+				authenticate_supervisor!
+				error!("supervisor is invaild", 401) if current_supervisor.restaurant_id.to_i != params[:restaurant_id].to_i 
+				restaurant_status = RestaurantStatus.find_by(:restaurant_id => params[:restaurant_id])
+				error!("not found", 404) if restaurant_status.nil?
+				restaurant_status.board = params[:board]
+				restaurant_status.save
+				present:'response_status', 'board was updated'
+			end
+
+			#店铺起送价
+			put ":restaurant_id/start_shipping_fee" do
+				authenticate_supervisor!
+				error!("supervisor is invaild", 401) if current_supervisor.restaurant_id.to_i != params[:restaurant_id].to_i 
+				restaurant_status = RestaurantStatus.find_by(:restaurant_id => params[:restaurant_id])
+				error!("not found", 404) if restaurant_status.nil?
+				restaurant_status.start_shipping_fee = params[:start_shipping_fee]
+				restaurant_status.save
+				present:'response_status', 'start_shipping_fee was updated'
+			end
+
+			#店铺送餐费
+			put ":restaurant_id/shipping_fee" do
+				authenticate_supervisor!
+				error!("supervisor is invaild", 401) if current_supervisor.restaurant_id.to_i != params[:restaurant_id].to_i 
+				restaurant_status = RestaurantStatus.find_by(:restaurant_id => params[:restaurant_id])
+				error!("not found", 404) if restaurant_status.nil?
+				restaurant_status.shipping_fee = params[:shipping_fee]
+				restaurant_status.save
+				present:'response_status', 'shipping_fee was updated'
+			end
+
+			#店铺送餐时间
+			put ":restaurant_id/shipping_time" do
+				authenticate_supervisor!
+				error!("supervisor is invaild", 401) if current_supervisor.restaurant_id.to_i != params[:restaurant_id].to_i 
+				restaurant_status = RestaurantStatus.find_by(:restaurant_id => params[:restaurant_id])
+				error!("not found", 404) if restaurant_status.nil?
+				restaurant_status.shipping_time = params[:shipping_time]
+				restaurant_status.save
+				present:'response_status', 'shipping_time was updated'
+			end
+
+
+			#店铺送餐电话
+			put ":restaurant_id/shipping_phone_number" do
+				authenticate_supervisor!
+				error!("supervisor is invaild", 401) if current_supervisor.restaurant_id.to_i != params[:restaurant_id].to_i 
+				restaurant_status = RestaurantStatus.find_by(:restaurant_id => params[:restaurant_id])
+				error!("not found", 404) if restaurant_status.nil?
+				restaurant_status.shipping_phone_number = params[:shipping_phone_number]
+				restaurant_status.save
+				present:'response_status', 'phone_number was updated'
+			end
+
+
+
+			#店铺短信接收
+			put ":restaurant_id/is_sms" do
+				authenticate_supervisor!
+				error!("supervisor is invaild", 401) if current_supervisor.restaurant_id.to_i != params[:restaurant_id].to_i 
+				restaurant_status = RestaurantStatus.find_by(:restaurant_id => params[:restaurant_id])
+				error!("not found", 404) if restaurant_status.nil?
+				restaurant_status.is_sms = 1 - restaurant_status.is_sms.to_i
+				restaurant_status.save
+				if restaurant_status.is_sms == 1
+					response_body = 'sms push service is active'
+				else
+					response_body = 'sms push service is inactive'
+				end
+				present:'response_status', response_body
+			end
+
+			#店铺客户端接收
+			put ":restaurant_id/is_client" do
+				authenticate_supervisor!
+				error!("supervisor is invaild", 401) if current_supervisor.restaurant_id.to_i != params[:restaurant_id].to_i 
+				restaurant_status = RestaurantStatus.find_by(:restaurant_id => params[:restaurant_id])
+				error!("not found", 404) if restaurant_status.nil?
+				restaurant_status.is_client = 1 - restaurant_status.is_client.to_i
+				restaurant_status.save
+				if restaurant_status.is_client == 1
+					response_body = 'client push service is active'
+				else
+					response_body = 'client push service is inactive'
+				end
+				present:'response_status', response_body
 			end
 		end
 	end
