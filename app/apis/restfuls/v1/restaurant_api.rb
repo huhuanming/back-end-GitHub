@@ -12,6 +12,7 @@ module Restfuls
 		# * 创建餐馆
 		# * 读取餐馆菜单
 		# * 读取餐馆订单列表
+		# * 读取餐馆设置
 		# * 读取餐馆某条订单
 		# * 确认餐馆某条订单
 		#
@@ -266,6 +267,44 @@ module Restfuls
 		# 	帐号验证错误，用户名或密码错误
 		# ====== 404:
 		# 	没有找到相应的订单
+		#
+		#
+		# == 读取餐馆设置
+		# 	读取餐馆设置
+	    # ==== GET
+	    # 	restaurants/{:restaurant_id}/setting
+		# ==== Params
+		# ====== {:restaurant_id}:
+		# 	餐厅id
+		# ====== access_token:
+		# 	餐厅管理人员的 access_token
+	    # ==== Response Status Code
+		# 	200
+	    # ==== Response Body
+		# ====== board:
+		# 	餐馆公告
+		# ====== close_hour:
+		# 	餐馆关闭时的小时数，默认是 23。假如餐馆关闭时间是 22:02，close_hour 就是 22
+		# ====== close_min:
+		# 	餐馆关闭时的分数数，默认是 59。假如餐馆关闭时间是 22:02，close_hour 就是 2
+		# ====== start_shipping_fee:
+		# 	起送价, 默认是 10 元
+		# ====== shipping_fee:
+		# 	送餐费， 默认是 0 元
+		# ====== shipping_time:
+		# 	送达时间, 默认 30分钟
+		# ====== shipping_phone_number:
+		# 	配送电话号码
+		# ====== is_sms:
+		# 	短信接单，0 表示不启用，1 表示启用，默认为 0
+		# ====== is_client:
+		# 	客户端接单，0 表示不启用，1 表示启用，默认为 1
+		# ====== checked_at:
+		# 	商家签到时间，商家当天签到后就开店, 如果没签到就表示没开店
+		# ====== 401:
+		# 	帐号验证错误，用户名或密码错误
+		# ====== 404:
+		# 	没有找到相应的订单
 		resource :restaurants do
 			desc "Create a restaurant"
 			post do	
@@ -334,7 +373,7 @@ module Restfuls
 
 
 				begin
-			        RestaurantStatus.create(:restaurant_id => restaurant.id, :shipping_phone_number => params[:phone_number])
+			        RestaurantStatus.create(:restaurant_id => restaurant.id, :shipping_phone_number => params[:phone_number], :checked_at => (Time.now-1.day))
 			    rescue Exception => e
 			    	supervisor.delete
 			    	restaurant.delete
@@ -381,7 +420,7 @@ module Restfuls
 				present:'response_status', 'This order was checked'
 			end
 
-			get ":restaurant_id/status" do
+			get ":restaurant_id/setting" do
 				authenticate_supervisor!
 				error!("supervisor is invaild", 401) if current_supervisor.restaurant_id.to_i != params[:restaurant_id].to_i 
 				restaurant_status = RestaurantStatus.find_by(:restaurant_id => params[:restaurant_id])

@@ -72,6 +72,18 @@ describe ApplicationApi do
         	expect(supervisor.phone_number).to eq(params[:phone_number])
         	expect(supervisor.nick_name).to eq(params[:supervisor_name])
         	expect(supervisor.password).to eq("2185")
+
+          restaurant_status = RestaurantStatus.find_by(:restaurant_id => restaurant.id)
+          expect(restaurant_status.board).to eq("欢迎光临")
+          expect(restaurant_status.close_hour).to eq(23)
+          expect(restaurant_status.close_min).to eq(59)
+          expect(restaurant_status.start_shipping_fee.to_f).to eq(10.0)
+          expect(restaurant_status.shipping_fee.to_f).to eq(0.0)
+          expect(restaurant_status.shipping_time).to eq(30)
+          expect(restaurant_status.shipping_phone_number).to eq(restaurant.phone_number)
+          expect(restaurant_status.is_sms).to eq(0)
+          expect(restaurant_status.is_client).to eq(1)
+          expect(restaurant_status.checked_at.day).to eq(Time.now.day-1)
       	end
     end
   end

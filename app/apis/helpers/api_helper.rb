@@ -11,6 +11,9 @@ module ApiHelper
       error!("AccessToken is invalid", 401) if token_array.length < 3
 
       if token_array.length > 3
+        token = token_array[0]
+        encode_signed = token_array[1]
+
         token_array.delete_at(0)
         token_array.delete_at(0)
         encoded = token_array.join(":")
@@ -56,6 +59,9 @@ module ApiHelper
       error!("AccessToken is invalid", 401) if token_array.length < 3
 
       if token_array.length > 3
+        token = token_array[0]
+        encode_signed = token_array[1]
+
         token_array.delete_at(0)
         token_array.delete_at(0)
         encoded = token_array.join(":")
