@@ -73,11 +73,11 @@ module Restfuls
 						the_food.shop_price = price
 						the_food.save
 					end
-					Food.where(:food_type_id => the_type.id).where.not(:food_name => food_names).delete_all
+					Food.where(:food_type_id => the_type.id).where.not(:food_name => food_names).update_all(:food_type_id => -1)
 				end
 				ids = FoodType.where(:restaurant_id => restaurant_id).where.not(:type_name => types).pluck(:id)
 				if ids.length > 0
-					Food.where(:food_type_id => ids).delete_all
+					Food.where(:food_type_id => ids).update_all(:food_type_id => -1)
 					FoodType.where(:id => ids).delete_all
 				end
 				present:'response_status', 'successed to update menu of this restaurant'

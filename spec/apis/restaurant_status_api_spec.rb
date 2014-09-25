@@ -34,4 +34,28 @@ describe ApplicationApi do
     end
   end
 
+  it '更新餐馆开店状态: restaurants/{:restaurant_id}/is_open' do
+    with_api(ApplicationApi, api_options) do |option|
+        path = "/v1/restaurants/" + @restaurant_id.to_s + "/is_open"
+        params = Hash.new
+        params[:access_token] = @access_token
+        put_request(:path => path, :body => params) do |async|
+          response = JSON.parse(async.response)
+          expect(response["response_status"]).to eq("restaurant was opened")
+          put_request(:path => path, :body => params) do |async|
+            response = JSON.parse(async.response)
+            expect(response["response_status"]).to eq("restaurant was closed")
+            put_request(:path => path, :body => params) do |async|
+              response = JSON.parse(async.response)
+              expect(response["response_status"]).to eq("restaurant was opened")
+                put_request(:path => path, :body => params) do |async|
+                  response = JSON.parse(async.response)
+                  expect(response["response_status"]).to eq("restaurant was closed")
+                end
+            end
+          end
+        end
+    end
+  end
+
 end

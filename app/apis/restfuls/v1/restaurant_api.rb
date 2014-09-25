@@ -18,7 +18,7 @@ module Restfuls
 		# * 更新餐馆公告
 		# * 更新餐馆起送价
 		# * 更新餐馆送餐费
-		# * 更新餐馆送达时间
+		# * 更新餐馆配送时间
 		# * 更新餐馆送餐电话
 		# * 更新餐馆短信接单状态
 		# * 更新餐馆客户端接单状态
@@ -327,7 +327,7 @@ module Restfuls
 		# == 更新餐馆开店状态
 		# 	更新餐馆开店状态
 	    # ==== PUT
-	    # 	restaurants/{:restaurant_id}/open
+	    # 	restaurants/{:restaurant_id}/is_open
 		# ==== Params
 		# ====== {:restaurant_id}:
 		# 	餐厅id
@@ -337,7 +337,7 @@ module Restfuls
 		# 	200
 	    # ==== Response Body
 		# ====== response_status:
-		# 	"restaurant was opened"
+		# 	"restaurant was opened" 或者 "restaurant was closed"
 		# ====== 401:
 		# 	帐号验证错误，用户名或密码错误
 		# ====== 404:
@@ -632,20 +632,28 @@ module Restfuls
 			end
 
 			#更新餐馆开店状态
-			put ":restaurant_id/open" do
+			put ":restaurant_id/is_open" do
 				authenticate_supervisor!
 				error!("supervisor is invaild", 401) if current_supervisor.restaurant_id.to_i != params[:restaurant_id].to_i 
 				restaurant_status = RestaurantStatus.find_by(:restaurant_id => params[:restaurant_id])
 				error!("not found", 404) if restaurant_status.nil?
-				restaurant_status.checked_at = Time.now
+				time_now = Time.now
+				if restaurant_status.checked_at.to_date == time_now.to_date
+					restaurant_status.checked_at = time_now - 1.day
+					response_body = 'restaurant was closed'
+				else
+					restaurant_status.checked_at = time_now
+					response_body = 'restaurant was opened'
+				end
 				restaurant_status.save
-				present:'response_status', 'restaurant was opened'
+				present:'response_status', response_body
 			end
 
 			#更新餐馆关店时间
 			put ":restaurant_id/close_time" do
 				authenticate_supervisor!
-				error!("supervisor is invaild", 401) if current_supervisor.restaurant_id.to_i != params[:restaurant_id].to_i 
+				error!("params is invalid", 401) if params[:close_hour].nil? || params[:close_min].nil?
+				error!("supervisor is invalid", 401) if current_supervisor.restaurant_id.to_i != params[:restaurant_id].to_i 
 				restaurant_status = RestaurantStatus.find_by(:restaurant_id => params[:restaurant_id])
 				error!("not found", 404) if restaurant_status.nil?
 				restaurant_status.close_hour = params[:close_hour]
@@ -657,6 +665,7 @@ module Restfuls
 			#店铺公告
 			put ":restaurant_id/board" do
 				authenticate_supervisor!
+				error!("params is invalid", 401) if params[:board].nil?
 				error!("supervisor is invaild", 401) if current_supervisor.restaurant_id.to_i != params[:restaurant_id].to_i 
 				restaurant_status = RestaurantStatus.find_by(:restaurant_id => params[:restaurant_id])
 				error!("not found", 404) if restaurant_status.nil?
@@ -668,6 +677,7 @@ module Restfuls
 			#店铺起送价
 			put ":restaurant_id/start_shipping_fee" do
 				authenticate_supervisor!
+				error!("params is invalid", 401) if params[:start_shipping_fee].nil?
 				error!("supervisor is invaild", 401) if current_supervisor.restaurant_id.to_i != params[:restaurant_id].to_i 
 				restaurant_status = RestaurantStatus.find_by(:restaurant_id => params[:restaurant_id])
 				error!("not found", 404) if restaurant_status.nil?
@@ -679,6 +689,7 @@ module Restfuls
 			#店铺送餐费
 			put ":restaurant_id/shipping_fee" do
 				authenticate_supervisor!
+				error!("params is invalid", 401) if params[:shipping_fee].nil?
 				error!("supervisor is invaild", 401) if current_supervisor.restaurant_id.to_i != params[:restaurant_id].to_i 
 				restaurant_status = RestaurantStatus.find_by(:restaurant_id => params[:restaurant_id])
 				error!("not found", 404) if restaurant_status.nil?
@@ -690,6 +701,7 @@ module Restfuls
 			#店铺送餐时间
 			put ":restaurant_id/shipping_time" do
 				authenticate_supervisor!
+				error!("params is invalid", 401) if params[:shipping_time].nil?
 				error!("supervisor is invaild", 401) if current_supervisor.restaurant_id.to_i != params[:restaurant_id].to_i 
 				restaurant_status = RestaurantStatus.find_by(:restaurant_id => params[:restaurant_id])
 				error!("not found", 404) if restaurant_status.nil?
@@ -702,6 +714,7 @@ module Restfuls
 			#店铺送餐电话
 			put ":restaurant_id/shipping_phone_number" do
 				authenticate_supervisor!
+				error!("params is invalid", 401) if params[:shipping_phone_number].nil?
 				error!("supervisor is invaild", 401) if current_supervisor.restaurant_id.to_i != params[:restaurant_id].to_i 
 				restaurant_status = RestaurantStatus.find_by(:restaurant_id => params[:restaurant_id])
 				error!("not found", 404) if restaurant_status.nil?
