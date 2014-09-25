@@ -1,7 +1,5 @@
-require 'net/http'
-
 class UserMobileVerification < ActiveRecord::Base
-
+	VERIFICATIONCODEURI = "http://172.31.15.1/api/user_sms/send_tpl_sms"
 	# Examine phone number and failed attemp 
 	def is_valid?
 		self.failed_attempts = 0 if self.updated_at.nil? || Time.now.to_i - self.updated_at.to_i > 86400
@@ -20,17 +18,10 @@ class UserMobileVerification < ActiveRecord::Base
 		self.save
 
 		params = Hash.new
-		params["apikey"] = APIKEY
 		params["mobile"] = self.phone_number
-		params["tpl_id"] = 2       
 		params["tpl_value"] = URI.escape("#code#=#{self.verification_code}&#company#=零公里外卖")
-		# res = Net::HTTP.post_form(URI.parse(VERIFICATIONCODEURI), params)
 		EventMachine.run do
 	      EventMachine::HttpRequest.new(VERIFICATIONCODEURI).post :body => params
 	    end
-		#  EventMachine.run do
-		#   http = EventMachine::HttpRequest.new('http://www.0km.me:9000/v1/ping').get
-		#   http.callback { |chunk| pp chunk.response }
-		# end
 	end
 end
