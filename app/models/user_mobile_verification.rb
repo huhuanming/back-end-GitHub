@@ -1,20 +1,61 @@
+require 'em-http-request'
 class UserMobileVerification < ActiveRecord::Base
 	VERIFICATIONCODEURI = "http://172.31.15.1/api/user_sms/send_tpl_sms"
 	# Examine phone number and failed attemp 
 	def is_valid?
-		self.failed_attempts = 0 if self.updated_at.nil? || Time.now.to_i - self.updated_at.to_i > 86400
-		return self.failed_attempts > 5
+		return false if self.updated_at.nil?
+		duration_time = Time.now.to_i - self.updated_at.to_i
+		if duration_time > 86400
+			self.failed_attempts = 0
+			self.sent_attempts = 0
+			self.save
+		end
+
+		return self.sent_attempts > 5 || self.failed_attempts > 5
 	end
 
 	# check mobile verification code
-	def is_verify?(encoded, encoded_sign)
-		return false if Time.now.to_i - self.updated_at.to_i > 3000
-		key = UserMobileVerification.find_by(:phone_number => self.phone_number).verification_code
-		return CGI.escape(Base64.encode64(OpenSSL::HMAC.digest('sha1', key, encoded)).chomp) == encoded_sign
+	def verify?(encryption_code)
+		encryption_code_array = encryption_code.split(":")
+
+		return false if encryption_code_array.length != 2
+
+		encoded_sign = encryption_code_array[0]
+		encoded = encryption_code_array[1]
+		
+		duration_time = Time.now.to_i - self.updated_at.to_i
+
+		if duration_time > 1800
+			return false
+		end
+
+		key = self.verification_code
+		if CGI.escape(Base64.encode64(OpenSSL::HMAC.digest('sha1', key, encoded)).chomp) == encoded_sign
+			self.failed_attempts = 0
+			self.sent_attempts = 0
+			self.save
+			return true
+		else
+			self.failed_attempts += 1
+			self.save
+			return false
+		end 
+	end
+
+	def not_verify?(encryption_code)
+		return !self.verify?(encryption_code)
 	end
 
 	def send_verification_code
-		self.verification_code = rand(1000..9999)
+		if self.updated_at.nil?
+		
+		else
+			duration_time = Time.now.to_i - self.updated_at.to_i
+			return false if duration_time < 60
+		end
+
+		self.verification_code = rand(100000..999999).to_s
+		self.sent_attempts += 1
 		self.save
 
 		params = Hash.new
@@ -23,5 +64,6 @@ class UserMobileVerification < ActiveRecord::Base
 		EventMachine.run do
 	      EventMachine::HttpRequest.new(VERIFICATIONCODEURI).post :body => params
 	    end
+	    return true
 	end
 end

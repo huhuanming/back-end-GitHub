@@ -1,6 +1,14 @@
 module BaseUser
 
   def authenticate!(password)
+
+    # return false if !self.locked_at.nil? && self.locked_at.to_date == Time.now.to_date
+
+    # if self.failed_attempts > 5
+    #   self.locked_at = Time.now
+    #   return false 
+    # end
+
     if self.password == password
       self.failed_attempts = 0
       return true

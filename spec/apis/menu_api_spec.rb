@@ -93,7 +93,7 @@ describe ApplicationApi do
         expect(response['response_status']).to eq("successed to update menu of this restaurant")
 
         expect(FoodType.find_by(:type_name => "翔类").nil?).to eq(true)
-         expect(Food.find_by(:food_name => "翔啊").nil?).to eq(true)
+        expect(Food.find_by(:food_name => "翔啊").nil?).to eq(false)
 
         menu = JSON.parse(params[:menu_json])
         types = menu.keys
