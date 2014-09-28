@@ -55,6 +55,7 @@ class UserMobileVerification < ActiveRecord::Base
 		end
 
 		self.verification_code = rand(100000..999999).to_s
+		self.sent_attempts ||= 0
 		self.sent_attempts += 1
 		self.save
 

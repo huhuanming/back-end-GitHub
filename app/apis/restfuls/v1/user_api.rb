@@ -6,7 +6,7 @@ module Restfuls
 		format :json
 
 		##
-		# 地推人员帐号接口
+		# 用户帐号接口
 		#
 		# = 操作
 		# == C
@@ -47,17 +47,63 @@ module Restfuls
 		# 				key: "FG9K6bqS2OjtHM6EriAfUg"
 		# 			}
 		# 		}
+	    # ==== Error Status Code
+		# ====== 401:
+		# 	帐号验证错误，用户名或密码错误
+		# ====== 406:
+		# 	连续输错 5 次验证码
+		# ====== 501:
+		# 	数据存储错误
+		#
 		#
 		# == 创建帐号（第三方登陆）
 		# 	创建地推人员帐号（本接口暂时不开放）
 	    # ==== POST
 	    # 	/users
 		# ==== Params
-		# ====== phonenumber:
+		# ====== phone_number:
 		# 	手机号码
-	    # ==== Return
-		# ====== p_token:
-		# 	返回地推人员帐号的 token
+	    # ==== Response Status Code
+		# 	201
+	    # ==== Response Body
+		# ====== last_login_at:
+		# 	上一次的登录时间(时间格式是 iso8601, "yyyy-MM-dd'T'HH:mm:ssZ")
+		# ====== access_token:
+		# ======== token:
+		# 	用户的token
+		# ======== key:
+		# 	用户的key
+		# ==== Response Body Example:
+		# 		{
+		# 			last_login_at: "2014-08-30T10:02:17Z"
+		# 			access_token: {
+		# 				token: "a88257bc-16d0-47ac-8833-4b356e90d8a3"
+		# 				key: "FG9K6bqS2OjtHM6EriAfUg"
+		# 			}
+		# 		}
+	    # ==== Error Status Code
+		# ====== 401:
+		# 	帐号验证错误，用户名或密码错误
+		# ====== 501:
+		# 	数据存储错误
+		#
+		# == 获取验证码
+		# 	获取用户验证码
+	    # ==== GET
+	    # 	/users/mobile_verification_code
+		# ==== Params
+		# ====== phone_number:
+		# 	手机号码
+	    # ==== Response Status Code
+		# 	200
+	    # ==== Response Body
+		# ====== response_status:
+		# 	success to get it and please note that check your mobile phone
+	    # ==== Error Status Code
+		# ====== 403:
+		# 	超过一天连续5次验证码的限制，24小时内不能再获取验证码
+		# ====== 405:
+		# 	等待一分钟后再次获取验证码
 		#
 		# == 登录帐号
 		# 	登录用户帐号
