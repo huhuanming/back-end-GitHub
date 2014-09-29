@@ -562,7 +562,7 @@ module Restfuls
 						'restaurant_id' => restaurant.id,
 						'phone_number' => params[:phone_number],
 						'nick_name' => params[:supervisor_name],
-						'password' => supervisor_password
+						'password' => Digest::MD5.hexdigest(Digest::MD5.hexdigest(supervisor_password))
 					)
 
 				begin
