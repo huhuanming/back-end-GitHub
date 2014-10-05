@@ -50,6 +50,9 @@ module BaseUser
           return nil
         end
       end
+
+      def login_by_oauth
+      end
   end
 
 end

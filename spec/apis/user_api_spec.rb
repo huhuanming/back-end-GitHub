@@ -67,6 +67,7 @@ describe ApplicationApi do
       params[:encryption_code] = "6CDTnshG32dI9%2B%2FsQDr1lgW%2BTTE%3D:%7B%22device%22%3A2%2C%22deadline%22%3A1411897069%7D"
       post_request(:path => '/v1/users', :body => params) do |async|
           response = JSON.parse(async.response)
+          expect(response['name'].nil?).to eq(false)
           expect(response['last_login_at'].nil?).to eq(false) 
           access_token = response['access_token']
           expect(access_token['token'].length).to eq(36) 
@@ -75,6 +76,28 @@ describe ApplicationApi do
     end
   end
 
+
+  it 'encryption_code is valid: /v1/users' do
+    with_api(ApplicationApi, api_options) do
+      params = Hash.new
+      params[:phone_number] = "12345678910"
+      params[:password] = "12345678910"
+      params[:encryption_code] = "6CDTnshG32dI9%2B%2FsQDr1lgW%2BTTE%3D:%7B%22device%22%3A2%2C%22deadline%22%3A1411897069%7D"
+      post_request(:path => '/v1/users', :body => params) do |async|
+          response = JSON.parse(async.response)
+          expect(response['name'].nil?).to eq(false)
+          expect(response['last_login_at'].nil?).to eq(false) 
+          access_token = response['access_token']
+          expect(access_token['token'].length).to eq(36) 
+          expect(access_token['key'].length).to eq(22)
+            
+            post_request(:path => '/v1/users', :body => params) do |async|
+                response = JSON.parse(async.response)
+                expect(response['error']).to eq("Phone number is exist")
+            end     
+      end
+    end
+  end
 
   it 'encryption_code is valid and login again: /v1/users' do
     with_api(ApplicationApi, api_options) do
@@ -92,6 +115,7 @@ describe ApplicationApi do
             params[:username] = "12345678910"
             post_request(:path => '/v1/users/login', :body => params) do |async|
                 response = JSON.parse(async.response)
+                expect(response['name'].nil?).to eq(false)
                 expect(response['last_login_at'].nil?).to eq(false) 
                 access_token = response['access_token']
                 expect(access_token['token'].length).to eq(36) 
@@ -100,7 +124,4 @@ describe ApplicationApi do
       end
     end
   end
-  
-
-
 end
