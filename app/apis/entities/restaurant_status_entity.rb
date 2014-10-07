@@ -1,8 +1,8 @@
 module Restfuls
 	module APIEntities
 		class RestaurantStatus < Grape::Entity
-      		expose :board, as: :board
-      		expose :close_hour, as: :close_hour
+      	  expose :board, as: :board
+      	  expose :close_hour, as: :close_hour
           expose :close_min, as: :close_min
           expose :close_hour, as: :close_hour
           expose :close_min, as: :close_min
@@ -14,6 +14,6 @@ module Restfuls
           expose :is_client, as: :is_client
           expose :checked_at, as: :checked_at, format_with: :iso_timestamp
           format_with(:iso_timestamp) { |date| date.iso8601 }
-    end
+    	end
 	end
 end

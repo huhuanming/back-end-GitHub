@@ -71,7 +71,7 @@ describe ApplicationApi do
         	expect(supervisor.restaurant_id).to eq(restaurant.id)
         	expect(supervisor.phone_number).to eq(params[:phone_number])
         	expect(supervisor.nick_name).to eq(params[:supervisor_name])
-        	expect(supervisor.password).to eq("2185")
+        	expect(supervisor.password).to eq(Digest::MD5.hexdigest(Digest::MD5.hexdigest("2185")))
 
           restaurant_status = RestaurantStatus.find_by(:restaurant_id => restaurant.id)
           expect(restaurant_status.board).to eq("欢迎光临")

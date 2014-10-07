@@ -33,6 +33,8 @@ module Restfuls
 	    # ==== Response Status Code
 		# 	201
 	    # ==== Response Body
+		# ====== name:
+		# 	用户名
 		# ====== last_login_at:
 		# 	上一次的登录时间(时间格式是 iso8601, "yyyy-MM-dd'T'HH:mm:ssZ")
 		# ====== access_token:
@@ -56,6 +58,8 @@ module Restfuls
 		# 	连续输错 5 次验证码
 		# ====== 501:
 		# 	数据存储错误
+		# ====== 502:
+		# 	该手机号已被注册
 		#
 		# == 获取验证码
 		# 	获取用户验证码
@@ -87,6 +91,8 @@ module Restfuls
 	    # ==== Response Status Code
 		# 	201
 	    # ==== Response Body
+		# ====== name:
+		# 	用户名
 		# ====== last_login_at:
 		# 	上一次的登录时间(时间格式是 iso8601, "yyyy-MM-dd'T'HH:mm:ssZ")
 		# ====== access_token:
@@ -96,6 +102,7 @@ module Restfuls
 		# 	用户的key
 		# ==== Response Body Example:
 		# 		{
+		#  			name: "打开方式有点不对啊"
 		# 			last_login_at: "2014-08-30T10:02:17Z"
 		# 			access_token: {
 		# 				token: "a88257bc-16d0-47ac-8833-4b356e90d8a3"
@@ -122,6 +129,8 @@ module Restfuls
 	    # ==== Response Status Code
 		# 	201
 	    # ==== Response Body
+		# ====== name:
+		# 	用户名
 		# ====== last_login_at:
 		# 	上一次的登录时间(时间格式是 iso8601, "yyyy-MM-dd'T'HH:mm:ssZ")
 		# ====== access_token:

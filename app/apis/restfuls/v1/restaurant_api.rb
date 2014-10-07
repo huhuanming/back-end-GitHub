@@ -23,6 +23,8 @@ module Restfuls
 		# * 更新餐馆短信接单状态
 		# * 更新餐馆客户端接单状态
 		# == R
+		# * 读取餐馆列表
+		# * 读取餐馆基本信息
 		# * 读取餐馆菜单
 		# * 读取餐馆订单列表
 		# * 读取餐馆设置
@@ -78,6 +80,59 @@ module Restfuls
 		# 	地推帐号 AccessToken 不存在
 		# ====== 501:
 		# 	数据存储错误
+		#
+		# == 读取餐馆列表
+		# 	根据你当前的位置获取附近的餐馆
+	    # ==== GET
+	    # 	/restaurants
+		# ==== Params
+		# ====== longitude:
+		# 	你当前位置的经度
+		# ====== latitude:
+		# 	你当前位置的纬度
+		# ====== order_type(可选)
+		# 	默认为 0. 1 代表 配送时间最短， 2 代表 配送距离最短， 3 代表 配送费最便宜
+		# ====== restaurant_type(可选）
+		# 	默认为 0. 暂不开放
+		# ====== page(可选)
+		# 	默认为 0.  获取的数据页数
+		# ====== count(可选）
+		# 	默认为 10. 每页的数据条数
+	    # ==== Response Status Code
+		# 	200
+		# ==== Response Body
+		# ====== rid:
+		# 	餐馆 id
+		# ====== name:
+		# 	餐馆名字
+		# ====== avatar:
+		# 	餐馆头像
+		# ====== status:
+		# ======== start_shipping_fee:
+		#   免运费起送价
+		# ======== shipping_time:
+		#   配送时间
+		# ==== Response Body Example:
+	    # 	[
+		#		{
+		#			rid: 10
+		#			name: "懒洋洋绝味面"
+		#			avatar: "restaurant_avatar"
+		#			status: {
+		#				start_shipping_fee: "10.0"
+		#				shipping_time: 10
+		#			}
+		#		}
+		#		{
+		#			rid: 11
+		#			name: "王记简阳老字号羊肉"
+		#			avatar: "restaurant_avatar"
+		#			status: {
+		#				start_shipping_fee: "10.0"
+		#				shipping_time: 10
+		#			}
+		#		}
+	    #  ]
 		# 
 		# 
 		# == 读取餐馆菜单
@@ -508,6 +563,7 @@ module Restfuls
 		# 	帐号验证错误，用户名或密码错误
 		# ====== 404:
 		# 	没有找到相应的订单
+
 		resource :restaurants do
 			desc "Create a restaurant"
 			post do	
@@ -585,6 +641,25 @@ module Restfuls
 					error!("Data is invaild", 501) 
 			    end
 				present:'response_status', 'successed to create a restaurant'
+			end
+
+			#根据你的位置读取餐馆列表
+			desc "Get restaurant with your location and orders"
+			params do
+				requires :longitude, type: String
+				requires :latitude, type: String
+				optional :order_type, type: Integer, default: 0, values: [0, 1, 2, 3]
+				optional :restaurant_type, type: Integer, default: 0, values: [0 , 1, 2, 3]
+				optional :page, type: Integer, default: 0
+				optional :count, type: Integer, default: 10
+			end
+			get do
+				error!("bad boy!", 401) if params[:page] < 0 || params[:count] < 0
+				restaurants = Restaurant.which_restaurant_type(params[:restaurant_type])
+										.near_by(params[:longitude], params[:latitude])
+										.opened.order_by(params["order_type"], params[:longitude], params[:latitude])
+										.page_with(params[:page], params[:count])
+				present restaurants, with: APIEntities::Restaurant
 			end
 
 			get ":restaurant_id/menu" do
