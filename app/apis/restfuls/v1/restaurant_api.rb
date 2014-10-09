@@ -24,6 +24,7 @@ module Restfuls
 		# * 更新餐馆客户端接单状态
 		# == R
 		# * 读取餐馆列表
+		# * 读取餐馆资料
 		# * 读取餐馆基本信息
 		# * 读取餐馆菜单
 		# * 读取餐馆订单列表
@@ -134,6 +135,77 @@ module Restfuls
 		#		}
 	    #  ]
 		# 
+		# == 读取餐馆资料
+		#   读取单个餐馆的资料
+		# === GET
+	    # 	restaurants/{:restaurant_id}
+		# ==== Params
+		# ====== {:restaurant_id}
+		# 	餐馆的 rid
+	    # ==== Response Status Code
+		# 	200
+		# ==== Response Body
+		# ====== rid:
+		# 	餐馆 rid
+		# ====== name:
+		# 	餐馆名字
+		# ====== avatar:
+		# 	餐馆头像
+		# ====== phone_number:
+		# 	餐馆电话号码
+		# ====== restaurant_address:
+		# ======== address:
+		# 	餐馆详细地址
+		# ======== radius:
+		# 	餐馆送餐半径
+		# ====== restaurant_address:
+		# ======== start_shipping_fee:
+		# 	免运费起送费
+		# ======== shipping_time:
+		# 	送餐时间
+		# ======== shipping_fee:
+		# 	送餐运费
+		# ======== board:
+		# 	餐馆公告
+		# ====== restaurant_type:
+		# ======== restaurant_type_name:
+		# ========== type_name:
+		# 	餐馆类型名字
+		# ==== Response Body Example:
+		#	{
+		#		rid: 10
+		#		name: "懒洋洋绝味面"
+		#		avatar: "restaurant_avatar"
+		#		phone_number: "13538381054"
+		#		restaurant_address: {
+		#			address: "成都犀浦校园路93附24"
+		#			radius: 500
+		#		}
+		#		restaurant_status: {
+		#			start_shipping_fee: "10.0"
+		#			shipping_time: 10
+		#			shipping_fee: "5.0"
+		#			board: "欢迎光临"
+		#		}
+		#		restaurant_type: [
+		#			{
+		#				restaurant_type_name: {
+		#					type_name: "面食"
+		#				}
+		#			}
+		#			{
+		#				restaurant_type_name: {
+		#					type_name: "炒饭"
+		#				}
+		#			}
+		#			{
+		#				restaurant_type_name: {
+		#					type_name: "盖浇"
+		#				}
+		#			}
+		#		]
+		#	}
+		#
 		# 
 		# == 读取餐馆菜单
 		# 	读取指定餐馆的菜单
@@ -141,17 +213,24 @@ module Restfuls
 	    # 	restaurants/{:restaurant_id}/menus
 		# ==== Params
 		# ====== {:restaurant_id}
-		# 	餐馆的id
+		# 	餐馆的rid
 	    # ==== Response Status Code
 		# 	200
 		# ==== Response Body
 		# ====== type_name:
 		# 	菜品种类名
 		# ====== foods:
+		# ======== fid:
+		# 	菜品id
 		# ======== food_name:
 		# 	菜名
 		# ======== shop_price:
 		# 	销售价格
+		# ========== food_status:
+		# =========== sold_number:
+		# 	这个菜的销量
+		# =========== updated_at:
+		# 	销量更新时间
 		# ==== Response Body Example:
 	    # 	[
 	    #     {
@@ -159,12 +238,22 @@ module Restfuls
 	    # 		"foods":
 	    # 		[
 	    # 			{
+	    # 				"fid":1,
 	    # 				"food_name":"翔啊",
-	    # 				"shop_price":"3.0"
+	    # 				"shop_price":"1.0",
+	    # 				"food_status": {
+		#					"sold_number": 0
+		#					"updated_at": "2014-10-09T07:18:27.000Z"
+		#				}
 	   	# 			},
 	    # 			{
+	    # 				"fid":2,
 	    # 				"food_name":"鐧借彍",
-	    # 				"shop_price":"2.0"
+	    # 				"shop_price":"1.0",
+	    # 				"food_status": {
+		#					"sold_number": 0
+		#					"updated_at": "2014-10-09T07:18:27.000Z"
+		#				}
 	    # 			}
 	    # 		]
 	    #  	 },
@@ -173,12 +262,22 @@ module Restfuls
 	    # 		"foods":
 	    # 		[
 	    # 			{
+	    # 				"fid":3,
 	    # 				"food_name":"好菜",
 	    # 				"shop_price":"2.0"
+	    # 				"food_status": {
+		#					"sold_number": 0
+		#					"updated_at": "2014-10-09T07:18:27.000Z"
+		#				}
 	    # 			},
 	    # 			{
+	    # 				"fid":4,
 	    # 				"food_name":"花菜",
 	    # 				"shop_price":"1.0"
+	    # 				"food_status": {
+		#					"sold_number": 0
+		#					"updated_at": "2014-10-09T07:18:27.000Z"
+		#				}
 	    # 			}
 	    # 		]
 	    # 	 }
@@ -359,7 +458,7 @@ module Restfuls
 		# ====== close_hour:
 		# 	餐馆关闭时的小时数，默认是 23。假如餐馆关闭时间是 22:02，close_hour 就是 22
 		# ====== close_min:
-		# 	餐馆关闭时的分数数，默认是 59。假如餐馆关闭时间是 22:02，close_hour 就是 2
+		# 	餐馆关闭时的分钟数，默认是 59。假如餐馆关闭时间是 22:02，close_min 就是 2
 		# ====== start_shipping_fee:
 		# 	起送价, 默认是 10 元
 		# ====== shipping_fee:
@@ -649,7 +748,7 @@ module Restfuls
 				requires :longitude, type: String
 				requires :latitude, type: String
 				optional :order_type, type: Integer, default: 0, values: [0, 1, 2, 3]
-				optional :restaurant_type, type: Integer, default: 0, values: [0 , 1, 2, 3]
+				optional :restaurant_type, type: Integer, default: 0, values: [0, 1, 2, 3, 4, 5, 6]
 				optional :page, type: Integer, default: 0
 				optional :count, type: Integer, default: 10
 			end
@@ -660,6 +759,13 @@ module Restfuls
 										.opened.order_by(params["order_type"], params[:longitude], params[:latitude])
 										.page_with(params[:page], params[:count])
 				present restaurants, with: APIEntities::Restaurant
+			end
+
+			#根据 餐馆id 读取餐馆
+			desc "Get restaurant profile"
+			get ":restaurant_id" do
+				food_types = Restaurant.find_by(:id => params[:restaurant_id])
+				present food_types, with: APIEntities::RestaurantProfile
 			end
 
 			get ":restaurant_id/menu" do

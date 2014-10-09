@@ -1,6 +1,8 @@
 require 'rubygems'
 require 'bundler/setup'
 require 'active_support'
+require 'active_record'
+require "em-synchrony"
 require 'em-synchrony/activerecord'
 require 'em-synchrony/mysql2'
 # rails4的ActiveRecord将attr_accessible类宏移到了Gem中

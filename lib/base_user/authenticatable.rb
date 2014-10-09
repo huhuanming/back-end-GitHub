@@ -11,6 +11,7 @@ module BaseUser
 
     if self.password == password
       self.failed_attempts = 0
+      self.save
       return true
     else
       self.failed_attempts ||= 0

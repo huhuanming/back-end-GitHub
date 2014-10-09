@@ -1,11 +1,8 @@
 # source 'http://ruby.taobao.org'
 source 'https://rubygems.org/'
-gem 'pg', '0.17.1'
-gem 'em-postgresql-adapter', :git => 'git://github.com/leftbee/em-postgresql-adapter.git', :branch => '0.3'
 
 gem 'rack-fiber_pool',  :require => 'rack/fiber_pool'
-gem 'em-synchrony', :git => 'git://github.com/igrigorik/em-synchrony.git',
-                    :require => ['em-synchrony', 'em-synchrony/activerecord']
+gem 'em-synchrony', '1.0.3'
 gem 'em-websocket', '0.3.8'
 gem 'em-http-request', '1.1.2'
 gem 'yajl-ruby', '1.1.0'
@@ -16,7 +13,8 @@ gem 'grape', '0.8.0'
 gem 'grape-entity', '0.4.3'
 gem 'goliath', '1.0.4'
 gem 'tilt', '2.0.1'
-gem 'will_paginate'
+gem 'will_paginate', '3.0.7'
+gem 'activerecord', '4.1.5'
 
 gem 'mysql2', '0.3.16'
 gem 'protected_attributes', '1.0.8'

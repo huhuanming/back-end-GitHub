@@ -1,20 +1,3 @@
-GIT
-  remote: git://github.com/igrigorik/em-synchrony.git
-  revision: ad17ce925fe49c45e1b5f713910e24d4798ae29c
-  specs:
-    em-synchrony (1.0.3)
-      eventmachine (>= 1.0.0.beta.1)
-
-GIT
-  remote: git://github.com/leftbee/em-postgresql-adapter.git
-  revision: 6313a6c5c48fd9d141f60c22ae9c12c2eca1b329
-  branch: 0.3
-  specs:
-    em-postgresql-adapter (0.3)
-      activerecord (>= 3.1.0)
-      eventmachine
-      pg (>= 0.8.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -64,6 +47,8 @@ GEM
       http_parser.rb (>= 0.6.0)
     em-socksify (0.3.0)
       eventmachine (>= 1.0.0.beta.4)
+    em-synchrony (1.0.3)
+      eventmachine (>= 1.0.0.beta.1)
     em-websocket (0.3.8)
       addressable (>= 2.1.1)
       eventmachine (>= 0.12.9)
@@ -116,7 +101,6 @@ GEM
     net-ssh (2.9.1)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
-    pg (0.17.1)
     protected_attributes (1.0.8)
       activemodel (>= 4.0.1, < 5.0)
     rack (1.5.2)
@@ -170,14 +154,14 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activerecord (= 4.1.5)
   bcrypt (= 3.1.7)
   capistrano
   capistrano_colors
   dalli (= 2.7.2)
   database_cleaner
   em-http-request (= 1.1.2)
-  em-postgresql-adapter!
-  em-synchrony!
+  em-synchrony (= 1.0.3)
   em-websocket (= 0.3.8)
   eventmachine (= 1.0.3)
   factory_girl
@@ -188,7 +172,6 @@ DEPENDENCIES
   harmonious_dictionary (= 0.0.1)
   hiredis (= 0.5.2)
   mysql2 (= 0.3.16)
-  pg (= 0.17.1)
   protected_attributes (= 1.0.8)
   rack-fiber_pool
   rdoc
@@ -199,5 +182,5 @@ DEPENDENCIES
   rspec-core
   rvm-capistrano
   tilt (= 2.0.1)
-  will_paginate
+  will_paginate (= 3.0.7)
   yajl-ruby (= 1.1.0)

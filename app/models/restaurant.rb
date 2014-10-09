@@ -3,6 +3,7 @@ class Restaurant < ActiveRecord::Base
 	has_one :restaurant_address
 	has_one :restaurant_status
 	has_many :supervisors
+	has_many :restaurant_types
 
 	scope :opened, -> { joins(:restaurant_status).where(" ? <= checked_at and checked_at <= ?", Time.now.at_beginning_of_day, Time.now.at_end_of_day)}
 	scope :near_by, ->(longitude, latitude) { joins(:restaurant_address).where("coordinate_x1 <= ? and ? <= coordinate_x2 and coordinate_y1 <= ? and ? <= coordinate_y2", longitude, longitude, latitude, latitude) }
@@ -19,7 +20,9 @@ class Restaurant < ActiveRecord::Base
 		end
 	}
 	scope :which_restaurant_type, ->(restaurant_type){ 
-		# joins(:restaurant_status).order("shipping_time ASC") 
+		if restaurant_type > 0
+			joins(:restaurant_types).where("restaurant_type_name_id = ?", restaurant_type)
+		end
 	}
 	scope :page_with, ->(page, count) { limit(count).offset(page * count) }
 end
