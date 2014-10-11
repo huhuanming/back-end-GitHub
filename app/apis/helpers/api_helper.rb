@@ -35,6 +35,18 @@ module ApiHelper
       return supervisor
   end
 
+  def current_user
+      access_token = params[:access_token]
+      token_array = access_token.split(":")
+
+      token = token_array[0]
+      user = UserToken.find_by(:token => token).user
+
+      error!("User is not exsit", 404) if user.nil?
+
+      return user
+  end
+
   def authenticate!(class_name)
       access_token = params[:access_token]
       

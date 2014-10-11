@@ -812,6 +812,50 @@ module Restfuls
 				present restaurant_status, with: APIEntities::RestaurantStatus
 			end
 
+			desc "为餐馆创建订单 Create Order"
+		    params do
+		      requires :access_token, type: String
+		      requires :foods, type: String
+		      requires :ship_type, type: Integer
+		      requires :order_type, type: Integer
+		      requires :shipping_user, type: String
+		      requires :shipping_address, type: String
+		      requires :phone_number, type: String
+		    end
+		    post ":restaurant_id/order" do
+		        authenticate_user!
+		        this_user = current_user
+		        foods = JSON.parse(params[:foods])
+		        order_sign = OrderSign.create(:restaurant_id => params[:restaurant_id], :user => this_user.id, :sign => "#{Time.new.to_i}#{this_user.id}")
+		        price = 0
+		        foods.each_with_index{ |food|
+		          this_food = Food.find_by(:id => food["fid"])
+		          this_food_price = this_food.shop_price * food["count"]
+		          order_food = OrderFood.new
+		          order_food.order_sign_id = order_sign.id
+		          order_food.food_name = this_food.food_name
+		          order_food.count = food["count"]
+		          order_food.total_price = this_food_price
+		          order_food.actual_total_price = this_food_price
+		          order_food.save
+
+		          price += this_food_price
+		        }
+
+		        order = Order.new
+		        order.order_sign_id = order_sign.id
+		        order.ship_type = params[:ship_type]
+		        order.order_type = params[:order_type]
+		        order.shipping_user = params[:shipping_user]
+		        order.shipping_address = params[:shipping_address]
+		        order.total_price = price
+		        order.actual_total_price = price
+		        order.food_count = foods.size
+		        order.save
+
+		        present 'order_sign', OrderSign.sign
+		    end
+
 			#更新餐馆开店状态
 			put ":restaurant_id/is_open" do
 				authenticate_supervisor!

@@ -1,4 +1,3 @@
 class OrderFood < ActiveRecord::Base
-	belongs_to :order
-	belongs_to :food
+	belongs_to :order_sign
 end
