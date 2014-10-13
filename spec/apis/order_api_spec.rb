@@ -12,7 +12,6 @@ describe ApplicationApi do
       6.times.each{ |index|
         FactoryGirl.create(:order, phone_number: index, restaurant_id: @restaurant_id, shipping_at: Time.new + 30.minutes)
       }
-      
   end
 
   it 'GET /v1/:restaurant/orders' do

@@ -11,6 +11,7 @@ module Restfuls
 		# = 操作
 		# == C
 		# * 创建餐馆
+		# * 创建餐馆订单
 		# == U
 		# * 确认餐馆某条订单
 		# * 更新餐馆开店状态
@@ -81,6 +82,40 @@ module Restfuls
 		# 	地推帐号 AccessToken 不存在
 		# ====== 501:
 		# 	数据存储错误
+		#
+		#
+		# == 创建餐馆订单
+		# 	创建一家餐馆，并生成一个商家帐号，商家登录帐号为他填写的手机号，登录密码为手机号后四位
+	    # ==== POST
+	    # 	{:restaurant_id}/orders
+		# ==== Params
+		# ====== access_token:
+		# 	顾客 access_token
+		# ====== foods:
+		# 	上传的菜单结构[{"fid":"1","count":"2"},{"fid":"2","count":"2"}]
+		# ====== ship_type（选填）
+		# 	运送类型，默认为0， 0 是 默认配送方式，由餐馆自行配送
+		# ====== order_type（选填）
+		# 	订单类型，默认为0.
+		# ====== shipping_user:
+		# 	收货人
+		# ====== shipping_address:
+		# 	收货地址
+		# ====== phone_number:
+		# 	收货人手机号
+	    # ==== Response Status Code
+		# 	201
+		# ==== Response Body
+		# ====== order_sign:
+		# 	订单号，一个字符串
+	    # ==== Error Status Code
+		# ====== 401:
+		# 	地推帐号验证错误，AccessToken 过期、无效
+		# ====== 404:
+		# 	地推帐号 AccessToken 不存在
+		# ====== 501:
+		# 	数据存储错误
+		#
 		#
 		# == 读取餐馆列表
 		# 	根据你当前的位置获取附近的餐馆
@@ -812,25 +847,35 @@ module Restfuls
 				present restaurant_status, with: APIEntities::RestaurantStatus
 			end
 
-			desc "为餐馆创建订单 Create Order"
+			desc "创建餐馆订单 Create Order"
 		    params do
 		      requires :access_token, type: String
 		      requires :foods, type: String
-		      requires :ship_type, type: Integer
-		      requires :order_type, type: Integer
+		      requires :ship_type, type: Integer, default: 0
+		      requires :order_type, type: Integer, default: 0
 		      requires :shipping_user, type: String
 		      requires :shipping_address, type: String
 		      requires :phone_number, type: String
 		    end
-		    post ":restaurant_id/order" do
+		    post ":restaurant_id/orders" do
 		        authenticate_user!
 		        this_user = current_user
-		        foods = JSON.parse(params[:foods])
-		        order_sign = OrderSign.create(:restaurant_id => params[:restaurant_id], :user => this_user.id, :sign => "#{Time.new.to_i}#{this_user.id}")
+		        begin
+		       		foods = JSON.parse(params[:foods])
+		        rescue Exception => e
+		        	error!("food is invalid", 400)
+		        end
+		        order_sign = OrderSign.create(:restaurant_id => params[:restaurant_id], :user_id => this_user.id, :sign => "#{Time.new.to_i}#{this_user.id}")
 		        price = 0
 		        foods.each_with_index{ |food|
 		          this_food = Food.find_by(:id => food["fid"])
-		          this_food_price = this_food.shop_price * food["count"]
+		          count = food["count"].to_i
+		          this_food_price = this_food.shop_price * count
+
+		          this_food_status = this_food.food_status
+		          this_food_status.sold_number+=count
+		          this_food_status.save
+		          
 		          order_food = OrderFood.new
 		          order_food.order_sign_id = order_sign.id
 		          order_food.food_name = this_food.food_name
@@ -848,12 +893,13 @@ module Restfuls
 		        order.order_type = params[:order_type]
 		        order.shipping_user = params[:shipping_user]
 		        order.shipping_address = params[:shipping_address]
+		        order.phone_number = params[:phone_number]
 		        order.total_price = price
 		        order.actual_total_price = price
 		        order.food_count = foods.size
 		        order.save
 
-		        present 'order_sign', OrderSign.sign
+		        present:'order_sign', order_sign.sign
 		    end
 
 			#更新餐馆开店状态
