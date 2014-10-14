@@ -20,7 +20,7 @@ module Restfuls
 		# == 读取餐馆分类列表
 		# 	读取餐馆分类列表
 	    # ==== GET
-	    # 	/restaurants_types
+	    # 	/restaurant_types
 	    # ==== Response Status Code
 		# 	200
 		# ==== Response Body

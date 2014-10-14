@@ -12,8 +12,16 @@ module Restfuls
 		# = 操作
 		# == C
 		# * 创建帐号
+		# * 创建收货地址
+    	# == U
+    	# * 更新收货地址
+    	# * 更新默认收货地址
     	# == R
     	# * 获取验证码
+    	# * 获取收货地址
+    	# * 获取默认收货地址
+    	# == D
+    	# * 删除收货地址
     	# == Other
     	# * 登录帐号
     	# * 登陆账号（第三方登陆）
@@ -78,6 +86,136 @@ module Restfuls
 		# 	超过一天连续5次验证码的限制，24小时内不能再获取验证码
 		# ====== 405:
 		# 	等待一分钟后再次获取验证码
+		#
+		# == 创建收货地址
+		# 	创建用户收货地址
+	    # ==== POST
+	    # 	/users/{:user_id}/addresses
+		# ==== Params
+		# ====== access_token:
+		# 	用户的 access token
+		# ====== shipping_user:
+		# 	收货用户
+		# ====== shipping_address:
+		# 	收货地址
+		# ====== phone_number:
+		# 	手机号码
+		# ====== is_default（可选）:
+		# 	是否设置为默认收货地址
+	    # ==== Response Status Code
+		# 	201
+	    # ==== Response Body
+		# ====== response_status:
+		# 	success to created
+		#
+		# == 更新收货地址
+		# 	更新用户收货地址
+	    # ==== PUT
+	    # 	/users/{:user_id}/addresses/{:address_id}
+		# ==== Params
+		# ====== access_token:
+		# 	用户的 access token
+		# ====== shipping_user:
+		# 	收货用户
+		# ====== shipping_address:
+		# 	收货地址
+		# ====== phone_number:
+		# 	手机号码
+		# ====== is_default（可选）:
+		# 	是否设置为默认收货地址
+	    # ==== Response Status Code
+		# 	200
+	    # ==== Response Body
+		# ====== response_status:
+		# 	success to updated
+		#
+		# == 获取收货地址
+		# 	获取用户收货地址
+	    # ==== GET
+	    # 	/users/{:user_id}/addresses
+		# ==== Params
+		# ====== access_token:
+		# 	用户的 access token
+	    # ==== Response Status Code
+		# 	200
+	    # ==== Response Body
+		# ====== shipping_user:
+		# 	收货人名字
+		# ====== shipping_address:
+		# 	收货地址
+		# ====== phone_number:
+		# 	收货人手机号
+		# ====== is_default:
+		# 	是否是默认收货地址
+		# ==== Response Body Example:
+		#	[
+		#		{
+		#			"shipping_user" : "2888",
+  		#			"shipping_address" : "交大",
+  		#			"phone_number" : "123456789",
+  		#			"is_default" : "1"
+  		#		},
+		#		{
+		#			"shipping_user" : "1234234",
+  		#			"shipping_address" : "交大",
+  		#			"phone_number" : "123456789",
+  		#			"is_default" : "0"
+  		#		}
+  		#	]
+		#
+		#
+		# == 获取默认收货地址
+		# 	获取用户默认收货地址
+	    # ==== GET
+	    # 	/users/{:user_id}/addresses/default_address
+		# ==== Params
+		# ====== access_token:
+		# 	用户的 access token
+	    # ==== Response Status Code
+		# 	200
+	    # ==== Response Body
+		# ====== shipping_user:
+		# 	收货人名字
+		# ====== shipping_address:
+		# 	收货地址
+		# ====== phone_number:
+		# 	收货人手机号
+		# ====== is_default:
+		# 	是否是默认收货地址
+		# ==== Response Body Example:
+		#		{
+		#			"shipping_user" : "2888",
+  		#			"shipping_address" : "交大",
+  		#			"phone_number" : "123456789",
+  		#			"is_default" : "1"
+  		#		}
+  		#
+  		#
+		# == 删除收货地址
+		# 	删除用户收货地址
+	    # ==== DELETE
+	    # 	/users/{:user_id}/addresses/{:address_id}
+		# ==== Params
+		# ====== access_token:
+		# 	用户的 access token
+	    # ==== Response Status Code
+		# 	200
+	    # ==== Response Body
+		# ====== response_status:
+		# 	success to deleted
+		#
+		# == 更新默认收货地址
+		# 	更新默认收货地址
+	    # ==== PUT
+	    # 	/users/{:user_id}/addresses/{:address_id}/is_default
+		# ==== Params
+		# ====== access_token:
+		# 	用户的 access token
+	    # ==== Response Status Code
+		# 	200
+	    # ==== Response Body
+		# ====== response_status:
+		# 	this address was default
 		#
 		# == 登录帐号
 		# 	登录用户帐号
@@ -174,10 +312,10 @@ module Restfuls
 				begin
 			        new_user.save
 			    rescue Exception => e
-					error!("Data is invaild", 501) 
+					error!("Data is invalid", 501) 
 			    end
 			    new_user_token = new_user.generate_access_token
-			    error!("Data is invaild", 501) if new_user_token.nil?
+			    error!("Data is invalid", 501) if new_user_token.nil?
 				present new_user, with: APIEntities::UserToken
 			end
 
@@ -247,6 +385,135 @@ module Restfuls
 				error!("Can't get verification code in 24 hours", 403) if user_mobile_verification.is_valid?
 				error!("Wait 1 minute to get verification_code", 405) if !user_mobile_verification.send_verification_code
 				present:"response_status", "success to get it and please note that check your mobile phone"
+			end
+
+			desc "create a delivery address for user"
+			params do
+				requires :access_token, type: String
+				requires :shipping_user, type: String
+				requires :shipping_address, type: String
+				requires :phone_number, type: String
+				optional :is_default, type: Integer, default: 0
+			end
+			post ':user_id/addresses' do
+				authenticate_user!
+				error!("access_token is invalid", 401) if params[:user_id].to_i != current_user.id
+				this_address = UserAddress.new(
+										 		:user_id => params[:user_id],
+										 		:shipping_user => params[:shipping_user],
+										 		:shipping_address => params[:shipping_address],
+										 		:phone_number => params[:phone_number],
+										 		:is_default => params[:is_default]
+										 	)
+				this_address.is_default = 1	if UserAddress.where(:user_id => params[:user_id]).size < 1
+				if params[:is_default] == 1
+					address_with_default = UserAddress.where(:user_id => params[:user_id])
+													  .where(:is_default => 1)
+													  .first
+					if !address_with_default.nil?
+						address_with_default.is_default = 0
+						address_with_default.save
+					end
+				end
+				this_address.save
+				present:'response_status', 'success to created'
+			end
+
+			desc "updated a delivery address for user"
+			params do
+				requires :access_token, type: String
+				requires :shipping_user, type: String
+				requires :shipping_address, type: String
+				requires :phone_number, type: String
+				optional :is_default, type: Integer, default: 0
+			end
+			put ':user_id/addresses/:address_id' do
+				 authenticate_user!
+				 this_user = current_user
+				 error!("access_token is invalid", 401) if params[:user_id].to_i != this_user.id
+				 this_address = UserAddress.find_by_id(params[:address_id])
+				 error!("access_token is invalid", 401) if this_address.nil? || this_address.user_id != params[:user_id].to_i
+				 this_address.shipping_user = params[:shipping_user]
+				 this_address.shipping_address = params[:shipping_address]
+				 this_address.phone_number = params[:phone_number]
+				 this_address.is_default = params[:is_default]
+				 if params[:is_default] == 1
+					address_with_default = UserAddress.where(:user_id => params[:user_id])
+													  .where(:is_default => 1)
+													  .first
+					if !address_with_default.nil?
+						address_with_default.is_default = 0
+						address_with_default.save
+					end
+				  end
+				 this_address.save
+				 present:'response_status', 'success to updated'
+			end
+
+			desc "read delivery addresses for user"
+			params do
+				requires :access_token, type: String
+			end
+			get ':user_id/addresses' do
+				 authenticate_user!
+				 this_user = current_user
+				 error!("access_token is invalid", 401) if params[:user_id].to_i != this_user.id
+				 addresses = UserAddress.where(:user_id => params[:user_id])
+				 present addresses, with: APIEntities::UserAddress
+			end
+
+
+			desc "get default delivery addresses for user"
+			params do
+				requires :access_token, type: String
+			end
+			get ':user_id/addresses/default_address' do
+				 authenticate_user!
+				 this_user = current_user
+				 error!("access_token is invalid", 401) if params[:user_id].to_i != this_user.id
+				 addresses = UserAddress.where(:user_id => params[:user_id])
+													  .where(:is_default => 1)
+													  .first
+				 present addresses, with: APIEntities::UserAddress
+			end
+
+
+			desc "delete a delivery address for user"
+			params do
+				requires :access_token, type: String
+			end
+			delete ':user_id/addresses/:address_id' do
+				 authenticate_user!
+				 this_user = current_user
+				 error!("access_token is invalid", 401) if params[:user_id].to_i != this_user.id
+				 this_address = UserAddress.find_by_id(params[:address_id])
+				 error!("this address is not invalid", 401) if this_address.user_id != params[:user_id].to_i
+				 this_address.delete
+				 present:'response_status', 'success to deleted'
+			end
+
+
+			desc "updated a delivery address's is_default value"
+			params do
+				requires :access_token, type: String
+			end
+			put ':user_id/addresses/:address_id/is_default' do
+				 authenticate_user!
+				 this_user = current_user
+				 error!("access_token is invalid", 401) if params[:user_id].to_i != this_user.id
+				 this_address = UserAddress.find_by_id(params[:address_id])
+				 error!("access_token is invalid", 401) if this_address.user_id != params[:user_id].to_i
+
+				address_with_default = UserAddress.where(:user_id => params[:user_id])
+									 				  .where(:is_default => 1)
+													  .first
+				if !address_with_default.nil?
+						address_with_default.is_default = 0
+						address_with_default.save
+				end
+				this_address.is_default = 1
+				this_address.save
+			    present:'response_status', 'this address was default'
 			end
 
 		end
