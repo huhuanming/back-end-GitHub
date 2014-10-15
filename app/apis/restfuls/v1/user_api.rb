@@ -319,6 +319,17 @@ module Restfuls
 				present new_user, with: APIEntities::UserToken
 			end
 
+			desc "bind push id and user"
+			params
+				requires :push_id, type: String
+				requires :access_token, type: String
+			end
+			post "/bind_push"
+				authenticate_user!
+				UserPush.create(:user_id => current_user.id, :push_id => params[:push_id])
+				present:"response_status", "success to bind"
+			end
+
 			desc "Login customer account with third party oauth service"
 			params do
 				requires :uid, type: String

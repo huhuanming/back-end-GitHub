@@ -1,4 +1,7 @@
 class Restaurant < ActiveRecord::Base
+
+	ORDERBOOKINGURI = "http://54.64.190.26/api/pushes/restaurant/overbooking"
+
 	has_one :restaurant_linsece
 	has_one :restaurant_address
 	has_one :restaurant_status
@@ -26,4 +29,15 @@ class Restaurant < ActiveRecord::Base
 		end
 	}
 	scope :page_with, ->(page, count) { limit(count).offset(page * count) }
+
+	def push_orderbooking_inform
+		params = Hash.new
+		params["badge"] = "1"
+		supervisor_push = Restaurant.supervisors.first.supervisor_push
+		return if supervisor_push.nil?
+		params["push_id"] = supervisor_push.push_id
+		uri = URI.parse(ORDERBOOKINGURI)
+		res = Net::HTTP.post_form(uri, params)   
+		puts res.body
+	end
 end
