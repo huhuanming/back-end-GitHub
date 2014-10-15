@@ -320,11 +320,11 @@ module Restfuls
 			end
 
 			desc "bind push id and user"
-			params
+			params do
 				requires :push_id, type: String
 				requires :access_token, type: String
 			end
-			post "/bind_push"
+			post "/bind_push" do
 				authenticate_user!
 				UserPush.create(:user_id => current_user.id, :push_id => params[:push_id])
 				present:"response_status", "success to bind"
@@ -518,9 +518,9 @@ module Restfuls
 				address_with_default = UserAddress.where(:user_id => params[:user_id])
 									 				  .where(:is_default => 1)
 													  .first
-				if !address_with_default.nil?
-						address_with_default.is_default = 0
-						address_with_default.save
+				if address_with_default.nil?
+					address_with_default.is_default = 0
+					address_with_default.save
 				end
 				this_address.is_default = 1
 				this_address.save
@@ -528,6 +528,5 @@ module Restfuls
 			end
 
 		end
-
 	end
 end

@@ -12,6 +12,7 @@ module Restfuls
 		# == C
 		# * 创建餐馆
 		# * 创建餐馆订单
+		# * 创建餐馆评论
 		# == U
 		# * 确认餐馆某条订单
 		# * 更新餐馆开店状态
@@ -31,6 +32,7 @@ module Restfuls
 		# * 读取餐馆订单列表
 		# * 读取餐馆设置
 		# * 读取餐馆某条订单
+		# * 读取餐馆评论
 		#
 		#
 		# == 创建餐馆
@@ -115,6 +117,52 @@ module Restfuls
 		# 	地推帐号 AccessToken 不存在
 		# ====== 501:
 		# 	数据存储错误
+		#
+		#
+		# == 创建餐馆评论
+		# 	创建餐馆评论
+	    # ==== POST
+	    # 	{:restaurant_id}/comments
+		# ==== Params
+		# ====== access_token:
+		# 	用户的 access_token
+		# ====== title:
+		# 	评论题目
+		# ====== comment
+		# 	评论内容
+		# ====== point(选填)
+		# 	评分，默认为0
+	    # ==== Response Status Code
+		# 	201
+		# ==== Response Body
+		# ====== response_status:
+		# 	'successed to comment it'
+		#
+		#
+		# == 获取餐馆评论
+		# 	获取餐馆评论
+	    # ==== POST
+	    # 	{:restaurant_id}/comments
+		# ==== Params
+		# ====== page:
+		# 	页数
+		# ====== count:
+		# 	每页的个数
+		# ====== comment
+		# 	评论内容
+	    # ==== Response Status Code
+		# 	200
+		# ==== Response Body
+		# ====== author:
+		# 	评论的作者
+		# ====== title:
+		# 	评论的题目
+		# ====== comment:
+		# 	评论的内容
+		# ====== point:
+		# 	评论的评分
+		# ====== created_at:
+		# 	评论创建时间
 		#
 		#
 		# == 读取餐馆列表
@@ -1027,6 +1075,41 @@ module Restfuls
 				end
 				present:'response_status', response_body
 			end
+
+			######餐馆评论
+			#创建餐馆评论
+			desc "create a comment by user for rest"
+		    params do
+		    	requires :access_token, type: String
+		    	requires :title, type: String
+		    	requires :comment, type: String
+		    	optional :point, type: Integer
+		    end
+		    post ":restaurant_id/comments" do
+		    	authenticate_user!
+		    	this_user = current_user
+		    	RestaurantComment.create(
+		    			:restaurant_id => params[:restaurant_id],
+		    			:user_id => this_user.id,
+		    			:author => this_user.nick_name,
+		    			:title => params[:title],
+		    			:comment => params[:comment],
+		    			:point => params[:point]
+		    		)
+				present:'response_status', 'successed to comment it'
+		    end
+
+			desc "get all comments"
+		    params do
+				optional :page, type: Integer, default: 0
+				optional :count, type: Integer, default: 10
+			end
+		    get ":restaurant_id/comments" do
+		    	error!("bad boy!", 401) if params[:page] < 0 || params[:count] < 0
+				comments = RestaurantComment.where(:restaurant_id => params[:restaurant_id]).paginate(:page => params[:page], :per_page => params[:count])
+				present comments, with: APIEntities::RestaurantComment
+		    end
+
 		end
 	end
 end
