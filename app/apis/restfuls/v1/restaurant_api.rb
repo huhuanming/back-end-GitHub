@@ -135,24 +135,26 @@ module Restfuls
 	    # ==== Response Status Code
 		# 	201
 		# ==== Response Body
-		# ====== response_status:
-		# 	'successed to comment it'
+		# ====== cid:
+		# 	评论的cid
 		#
 		#
-		# == 获取餐馆评论
-		# 	获取餐馆评论
-	    # ==== POST
+		# == 读取餐馆评论
+		# 	读取餐馆评论
+	    # ==== GET
 	    # 	{:restaurant_id}/comments
 		# ==== Params
-		# ====== page:
-		# 	页数
+		# ====== cid:
+		# 	当前的cid
 		# ====== count:
 		# 	每页的个数
-		# ====== comment
-		# 	评论内容
+		# ====== order:
+		# 	排序方式, 0 是按照时间最新排序， 1 是评分从高到低排序
 	    # ==== Response Status Code
 		# 	200
 		# ==== Response Body
+		# ====== cid:
+		# 	评论的cid
 		# ====== author:
 		# 	评论的作者
 		# ====== title:
@@ -839,7 +841,8 @@ module Restfuls
 				error!("bad boy!", 401) if params[:page] < 0 || params[:count] < 0
 				restaurants = Restaurant.which_restaurant_type(params[:restaurant_type])
 										.near_by(params[:longitude], params[:latitude])
-										.opened.order_by(params["order_type"], params[:longitude], params[:latitude])
+										.opened
+										.order_by(params[:order_type], params[:longitude], params[:latitude])
 										.page_with(params[:page], params[:count])
 				present restaurants, with: APIEntities::Restaurant
 			end
@@ -1088,25 +1091,25 @@ module Restfuls
 		    post ":restaurant_id/comments" do
 		    	authenticate_user!
 		    	this_user = current_user
-		    	RestaurantComment.create(
-		    			:restaurant_id => params[:restaurant_id],
-		    			:user_id => this_user.id,
-		    			:author => this_user.nick_name,
-		    			:title => params[:title],
-		    			:comment => params[:comment],
-		    			:point => params[:point]
-		    		)
-				present:'response_status', 'successed to comment it'
+		    	comment = RestaurantComment.create(
+			    			:restaurant_id => params[:restaurant_id],
+			    			:user_id => this_user.id,
+			    			:author => this_user.nick_name,
+			    			:title => params[:title],
+			    			:comment => params[:comment],
+			    			:point => params[:point]
+			    		)
+				present:'cid', comment.id
 		    end
-
+		    #读取餐馆评论
 			desc "get all comments"
 		    params do
-				optional :page, type: Integer, default: 0
+				optional :cid, type: Integer, default: 0
 				optional :count, type: Integer, default: 10
+				optional :order, type: Integer, default: 0
 			end
 		    get ":restaurant_id/comments" do
-		    	error!("bad boy!", 401) if params[:page] < 0 || params[:count] < 0
-				comments = RestaurantComment.where(:restaurant_id => params[:restaurant_id]).paginate(:page => params[:page], :per_page => params[:count])
+				comments = RestaurantComment.where(:restaurant_id => params[:restaurant_id]).where(:id < params[:cid]).limit(params[:count]).order_by(params[:order])
 				present comments, with: APIEntities::RestaurantComment
 		    end
 

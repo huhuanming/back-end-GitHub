@@ -461,6 +461,15 @@ module Restfuls
 				 present:'response_status', 'success to updated'
 			end
 
+			desc "get a user profile"
+			params do
+				requires :access_token, type: String
+			end
+			get ':user_id/profile' do
+				 authenticate_user!
+				 present current_user, with: APIEntities::UserProfile
+			end
+
 			desc "read delivery addresses for user"
 			params do
 				requires :access_token, type: String

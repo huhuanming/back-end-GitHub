@@ -1,6 +1,7 @@
 module Restfuls
 	module APIEntities
 		class RestaurantComment < Grape::Entity
+          expose :id, as: :cid
       	  expose :author, as: :author
       	  expose :title, as: :title
           expose :comment, as: :comment

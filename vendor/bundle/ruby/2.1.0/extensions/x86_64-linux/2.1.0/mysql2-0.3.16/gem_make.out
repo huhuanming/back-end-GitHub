@@ -1,0 +1,33 @@
+/usr/local/rvm/rubies/ruby-2.1.1/bin/ruby extconf.rb 
+checking for ruby/thread.h... yes
+checking for rb_thread_call_without_gvl() in ruby/thread.h... yes
+checking for rb_thread_blocking_region()... yes
+checking for rb_wait_for_single_fd()... yes
+checking for rb_hash_dup()... yes
+checking for rb_intern3()... yes
+-----
+Using mysql_config at /usr/bin/mysql_config
+-----
+checking for mysql.h... yes
+checking for errmsg.h... yes
+checking for mysqld_error.h... yes
+-----
+Setting libpath to /usr/lib64/mysql
+-----
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+compiling result.c
+compiling client.c
+client.c: In function ‘rb_connect’:
+client.c:331: warning: ISO C90 forbids mixed declarations and code
+client.c:357: warning: comparison between signed and unsigned integer expressions
+compiling infile.c
+compiling mysql2_ext.c
+linking shared-object mysql2/mysql2.so
+
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 mysql2.so ./.gem.20141016-18324-129x4x4/mysql2
+installing default mysql2 libraries
