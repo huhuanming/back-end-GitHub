@@ -34,6 +34,9 @@ module Restfuls
 		# * 读取餐馆某条订单
 		# * 读取餐馆评论
 		#
+		# == Other
+		# * 搜索菜名
+		# * 摇一摇
 		#
 		# == 创建餐馆
 		# 	创建一家餐馆，并生成一个商家帐号，商家登录帐号为他填写的手机号，登录密码为手机号后四位
@@ -135,24 +138,26 @@ module Restfuls
 	    # ==== Response Status Code
 		# 	201
 		# ==== Response Body
-		# ====== response_status:
-		# 	'successed to comment it'
+		# ====== cid:
+		# 	评论的cid
 		#
 		#
-		# == 获取餐馆评论
-		# 	获取餐馆评论
-	    # ==== POST
+		# == 读取餐馆评论
+		# 	读取餐馆评论
+	    # ==== GET
 	    # 	{:restaurant_id}/comments
 		# ==== Params
-		# ====== page:
-		# 	页数
+		# ====== cid:
+		# 	当前的cid
 		# ====== count:
 		# 	每页的个数
-		# ====== comment
-		# 	评论内容
+		# ====== order:
+		# 	排序方式, 0 是按照时间最新排序， 1 是评分从高到低排序
 	    # ==== Response Status Code
 		# 	200
 		# ==== Response Body
+		# ====== cid:
+		# 	评论的cid
 		# ====== author:
 		# 	评论的作者
 		# ====== title:
@@ -745,6 +750,52 @@ module Restfuls
 		# 	帐号验证错误，用户名或密码错误
 		# ====== 404:
 		# 	没有找到相应的订单
+		#
+		#
+		# == 搜索菜名
+		# 	根据你当前的位置搜索菜名
+	    # ==== GET
+	    # 	/restaurants/search_food
+		# ==== Params
+		# ====== longitude:
+		# 	你当前位置的经度
+		# ====== latitude:
+		# 	你当前位置的纬度
+		# ====== food_name
+		# 	食物名字片段
+	    # ==== Response Status Code
+		# 	200
+		# ==== Response Body
+		# ====== fid:
+		# 	食物 id
+		# ====== food_name:
+		# 	食物名字
+		# ====== shop_price:
+		# 	食物售价
+		# ====== rid:
+		# 	餐馆 id
+		# ====== restaurant_name:
+		# 	餐馆名字
+		# ====== restaurant_avatar:
+		# 	餐馆头像
+		# ==== Response Body Example:
+	   	#  [
+		#	 {
+		#		fid: 10,
+		#		food_name: "杂酱面",
+		#		shop_price: "7.0",
+		#		rid: 10,
+		#		restaurant_name: "懒洋洋绝味面",
+		#		restaurant_avatar: "restaurant_avatar"
+		#	 },
+		#	 {
+		#		fid: 11,
+		#		food_name: "杂酱面",
+		#		shop_price: "7.0",
+		#		rid: 11,
+		#		restaurant_avatar: "restaurant_avatar",
+		#	  }
+	    #   ]
 
 		resource :restaurants do
 			desc "Create a restaurant"
@@ -839,10 +890,35 @@ module Restfuls
 				error!("bad boy!", 401) if params[:page] < 0 || params[:count] < 0
 				restaurants = Restaurant.which_restaurant_type(params[:restaurant_type])
 										.near_by(params[:longitude], params[:latitude])
-										.opened.order_by(params["order_type"], params[:longitude], params[:latitude])
+										.opened
+										.order_by(params[:order_type], params[:longitude], params[:latitude])
 										.page_with(params[:page], params[:count])
 				present restaurants, with: APIEntities::Restaurant
 			end
+
+		    #搜索菜名
+			desc "search food"
+		    params do
+				requires :longitude, type: String
+				requires :latitude, type: String
+				requires :food_name, type: String
+			end
+		    get '/search_food' do
+				restaurant_ids = Restaurant.near_by(params[:longitude], params[:latitude]).opened.pluck(:id)
+				food_types_ids = FoodType.where(:restaurant_id => restaurant_ids).pluck(:id)
+				foods = Food.select(
+									"foods.id as fid",
+									"foods.food_name",
+									"foods.shop_price",
+									"food_types.restaurant_id as rid",
+									"restaurants.restaurant_name",
+									"restaurants.restaurant_avatar"
+									)
+							.joins("LEFT JOIN restaurants on restaurants.id = food_types.restaurant_id")
+							.joins(:food_type).where(:food_type_id => food_types_ids).where("food_name like ?", "%"+params[:food_name]+"%")
+		      	present foods
+		    end
+
 
 			#根据 餐馆id 读取餐馆
 			desc "Get restaurant profile"
@@ -1088,27 +1164,32 @@ module Restfuls
 		    post ":restaurant_id/comments" do
 		    	authenticate_user!
 		    	this_user = current_user
-		    	RestaurantComment.create(
-		    			:restaurant_id => params[:restaurant_id],
-		    			:user_id => this_user.id,
-		    			:author => this_user.nick_name,
-		    			:title => params[:title],
-		    			:comment => params[:comment],
-		    			:point => params[:point]
-		    		)
-				present:'response_status', 'successed to comment it'
+		    	comment = RestaurantComment.create(
+			    			:restaurant_id => params[:restaurant_id],
+			    			:user_id => this_user.id,
+			    			:author => this_user.nick_name,
+			    			:title => params[:title],
+			    			:comment => params[:comment],
+			    			:point => params[:point]
+			    		)
+				present:'cid', comment.id
 		    end
 
+		    #读取餐馆评论
 			desc "get all comments"
 		    params do
-				optional :page, type: Integer, default: 0
+				optional :cid, type: Integer, default: 0
 				optional :count, type: Integer, default: 10
+				optional :order, type: Integer, default: 0
 			end
 		    get ":restaurant_id/comments" do
-		    	error!("bad boy!", 401) if params[:page] < 0 || params[:count] < 0
-				comments = RestaurantComment.where(:restaurant_id => params[:restaurant_id]).paginate(:page => params[:page], :per_page => params[:count])
+		    	cid = params[:cid]
+		    	restaurant_last_comment = RestaurantComment.last
+		    	cid = restaurant_last_comment.last.id + 1	if cid == 0 && restaurant_last_comment
+				comments = RestaurantComment.where(:restaurant_id => params[:restaurant_id]).where("id < ?",cid).limit(params[:count]).order_by(params[:order])
 				present comments, with: APIEntities::RestaurantComment
 		    end
+
 
 		end
 	end

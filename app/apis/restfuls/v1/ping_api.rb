@@ -38,6 +38,11 @@ module Restfuls
          present:ping, Time.new
     end
 
+    ## 后门
+    get '/open_restaurant' do 
+         RestaurantStatus.update_all(:checked_at => Time.now)
+         present:'yeap', 'Milord, all restaurant were opened'
+    end
 
   end
 end

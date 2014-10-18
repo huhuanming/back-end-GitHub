@@ -19,7 +19,7 @@ describe ApplicationApi do
                     10 => [14, 5, 12, 16, 3, 7, 25, 5],
                     11 => [17, 19, 15, 19, 17, 21, 22, 8],
                   }
-       @locations.each_with_index{ |location, index| 
+        @locations.each_with_index{ |location, index| 
 	      @restaurant = FactoryGirl.create(:restaurant, promotioner_id: @promotioner.id, restaurant_name:"餐馆#{index}")
 	      @restaurant_id = @restaurant.id
         this_time = @current_time
