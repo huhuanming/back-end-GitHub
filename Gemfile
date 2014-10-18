@@ -8,7 +8,7 @@ gem 'em-http-request', '1.1.2'
 gem 'yajl-ruby', '1.1.0'
 gem 'eventmachine', '1.0.3'
 gem 'bcrypt', '3.1.7'
-
+gem 'hashie', '3.3.1'
 gem 'grape', '0.8.0'
 gem 'grape-entity', '0.4.3'
 gem 'goliath', '1.0.4'
