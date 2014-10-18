@@ -398,143 +398,148 @@ module Restfuls
 				present:"response_status", "success to get it and please note that check your mobile phone"
 			end
 
-			desc "create a delivery address for user"
-			params do
-				requires :access_token, type: String
-				requires :shipping_user, type: String
-				requires :shipping_address, type: String
-				requires :phone_number, type: String
-				optional :is_default, type: Integer, default: 0
-			end
-			post ':user_id/addresses' do
-				authenticate_user!
-				error!("access_token is invalid", 401) if params[:user_id].to_i != current_user.id
-				this_address = UserAddress.new(
-										 		:user_id => params[:user_id],
-										 		:shipping_user => params[:shipping_user],
-										 		:shipping_address => params[:shipping_address],
-										 		:phone_number => params[:phone_number],
-										 		:is_default => params[:is_default]
-										 	)
-				this_address.is_default = 1	if UserAddress.where(:user_id => params[:user_id]).size < 1
-				if params[:is_default] == 1
-					address_with_default = UserAddress.where(:user_id => params[:user_id])
-													  .where(:is_default => 1)
-													  .first
-					if !address_with_default.nil?
-						address_with_default.is_default = 0
-						address_with_default.save
+			namespace ":user_id" do
+				desc "get a user profile"
+					params do
+						requires :access_token, type: String
 					end
-				end
-				this_address.save
-				present:'response_status', 'success to created'
-			end
-
-			desc "updated a delivery address for user"
-			params do
-				requires :access_token, type: String
-				requires :shipping_user, type: String
-				requires :shipping_address, type: String
-				requires :phone_number, type: String
-				optional :is_default, type: Integer, default: 0
-			end
-			put ':user_id/addresses/:address_id' do
-				 authenticate_user!
-				 this_user = current_user
-				 error!("access_token is invalid", 401) if params[:user_id].to_i != this_user.id
-				 this_address = UserAddress.find_by_id(params[:address_id])
-				 error!("access_token is invalid", 401) if this_address.nil? || this_address.user_id != params[:user_id].to_i
-				 this_address.shipping_user = params[:shipping_user]
-				 this_address.shipping_address = params[:shipping_address]
-				 this_address.phone_number = params[:phone_number]
-				 this_address.is_default = params[:is_default]
-				 if params[:is_default] == 1
-					address_with_default = UserAddress.where(:user_id => params[:user_id])
-													  .where(:is_default => 1)
-													  .first
-					if !address_with_default.nil?
-						address_with_default.is_default = 0
-						address_with_default.save
+					get 'profile' do
+						 authenticate_user!
+						 present current_user, with: APIEntities::UserProfile
 					end
-				  end
-				 this_address.save
-				 present:'response_status', 'success to updated'
-			end
 
-			desc "get a user profile"
-			params do
-				requires :access_token, type: String
-			end
-			get ':user_id/profile' do
-				 authenticate_user!
-				 present current_user, with: APIEntities::UserProfile
-			end
+					namespace "addresses" do
 
-			desc "read delivery addresses for user"
-			params do
-				requires :access_token, type: String
-			end
-			get ':user_id/addresses' do
-				 authenticate_user!
-				 this_user = current_user
-				 error!("access_token is invalid", 401) if params[:user_id].to_i != this_user.id
-				 addresses = UserAddress.where(:user_id => params[:user_id])
-				 present addresses, with: APIEntities::UserAddress
-			end
+						desc "read delivery addresses for user"
+						params do
+							requires :access_token, type: String
+						end
+						get do
+							 authenticate_user!
+							 this_user = current_user
+							 error!("access_token is invalid", 401) if params[:user_id].to_i != this_user.id
+							 addresses = UserAddress.where(:user_id => params[:user_id])
+							 present addresses, with: APIEntities::UserAddress
+						end
+
+						desc "create a delivery address for user"
+						params do
+							requires :access_token, type: String
+							requires :shipping_user, type: String
+							requires :shipping_address, type: String
+							requires :phone_number, type: String
+							optional :is_default, type: Integer, default: 0
+						end
+						post do
+							authenticate_user!
+							error!("access_token is invalid", 401) if params[:user_id].to_i != current_user.id
+							this_address = UserAddress.new(
+													 		:user_id => params[:user_id],
+													 		:shipping_user => params[:shipping_user],
+													 		:shipping_address => params[:shipping_address],
+													 		:phone_number => params[:phone_number],
+													 		:is_default => params[:is_default]
+													 	)
+							this_address.is_default = 1	if UserAddress.where(:user_id => params[:user_id]).size < 1
+							if params[:is_default] == 1
+								address_with_default = UserAddress.where(:user_id => params[:user_id])
+																  .where(:is_default => 1)
+																  .first
+								if !address_with_default.nil?
+									address_with_default.is_default = 0
+									address_with_default.save
+								end
+							end
+							this_address.save
+							present:'response_status', 'success to created'
+						end
+
+						desc "get default delivery addresses for user"
+						params do
+							requires :access_token, type: String
+						end
+						get 'default_address' do
+							 authenticate_user!
+							 this_user = current_user
+							 error!("access_token is invalid", 401) if params[:user_id].to_i != this_user.id
+							 addresses = UserAddress.where(:user_id => params[:user_id])
+																  .where(:is_default => 1)
+																  .first
+							 present addresses, with: APIEntities::UserAddress
+						end
+
+						desc "updated a delivery address for user"
+						params do
+							requires :access_token, type: String
+							requires :shipping_user, type: String
+							requires :shipping_address, type: String
+							requires :phone_number, type: String
+							optional :is_default, type: Integer, default: 0
+						end
+						put ':address_id' do
+							 authenticate_user!
+							 this_user = current_user
+							 error!("access_token is invalid", 401) if params[:user_id].to_i != this_user.id
+							 this_address = UserAddress.find_by_id(params[:address_id])
+							 error!("access_token is invalid", 401) if this_address.nil? || this_address.user_id != params[:user_id].to_i
+							 this_address.shipping_user = params[:shipping_user]
+							 this_address.shipping_address = params[:shipping_address]
+							 this_address.phone_number = params[:phone_number]
+							 this_address.is_default = params[:is_default]
+							 if params[:is_default] == 1
+								address_with_default = UserAddress.where(:user_id => params[:user_id])
+																  .where(:is_default => 1)
+																  .first
+								if !address_with_default.nil?
+									address_with_default.is_default = 0
+									address_with_default.save
+								end
+							  end
+							 this_address.save
+							 present:'response_status', 'success to updated'
+						end
+
+						desc "delete a delivery address for user"
+						params do
+							requires :access_token, type: String
+						end
+						delete ':address_id' do
+							 authenticate_user!
+							 this_user = current_user
+							 error!("access_token is invalid", 401) if params[:user_id].to_i != this_user.id
+							 this_address = UserAddress.find_by_id(params[:address_id])
+							 error!("this address is not invalid", 401) if this_address.user_id != params[:user_id].to_i
+							 this_address.delete
+							 present:'response_status', 'success to deleted'
+						end
 
 
-			desc "get default delivery addresses for user"
-			params do
-				requires :access_token, type: String
-			end
-			get ':user_id/addresses/default_address' do
-				 authenticate_user!
-				 this_user = current_user
-				 error!("access_token is invalid", 401) if params[:user_id].to_i != this_user.id
-				 addresses = UserAddress.where(:user_id => params[:user_id])
-													  .where(:is_default => 1)
-													  .first
-				 present addresses, with: APIEntities::UserAddress
-			end
+						desc "updated a delivery address's is_default value"
+						params do
+							requires :access_token, type: String
+						end
+						put ':address_id/is_default' do
+							 authenticate_user!
+							 this_user = current_user
+							 error!("access_token is invalid", 401) if params[:user_id].to_i != this_user.id
+							 this_address = UserAddress.find_by_id(params[:address_id])
+							 error!("access_token is invalid", 401) if this_address.user_id != params[:user_id].to_i
 
+							address_with_default = UserAddress.where(:user_id => params[:user_id])
+												 				  .where(:is_default => 1)
+																  .first
+							if address_with_default.nil?
+								address_with_default.is_default = 0
+								address_with_default.save
+							end
+							this_address.is_default = 1
+							this_address.save
+						    present:'response_status', 'this address was default'
+						end
+				end #namespace :user_id/addresses
+			end #namespace :user_id
 
-			desc "delete a delivery address for user"
-			params do
-				requires :access_token, type: String
-			end
-			delete ':user_id/addresses/:address_id' do
-				 authenticate_user!
-				 this_user = current_user
-				 error!("access_token is invalid", 401) if params[:user_id].to_i != this_user.id
-				 this_address = UserAddress.find_by_id(params[:address_id])
-				 error!("this address is not invalid", 401) if this_address.user_id != params[:user_id].to_i
-				 this_address.delete
-				 present:'response_status', 'success to deleted'
-			end
-
-
-			desc "updated a delivery address's is_default value"
-			params do
-				requires :access_token, type: String
-			end
-			put ':user_id/addresses/:address_id/is_default' do
-				 authenticate_user!
-				 this_user = current_user
-				 error!("access_token is invalid", 401) if params[:user_id].to_i != this_user.id
-				 this_address = UserAddress.find_by_id(params[:address_id])
-				 error!("access_token is invalid", 401) if this_address.user_id != params[:user_id].to_i
-
-				address_with_default = UserAddress.where(:user_id => params[:user_id])
-									 				  .where(:is_default => 1)
-													  .first
-				if address_with_default.nil?
-					address_with_default.is_default = 0
-					address_with_default.save
-				end
-				this_address.is_default = 1
-				this_address.save
-			    present:'response_status', 'this address was default'
-			end
+			
 
 		end
 	end

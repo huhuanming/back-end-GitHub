@@ -11623,3 +11623,5 @@
 [23016:INFO] 2014-10-18 11:40:17 :: 200 GET /v1/restaurants/shake_to_food?longitude=103.983059&latitude=30.758264 in 35.52 ms
 [23016:INFO] 2014-10-18 11:40:19 :: 200 GET /v1/restaurants/shake_to_food?longitude=103.983059&latitude=30.758264 in 86.82 ms
 [23016:INFO] 2014-10-18 11:40:20 :: 200 GET /v1/restaurants/shake_to_food?longitude=103.983059&latitude=30.758264 in 42.25 ms
+[24528:INFO] 2014-10-18 12:22:51 :: Starting server on 0.0.0.0:9000 in development mode. Watch out for stones.
+[25839:INFO] 2014-10-18 12:35:56 :: Starting server on 0.0.0.0:9000 in development mode. Watch out for stones.

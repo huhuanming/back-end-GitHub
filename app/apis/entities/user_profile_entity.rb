@@ -8,7 +8,7 @@ module Restfuls
           expose :nick_name, as: :token
           expose :avatar, as: :avatar
           expose :phone_number, as: :phone_number
-          expose :oauth, as: :access_token, using: Restfuls::APIEntities::UserProfileOauth
+          expose :oauth_user, as: :oauth, using: Restfuls::APIEntities::UserProfileOauth
     end
 
 	end
