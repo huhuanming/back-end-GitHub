@@ -179,6 +179,13 @@
 <p>读取餐馆评论</p>
 </li></ul>
 
+<h2 id="method-i-restaurants-label-Other">Other<span><a href="#method-i-restaurants-label-Other">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+<ul><li>
+<p>搜索菜名</p>
+</li><li>
+<p>摇一摇</p>
+</li></ul>
+
 <h2 id="method-i-restaurants-label-%E5%88%9B%E5%BB%BA%E9%A4%90%E9%A6%86">创建餐馆<span><a href="#method-i-restaurants-label-%E5%88%9B%E5%BB%BA%E9%A4%90%E9%A6%86">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 
 <pre>创建一家餐馆，并生成一个商家帐号，商家登录帐号为他填写的手机号，登录密码为手机号后四位</pre>
@@ -279,7 +286,7 @@
 
 <h2 id="method-i-restaurants-label-%E5%88%9B%E5%BB%BA%E9%A4%90%E9%A6%86%E8%AE%A2%E5%8D%95">创建餐馆订单<span><a href="#method-i-restaurants-label-%E5%88%9B%E5%BB%BA%E9%A4%90%E9%A6%86%E8%AE%A2%E5%8D%95">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 
-<pre>创建一家餐馆，并生成一个商家帐号，商家登录帐号为他填写的手机号，登录密码为手机号后四位</pre>
+<pre>用户进行下单操作</pre>
 
 <h4 id="method-i-restaurants-label-POST">POST<span><a href="#method-i-restaurants-label-POST">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
 
@@ -1400,6 +1407,137 @@
 <h6 id="method-i-restaurants-label-404%3A">404:<span><a href="#method-i-restaurants-label-404%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
 
 <pre>没有找到相应的订单</pre>
+
+<h2 id="method-i-restaurants-label-%E6%90%9C%E7%B4%A2%E8%8F%9C%E5%90%8D">搜索菜名<span><a href="#method-i-restaurants-label-%E6%90%9C%E7%B4%A2%E8%8F%9C%E5%90%8D">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<pre>根据你当前的位置搜索菜名</pre>
+
+<h4 id="method-i-restaurants-label-GET">GET<span><a href="#method-i-restaurants-label-GET">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>/restaurants/search_food</pre>
+
+<h4 id="method-i-restaurants-label-Params">Params<span><a href="#method-i-restaurants-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-longitude%3A">longitude:<span><a href="#method-i-restaurants-label-longitude%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>你当前位置的经度</pre>
+
+<h6 id="method-i-restaurants-label-latitude%3A">latitude:<span><a href="#method-i-restaurants-label-latitude%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>你当前位置的纬度</pre>
+
+<h6 id="method-i-restaurants-label-food_name">food_name<span><a href="#method-i-restaurants-label-food_name">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>食物名字片段</pre>
+
+<h4 id="method-i-restaurants-label-Response+Status+Code">Response Status Code<span><a href="#method-i-restaurants-label-Response+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>200</pre>
+
+<h4 id="method-i-restaurants-label-Response+Body">Response Body<span><a href="#method-i-restaurants-label-Response+Body">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-fid%3A">fid:<span><a href="#method-i-restaurants-label-fid%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>食物 id</pre>
+
+<h6 id="method-i-restaurants-label-food_name%3A">food_name:<span><a href="#method-i-restaurants-label-food_name%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>食物名字</pre>
+
+<h6 id="method-i-restaurants-label-shop_price%3A">shop_price:<span><a href="#method-i-restaurants-label-shop_price%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>食物售价</pre>
+
+<h6 id="method-i-restaurants-label-rid%3A">rid:<span><a href="#method-i-restaurants-label-rid%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆 id</pre>
+
+<h6 id="method-i-restaurants-label-restaurant_name%3A">restaurant_name:<span><a href="#method-i-restaurants-label-restaurant_name%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆名字</pre>
+
+<h6 id="method-i-restaurants-label-restaurant_avatar%3A">restaurant_avatar:<span><a href="#method-i-restaurants-label-restaurant_avatar%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆头像</pre>
+
+<h4 id="method-i-restaurants-label-Response+Body+Example%3A">Response Body Example:<span><a href="#method-i-restaurants-label-Response+Body+Example%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>[
+    {
+           fid: 10,
+           food_name: &quot;杂酱面&quot;,
+           shop_price: &quot;7.0&quot;,
+           rid: 10,
+           restaurant_name: &quot;懒洋洋绝味面&quot;,
+           restaurant_avatar: &quot;restaurant_avatar&quot;
+    },
+    {
+           fid: 11,
+           food_name: &quot;杂酱面&quot;,
+           shop_price: &quot;7.0&quot;,
+           rid: 11,
+           restaurant_avatar: &quot;restaurant_avatar&quot;,
+     }
+ ]</pre>
+
+<h2 id="method-i-restaurants-label-%E6%91%87%E4%B8%80%E6%91%87">摇一摇<span><a href="#method-i-restaurants-label-%E6%91%87%E4%B8%80%E6%91%87">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<pre>根据你当前的位置摇一摇获取菜名</pre>
+
+<h4 id="method-i-restaurants-label-GET">GET<span><a href="#method-i-restaurants-label-GET">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>/restaurants/shake_to_food</pre>
+
+<h4 id="method-i-restaurants-label-Params">Params<span><a href="#method-i-restaurants-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-longitude%3A">longitude:<span><a href="#method-i-restaurants-label-longitude%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>你当前位置的经度</pre>
+
+<h6 id="method-i-restaurants-label-latitude%3A">latitude:<span><a href="#method-i-restaurants-label-latitude%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>你当前位置的纬度</pre>
+
+<h4 id="method-i-restaurants-label-Response+Status+Code">Response Status Code<span><a href="#method-i-restaurants-label-Response+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>200</pre>
+
+<h4 id="method-i-restaurants-label-Response+Body">Response Body<span><a href="#method-i-restaurants-label-Response+Body">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-fid%3A">fid:<span><a href="#method-i-restaurants-label-fid%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>食物 id</pre>
+
+<h6 id="method-i-restaurants-label-food_name%3A">food_name:<span><a href="#method-i-restaurants-label-food_name%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>食物名字</pre>
+
+<h6 id="method-i-restaurants-label-shop_price%3A">shop_price:<span><a href="#method-i-restaurants-label-shop_price%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>食物售价</pre>
+
+<h6 id="method-i-restaurants-label-rid%3A">rid:<span><a href="#method-i-restaurants-label-rid%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆 id</pre>
+
+<h6 id="method-i-restaurants-label-restaurant_name%3A">restaurant_name:<span><a href="#method-i-restaurants-label-restaurant_name%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆名字</pre>
+
+<h6 id="method-i-restaurants-label-restaurant_avatar%3A">restaurant_avatar:<span><a href="#method-i-restaurants-label-restaurant_avatar%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆头像</pre>
+
+<h4 id="method-i-restaurants-label-Response+Body+Example%3A">Response Body Example:<span><a href="#method-i-restaurants-label-Response+Body+Example%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>{
+       fid: 10,
+       food_name: &quot;杂酱面&quot;,
+       shop_price: &quot;7.0&quot;,
+       rid: 10,
+       restaurant_name: &quot;懒洋洋绝味面&quot;,
+       restaurant_avatar: &quot;restaurant_avatar&quot;
+}</pre>
           
           
 

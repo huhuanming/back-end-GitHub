@@ -796,7 +796,41 @@ module Restfuls
 		#		restaurant_avatar: "restaurant_avatar",
 		#	  }
 	    #   ]
-
+		#
+		# == 摇一摇
+		# 	根据你当前的位置摇一摇获取菜名
+	    # ==== GET
+	    # 	/restaurants/shake_to_food
+		# ==== Params
+		# ====== longitude:
+		# 	你当前位置的经度
+		# ====== latitude:
+		# 	你当前位置的纬度
+	    # ==== Response Status Code
+		# 	200
+		# ==== Response Body
+		# ====== fid:
+		# 	食物 id
+		# ====== food_name:
+		# 	食物名字
+		# ====== shop_price:
+		# 	食物售价
+		# ====== rid:
+		# 	餐馆 id
+		# ====== restaurant_name:
+		# 	餐馆名字
+		# ====== restaurant_avatar:
+		# 	餐馆头像
+		# ==== Response Body Example:
+		#	 {
+		#		fid: 10,
+		#		food_name: "杂酱面",
+		#		shop_price: "7.0",
+		#		rid: 10,
+		#		restaurant_name: "懒洋洋绝味面",
+		#		restaurant_avatar: "restaurant_avatar"
+		#	 }
+		
 		resource :restaurants do
 			desc "Create a restaurant"
 			post do	
@@ -917,6 +951,29 @@ module Restfuls
 							.joins("LEFT JOIN restaurants on restaurants.id = food_types.restaurant_id")
 							.joins(:food_type).where(:food_type_id => food_types_ids).where("food_name like ?", "%"+params[:food_name]+"%")
 		      	present foods
+		    end
+
+		    #搜索菜名
+			desc "shake and get a food"
+		    params do
+				requires :longitude, type: String
+				requires :latitude, type: String
+			end
+		    get '/shake_to_food' do
+				restaurant_ids = Restaurant.near_by(params[:longitude], params[:latitude]).opened.pluck(:id)
+				food_types_ids = FoodType.where(:restaurant_id => restaurant_ids).pluck(:id)
+				foods = Food.select(
+									"foods.id as fid",
+									"foods.food_name",
+									"foods.shop_price",
+									"food_types.restaurant_id as rid",
+									"restaurants.restaurant_name",
+									"restaurants.restaurant_avatar"
+									)
+							.joins("LEFT JOIN restaurants on restaurants.id = food_types.restaurant_id")
+							.joins(:food_type).where(:food_type_id => food_types_ids)
+				posion = rand(0..(foods.size - 1))
+		      	present foods[posion]
 		    end
 
 

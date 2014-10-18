@@ -42,3 +42,7 @@ build/
 app/.DS_Store
 
 app/apis/.DS_Store
+
+config/.DS_Store
+
+doc/.DS_Store

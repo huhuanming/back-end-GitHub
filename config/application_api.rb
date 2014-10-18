@@ -37,11 +37,11 @@ else # local environment
   end
 
   # cache_store 设置缓存（目前只支持Redis）
-  CACHE = EventMachine::Synchrony::ConnectionPool.new(size: 100) do
-    ActiveSupport::Cache.lookup_store :redis_store,
-      { :host => "localhost", :port => "6379", :driver => :synchrony, :expires_in => 1.week }
-  end
-  CACHE.logger = GGA.logger
+  # CACHE = EventMachine::Synchrony::ConnectionPool.new(size: 100) do
+  #   ActiveSupport::Cache.lookup_store :redis_store,
+  #     { :host => "localhost", :port => "6379", :driver => :synchrony, :expires_in => 1.week }
+  # end
+  # CACHE.logger = GGA.logger
 
   # For SecondLevelCache
   #SecondLevelCache.configure do |config|
