@@ -38,3 +38,7 @@ build/
 .rvmrc
 
 .DS_Store
+
+app/.DS_Store
+
+app/apis/.DS_Store

@@ -90,7 +90,7 @@ module Restfuls
 		#
 		#
 		# == 创建餐馆订单
-		# 	创建一家餐馆，并生成一个商家帐号，商家登录帐号为他填写的手机号，登录密码为手机号后四位
+		# 	用户进行下单操作
 	    # ==== POST
 	    # 	{:restaurant_id}/orders
 		# ==== Params
