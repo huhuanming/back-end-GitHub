@@ -6,7 +6,7 @@ production:
   database: backend
   username: backend
   password: 'ba6af5e27fcceca'
-  host: 10.121.42.214
+  host: "10.121.42.214"
   port: 3306
 
 development:
