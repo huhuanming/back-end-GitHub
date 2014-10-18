@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Restfuls::Restaurantv1 - RDoc Documentation</title>
+
+<link href="../fonts.css" rel="stylesheet">
+<link href="../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script src="../js/jquery.js"></script>
+<script src="../js/navigation.js"></script>
+<script src="../js/search_index.js"></script>
+<script src="../js/search.js"></script>
+<script src="../js/searcher.js"></script>
+<script src="../js/darkfish.js"></script>
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link">Grape::API
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-restaurants">#restaurants</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Restfuls::Restaurantv1">
+  <h1 id="class-Restfuls::Restaurantv1" class="class">
+    class Restfuls::Restaurantv1
+  </h1>
+
+  <section class="description">
+    
+<p>本接口用于餐厅方面</p>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-restaurants" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">restaurants</span><span
+            class="method-args">()</span>
+          
+          <!-- <span class="method-click-advice">click to toggle source</span> -->
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>餐馆接口</p>
+
+<h1 id="method-i-restaurants-label-%E6%93%8D%E4%BD%9C">操作<span><a href="#method-i-restaurants-label-%E6%93%8D%E4%BD%9C">&para;</a> <a href="#documentation">&uarr;</a></span></h1>
+
+<h2 id="method-i-restaurants-label-C">C<span><a href="#method-i-restaurants-label-C">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+<ul><li>
+<p>创建餐馆</p>
+</li><li>
+<p>创建餐馆订单</p>
+</li><li>
+<p>创建餐馆评论</p>
+</li></ul>
+
+<h2 id="method-i-restaurants-label-U">U<span><a href="#method-i-restaurants-label-U">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+<ul><li>
+<p>确认餐馆某条订单</p>
+</li><li>
+<p>更新餐馆开店状态</p>
+</li><li>
+<p>更新餐馆关店时间</p>
+</li><li>
+<p>更新餐馆公告</p>
+</li><li>
+<p>更新餐馆起送价</p>
+</li><li>
+<p>更新餐馆送餐费</p>
+</li><li>
+<p>更新餐馆配送时间</p>
+</li><li>
+<p>更新餐馆送餐电话</p>
+</li><li>
+<p>更新餐馆短信接单状态</p>
+</li><li>
+<p>更新餐馆客户端接单状态</p>
+</li></ul>
+
+<h2 id="method-i-restaurants-label-R">R<span><a href="#method-i-restaurants-label-R">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+<ul><li>
+<p>读取餐馆列表</p>
+</li><li>
+<p>读取餐馆资料</p>
+</li><li>
+<p>读取餐馆基本信息</p>
+</li><li>
+<p>读取餐馆菜单</p>
+</li><li>
+<p>读取餐馆订单列表</p>
+</li><li>
+<p>读取餐馆设置</p>
+</li><li>
+<p>读取餐馆某条订单</p>
+</li><li>
+<p>读取餐馆评论</p>
+</li></ul>
+
+<h2 id="method-i-restaurants-label-%E5%88%9B%E5%BB%BA%E9%A4%90%E9%A6%86">创建餐馆<span><a href="#method-i-restaurants-label-%E5%88%9B%E5%BB%BA%E9%A4%90%E9%A6%86">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<pre>创建一家餐馆，并生成一个商家帐号，商家登录帐号为他填写的手机号，登录密码为手机号后四位</pre>
+
+<h4 id="method-i-restaurants-label-POST">POST<span><a href="#method-i-restaurants-label-POST">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>/restaurants</pre>
+
+<h4 id="method-i-restaurants-label-Params">Params<span><a href="#method-i-restaurants-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-access_token%3A">access_token:<span><a href="#method-i-restaurants-label-access_token%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>地推人员 access_token</pre>
+
+<h6 id="method-i-restaurants-label-restaurant_name%3A">restaurant_name:<span><a href="#method-i-restaurants-label-restaurant_name%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆名称</pre>
+
+<h6 id="method-i-restaurants-label-supervisor_name">supervisor_name<span><a href="#method-i-restaurants-label-supervisor_name">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆老板名称</pre>
+
+<h6 id="method-i-restaurants-label-back_account%3A">back_account:<span><a href="#method-i-restaurants-label-back_account%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>银行帐号</pre>
+
+<h6 id="method-i-restaurants-label-phone_number%3A">phone_number:<span><a href="#method-i-restaurants-label-phone_number%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆联系电话（餐馆经营者手机号码）</pre>
+
+<h6 id="method-i-restaurants-label-linsece%3A">linsece:<span><a href="#method-i-restaurants-label-linsece%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆的营业执照</pre>
+
+<h6 id="method-i-restaurants-label-id_card_front%3A">id_card_front:<span><a href="#method-i-restaurants-label-id_card_front%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>身份证正面照片</pre>
+
+<h6 id="method-i-restaurants-label-id_card_reverse%3A">id_card_reverse:<span><a href="#method-i-restaurants-label-id_card_reverse%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>身份证背面照片</pre>
+
+<h6 id="method-i-restaurants-label-address%3A">address:<span><a href="#method-i-restaurants-label-address%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆地址</pre>
+
+<h6 id="method-i-restaurants-label-radius%3A">radius:<span><a href="#method-i-restaurants-label-radius%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>送餐半径，单位是米</pre>
+
+<h6 id="method-i-restaurants-label-longitude%3A">longitude:<span><a href="#method-i-restaurants-label-longitude%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆坐标经度</pre>
+
+<h6 id="method-i-restaurants-label-latitude%3A">latitude:<span><a href="#method-i-restaurants-label-latitude%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆坐标纬度</pre>
+
+<h6 id="method-i-restaurants-label-coordinate_x1%3A">coordinate_x1:<span><a href="#method-i-restaurants-label-coordinate_x1%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆x1坐标</pre>
+
+<h6 id="method-i-restaurants-label-coordinate_x2%3A">coordinate_x2:<span><a href="#method-i-restaurants-label-coordinate_x2%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆x2坐标</pre>
+
+<h6 id="method-i-restaurants-label-coordinate_y1%3A">coordinate_y1:<span><a href="#method-i-restaurants-label-coordinate_y1%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆y1坐标</pre>
+
+<h6 id="method-i-restaurants-label-coordinate_y2%3A">coordinate_y2:<span><a href="#method-i-restaurants-label-coordinate_y2%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆y2坐标</pre>
+
+<h4 id="method-i-restaurants-label-Response+Status+Code">Response Status Code<span><a href="#method-i-restaurants-label-Response+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>201</pre>
+
+<h4 id="method-i-restaurants-label-Response+Body">Response Body<span><a href="#method-i-restaurants-label-Response+Body">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-response_status%3A">response_status:<span><a href="#method-i-restaurants-label-response_status%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>&quot;successed to create a restaurant&quot;(字符串)</pre>
+
+<h4 id="method-i-restaurants-label-Error+Status+Code">Error Status Code<span><a href="#method-i-restaurants-label-Error+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-401%3A">401:<span><a href="#method-i-restaurants-label-401%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>地推帐号验证错误，AccessToken 过期、无效</pre>
+
+<h6 id="method-i-restaurants-label-404%3A">404:<span><a href="#method-i-restaurants-label-404%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>地推帐号 AccessToken 不存在</pre>
+
+<h6 id="method-i-restaurants-label-501%3A">501:<span><a href="#method-i-restaurants-label-501%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>数据存储错误</pre>
+
+<h2 id="method-i-restaurants-label-%E5%88%9B%E5%BB%BA%E9%A4%90%E9%A6%86%E8%AE%A2%E5%8D%95">创建餐馆订单<span><a href="#method-i-restaurants-label-%E5%88%9B%E5%BB%BA%E9%A4%90%E9%A6%86%E8%AE%A2%E5%8D%95">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<pre>创建一家餐馆，并生成一个商家帐号，商家登录帐号为他填写的手机号，登录密码为手机号后四位</pre>
+
+<h4 id="method-i-restaurants-label-POST">POST<span><a href="#method-i-restaurants-label-POST">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>{:restaurant_id}/orders</pre>
+
+<h4 id="method-i-restaurants-label-Params">Params<span><a href="#method-i-restaurants-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-access_token%3A">access_token:<span><a href="#method-i-restaurants-label-access_token%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>顾客 access_token</pre>
+
+<h6 id="method-i-restaurants-label-foods%3A">foods:<span><a href="#method-i-restaurants-label-foods%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>上传的菜单结构[{&quot;fid&quot;:&quot;1&quot;,&quot;count&quot;:&quot;2&quot;},{&quot;fid&quot;:&quot;2&quot;,&quot;count&quot;:&quot;2&quot;}]</pre>
+
+<h6 id="method-i-restaurants-label-ship_type%EF%BC%88%E9%80%89%E5%A1%AB%EF%BC%89">ship_type（选填）<span><a href="#method-i-restaurants-label-ship_type%EF%BC%88%E9%80%89%E5%A1%AB%EF%BC%89">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>运送类型，默认为0， 0 是 默认配送方式，由餐馆自行配送</pre>
+
+<h6 id="method-i-restaurants-label-order_type%EF%BC%88%E9%80%89%E5%A1%AB%EF%BC%89">order_type（选填）<span><a href="#method-i-restaurants-label-order_type%EF%BC%88%E9%80%89%E5%A1%AB%EF%BC%89">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>订单类型，默认为0.</pre>
+
+<h6 id="method-i-restaurants-label-shipping_user%3A">shipping_user:<span><a href="#method-i-restaurants-label-shipping_user%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>收货人</pre>
+
+<h6 id="method-i-restaurants-label-shipping_address%3A">shipping_address:<span><a href="#method-i-restaurants-label-shipping_address%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>收货地址</pre>
+
+<h6 id="method-i-restaurants-label-phone_number%3A">phone_number:<span><a href="#method-i-restaurants-label-phone_number%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>收货人手机号</pre>
+
+<h4 id="method-i-restaurants-label-Response+Status+Code">Response Status Code<span><a href="#method-i-restaurants-label-Response+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>201</pre>
+
+<h4 id="method-i-restaurants-label-Response+Body">Response Body<span><a href="#method-i-restaurants-label-Response+Body">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-order_sign%3A">order_sign:<span><a href="#method-i-restaurants-label-order_sign%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>订单号，一个字符串</pre>
+
+<h4 id="method-i-restaurants-label-Error+Status+Code">Error Status Code<span><a href="#method-i-restaurants-label-Error+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-401%3A">401:<span><a href="#method-i-restaurants-label-401%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>地推帐号验证错误，AccessToken 过期、无效</pre>
+
+<h6 id="method-i-restaurants-label-404%3A">404:<span><a href="#method-i-restaurants-label-404%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>地推帐号 AccessToken 不存在</pre>
+
+<h6 id="method-i-restaurants-label-501%3A">501:<span><a href="#method-i-restaurants-label-501%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>数据存储错误</pre>
+
+<h2 id="method-i-restaurants-label-%E5%88%9B%E5%BB%BA%E9%A4%90%E9%A6%86%E8%AF%84%E8%AE%BA">创建餐馆评论<span><a href="#method-i-restaurants-label-%E5%88%9B%E5%BB%BA%E9%A4%90%E9%A6%86%E8%AF%84%E8%AE%BA">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<pre>创建餐馆评论</pre>
+
+<h4 id="method-i-restaurants-label-POST">POST<span><a href="#method-i-restaurants-label-POST">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>{:restaurant_id}/comments</pre>
+
+<h4 id="method-i-restaurants-label-Params">Params<span><a href="#method-i-restaurants-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-access_token%3A">access_token:<span><a href="#method-i-restaurants-label-access_token%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>用户的 access_token</pre>
+
+<h6 id="method-i-restaurants-label-title%3A">title:<span><a href="#method-i-restaurants-label-title%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>评论题目</pre>
+
+<h6 id="method-i-restaurants-label-comment">comment<span><a href="#method-i-restaurants-label-comment">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>评论内容</pre>
+
+<h6 id="method-i-restaurants-label-point%28%E9%80%89%E5%A1%AB%29">point(选填)<span><a href="#method-i-restaurants-label-point%28%E9%80%89%E5%A1%AB%29">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>评分，默认为0</pre>
+
+<h4 id="method-i-restaurants-label-Response+Status+Code">Response Status Code<span><a href="#method-i-restaurants-label-Response+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>201</pre>
+
+<h4 id="method-i-restaurants-label-Response+Body">Response Body<span><a href="#method-i-restaurants-label-Response+Body">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-cid%3A">cid:<span><a href="#method-i-restaurants-label-cid%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>评论的cid</pre>
+
+<h2 id="method-i-restaurants-label-%E8%AF%BB%E5%8F%96%E9%A4%90%E9%A6%86%E8%AF%84%E8%AE%BA">读取餐馆评论<span><a href="#method-i-restaurants-label-%E8%AF%BB%E5%8F%96%E9%A4%90%E9%A6%86%E8%AF%84%E8%AE%BA">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<pre>读取餐馆评论</pre>
+
+<h4 id="method-i-restaurants-label-GET">GET<span><a href="#method-i-restaurants-label-GET">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>{:restaurant_id}/comments</pre>
+
+<h4 id="method-i-restaurants-label-Params">Params<span><a href="#method-i-restaurants-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-cid%3A">cid:<span><a href="#method-i-restaurants-label-cid%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>当前的cid</pre>
+
+<h6 id="method-i-restaurants-label-count%3A">count:<span><a href="#method-i-restaurants-label-count%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>每页的个数</pre>
+
+<h6 id="method-i-restaurants-label-order%3A">order:<span><a href="#method-i-restaurants-label-order%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>排序方式, 0 是按照时间最新排序， 1 是评分从高到低排序</pre>
+
+<h4 id="method-i-restaurants-label-Response+Status+Code">Response Status Code<span><a href="#method-i-restaurants-label-Response+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>200</pre>
+
+<h4 id="method-i-restaurants-label-Response+Body">Response Body<span><a href="#method-i-restaurants-label-Response+Body">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-cid%3A">cid:<span><a href="#method-i-restaurants-label-cid%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>评论的cid</pre>
+
+<h6 id="method-i-restaurants-label-author%3A">author:<span><a href="#method-i-restaurants-label-author%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>评论的作者</pre>
+
+<h6 id="method-i-restaurants-label-title%3A">title:<span><a href="#method-i-restaurants-label-title%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>评论的题目</pre>
+
+<h6 id="method-i-restaurants-label-comment%3A">comment:<span><a href="#method-i-restaurants-label-comment%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>评论的内容</pre>
+
+<h6 id="method-i-restaurants-label-point%3A">point:<span><a href="#method-i-restaurants-label-point%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>评论的评分</pre>
+
+<h6 id="method-i-restaurants-label-created_at%3A">created_at:<span><a href="#method-i-restaurants-label-created_at%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>评论创建时间</pre>
+
+<h2 id="method-i-restaurants-label-%E8%AF%BB%E5%8F%96%E9%A4%90%E9%A6%86%E5%88%97%E8%A1%A8">读取餐馆列表<span><a href="#method-i-restaurants-label-%E8%AF%BB%E5%8F%96%E9%A4%90%E9%A6%86%E5%88%97%E8%A1%A8">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<pre>根据你当前的位置获取附近的餐馆</pre>
+
+<h4 id="method-i-restaurants-label-GET">GET<span><a href="#method-i-restaurants-label-GET">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>/restaurants</pre>
+
+<h4 id="method-i-restaurants-label-Params">Params<span><a href="#method-i-restaurants-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-longitude%3A">longitude:<span><a href="#method-i-restaurants-label-longitude%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>你当前位置的经度</pre>
+
+<h6 id="method-i-restaurants-label-latitude%3A">latitude:<span><a href="#method-i-restaurants-label-latitude%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>你当前位置的纬度</pre>
+
+<h6 id="method-i-restaurants-label-order_type%28%E5%8F%AF%E9%80%89%29">order_type(可选)<span><a href="#method-i-restaurants-label-order_type%28%E5%8F%AF%E9%80%89%29">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>默认为 0. 1 代表 配送时间最短， 2 代表 配送距离最短， 3 代表 配送费最便宜</pre>
+
+<h6 id="method-i-restaurants-label-restaurant_type%28%E5%8F%AF%E9%80%89%EF%BC%89">restaurant_type(可选）<span><a href="#method-i-restaurants-label-restaurant_type%28%E5%8F%AF%E9%80%89%EF%BC%89">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>默认为 0. 暂不开放</pre>
+
+<h6 id="method-i-restaurants-label-page%28%E5%8F%AF%E9%80%89%29">page(可选)<span><a href="#method-i-restaurants-label-page%28%E5%8F%AF%E9%80%89%29">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>默认为 0.  获取的数据页数</pre>
+
+<h6 id="method-i-restaurants-label-count%28%E5%8F%AF%E9%80%89%EF%BC%89">count(可选）<span><a href="#method-i-restaurants-label-count%28%E5%8F%AF%E9%80%89%EF%BC%89">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>默认为 10. 每页的数据条数</pre>
+
+<h4 id="method-i-restaurants-label-Response+Status+Code">Response Status Code<span><a href="#method-i-restaurants-label-Response+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>200</pre>
+
+<h4 id="method-i-restaurants-label-Response+Body">Response Body<span><a href="#method-i-restaurants-label-Response+Body">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-rid%3A">rid:<span><a href="#method-i-restaurants-label-rid%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆 id</pre>
+
+<h6 id="method-i-restaurants-label-name%3A">name:<span><a href="#method-i-restaurants-label-name%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆名字</pre>
+
+<h6 id="method-i-restaurants-label-avatar%3A">avatar:<span><a href="#method-i-restaurants-label-avatar%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆头像</pre>
+
+<h6 id="method-i-restaurants-label-status%3A">status:<span><a href="#method-i-restaurants-label-status%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<h6 id="method-i-restaurants-label-start_shipping_fee%3A">start_shipping_fee:<span><a href="#method-i-restaurants-label-start_shipping_fee%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>免运费起送价</pre>
+
+<h6 id="method-i-restaurants-label-shipping_time%3A">shipping_time:<span><a href="#method-i-restaurants-label-shipping_time%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>配送时间</pre>
+
+<h4 id="method-i-restaurants-label-Response+Body+Example%3A">Response Body Example:<span><a href="#method-i-restaurants-label-Response+Body+Example%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>[
+           {
+                   rid: 10
+                   name: &quot;懒洋洋绝味面&quot;
+                   avatar: &quot;restaurant_avatar&quot;
+                   status: {
+                           start_shipping_fee: &quot;10.0&quot;
+                           shipping_time: 10
+                   }
+           }
+           {
+                   rid: 11
+                   name: &quot;王记简阳老字号羊肉&quot;
+                   avatar: &quot;restaurant_avatar&quot;
+                   status: {
+                           start_shipping_fee: &quot;10.0&quot;
+                           shipping_time: 10
+                   }
+           }
+]</pre>
+
+<h2 id="method-i-restaurants-label-%E8%AF%BB%E5%8F%96%E9%A4%90%E9%A6%86%E8%B5%84%E6%96%99">读取餐馆资料<span><a href="#method-i-restaurants-label-%E8%AF%BB%E5%8F%96%E9%A4%90%E9%A6%86%E8%B5%84%E6%96%99">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<pre>读取单个餐馆的资料</pre>
+
+<h3 id="method-i-restaurants-label-GET">GET<span><a href="#method-i-restaurants-label-GET">&para;</a> <a href="#documentation">&uarr;</a></span></h3>
+
+<pre>restaurants/{:restaurant_id}</pre>
+
+<h4 id="method-i-restaurants-label-Params">Params<span><a href="#method-i-restaurants-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-%7B%3Arestaurant_id%7D">{:restaurant_id}<span><a href="#method-i-restaurants-label-%7B%3Arestaurant_id%7D">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆的 rid</pre>
+
+<h4 id="method-i-restaurants-label-Response+Status+Code">Response Status Code<span><a href="#method-i-restaurants-label-Response+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>200</pre>
+
+<h4 id="method-i-restaurants-label-Response+Body">Response Body<span><a href="#method-i-restaurants-label-Response+Body">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-rid%3A">rid:<span><a href="#method-i-restaurants-label-rid%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆 rid</pre>
+
+<h6 id="method-i-restaurants-label-name%3A">name:<span><a href="#method-i-restaurants-label-name%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆名字</pre>
+
+<h6 id="method-i-restaurants-label-avatar%3A">avatar:<span><a href="#method-i-restaurants-label-avatar%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆头像</pre>
+
+<h6 id="method-i-restaurants-label-phone_number%3A">phone_number:<span><a href="#method-i-restaurants-label-phone_number%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆电话号码</pre>
+
+<h6 id="method-i-restaurants-label-restaurant_address%3A">restaurant_address:<span><a href="#method-i-restaurants-label-restaurant_address%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<h6 id="method-i-restaurants-label-address%3A">address:<span><a href="#method-i-restaurants-label-address%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆详细地址</pre>
+
+<h6 id="method-i-restaurants-label-radius%3A">radius:<span><a href="#method-i-restaurants-label-radius%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆送餐半径</pre>
+
+<h6 id="method-i-restaurants-label-restaurant_address%3A">restaurant_address:<span><a href="#method-i-restaurants-label-restaurant_address%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<h6 id="method-i-restaurants-label-start_shipping_fee%3A">start_shipping_fee:<span><a href="#method-i-restaurants-label-start_shipping_fee%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>免运费起送费</pre>
+
+<h6 id="method-i-restaurants-label-shipping_time%3A">shipping_time:<span><a href="#method-i-restaurants-label-shipping_time%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>送餐时间</pre>
+
+<h6 id="method-i-restaurants-label-shipping_fee%3A">shipping_fee:<span><a href="#method-i-restaurants-label-shipping_fee%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>送餐运费</pre>
+
+<h6 id="method-i-restaurants-label-board%3A">board:<span><a href="#method-i-restaurants-label-board%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆公告</pre>
+
+<h6 id="method-i-restaurants-label-restaurant_type%3A">restaurant_type:<span><a href="#method-i-restaurants-label-restaurant_type%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<h6 id="method-i-restaurants-label-restaurant_type_name%3A">restaurant_type_name:<span><a href="#method-i-restaurants-label-restaurant_type_name%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<h6 id="method-i-restaurants-label-type_name%3A">type_name:<span><a href="#method-i-restaurants-label-type_name%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆类型名字</pre>
+
+<h4 id="method-i-restaurants-label-Response+Body+Example%3A">Response Body Example:<span><a href="#method-i-restaurants-label-Response+Body+Example%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>{
+        rid: 10
+        name: &quot;懒洋洋绝味面&quot;
+        avatar: &quot;restaurant_avatar&quot;
+        phone_number: &quot;13538381054&quot;
+        restaurant_address: {
+                address: &quot;成都犀浦校园路93附24&quot;
+                radius: 500
+        }
+        restaurant_status: {
+                start_shipping_fee: &quot;10.0&quot;
+                shipping_time: 10
+                shipping_fee: &quot;5.0&quot;
+                board: &quot;欢迎光临&quot;
+        }
+        restaurant_type: [
+                {
+                        restaurant_type_name: {
+                                type_name: &quot;面食&quot;
+                        }
+                }
+                {
+                        restaurant_type_name: {
+                                type_name: &quot;炒饭&quot;
+                        }
+                }
+                {
+                        restaurant_type_name: {
+                                type_name: &quot;盖浇&quot;
+                        }
+                }
+        ]
+}</pre>
+
+<h2 id="method-i-restaurants-label-%E8%AF%BB%E5%8F%96%E9%A4%90%E9%A6%86%E8%8F%9C%E5%8D%95">读取餐馆菜单<span><a href="#method-i-restaurants-label-%E8%AF%BB%E5%8F%96%E9%A4%90%E9%A6%86%E8%8F%9C%E5%8D%95">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<pre>读取指定餐馆的菜单</pre>
+
+<h4 id="method-i-restaurants-label-GET">GET<span><a href="#method-i-restaurants-label-GET">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>restaurants/{:restaurant_id}/menus</pre>
+
+<h4 id="method-i-restaurants-label-Params">Params<span><a href="#method-i-restaurants-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-%7B%3Arestaurant_id%7D">{:restaurant_id}<span><a href="#method-i-restaurants-label-%7B%3Arestaurant_id%7D">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆的rid</pre>
+
+<h4 id="method-i-restaurants-label-Response+Status+Code">Response Status Code<span><a href="#method-i-restaurants-label-Response+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>200</pre>
+
+<h4 id="method-i-restaurants-label-Response+Body">Response Body<span><a href="#method-i-restaurants-label-Response+Body">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-type_name%3A">type_name:<span><a href="#method-i-restaurants-label-type_name%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>菜品种类名</pre>
+
+<h6 id="method-i-restaurants-label-foods%3A">foods:<span><a href="#method-i-restaurants-label-foods%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<h6 id="method-i-restaurants-label-fid%3A">fid:<span><a href="#method-i-restaurants-label-fid%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>菜品id</pre>
+
+<h6 id="method-i-restaurants-label-food_name%3A">food_name:<span><a href="#method-i-restaurants-label-food_name%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>菜名</pre>
+
+<h6 id="method-i-restaurants-label-shop_price%3A">shop_price:<span><a href="#method-i-restaurants-label-shop_price%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>销售价格</pre>
+
+<h6 id="method-i-restaurants-label-food_status%3A">food_status:<span><a href="#method-i-restaurants-label-food_status%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<h6 id="method-i-restaurants-label-sold_number%3A">sold_number:<span><a href="#method-i-restaurants-label-sold_number%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>这个菜的销量</pre>
+
+<h6 id="method-i-restaurants-label-updated_at%3A">updated_at:<span><a href="#method-i-restaurants-label-updated_at%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>销量更新时间</pre>
+
+<h4 id="method-i-restaurants-label-Response+Body+Example%3A">Response Body Example:<span><a href="#method-i-restaurants-label-Response+Body+Example%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>[
+   {
+        &quot;type_name&quot;:&quot;菜品二&quot;,
+        &quot;foods&quot;:
+        [
+                {
+                        &quot;fid&quot;:1,
+                        &quot;food_name&quot;:&quot;翔啊&quot;,
+                        &quot;shop_price&quot;:&quot;1.0&quot;,
+                        &quot;food_status&quot;: {
+                                   &quot;sold_number&quot;: 0
+                                   &quot;updated_at&quot;: &quot;2014-10-09T07:18:27.000Z&quot;
+                           }
+                },
+                {
+                        &quot;fid&quot;:2,
+                        &quot;food_name&quot;:&quot;鐧借彍&quot;,
+                        &quot;shop_price&quot;:&quot;1.0&quot;,
+                        &quot;food_status&quot;: {
+                                   &quot;sold_number&quot;: 0
+                                   &quot;updated_at&quot;: &quot;2014-10-09T07:18:27.000Z&quot;
+                           }
+                }
+        ]
+         },
+ {
+        &quot;type_name&quot;:&quot;翔类&quot;,
+        &quot;foods&quot;:
+        [
+                {
+                        &quot;fid&quot;:3,
+                        &quot;food_name&quot;:&quot;好菜&quot;,
+                        &quot;shop_price&quot;:&quot;2.0&quot;
+                        &quot;food_status&quot;: {
+                                   &quot;sold_number&quot;: 0
+                                   &quot;updated_at&quot;: &quot;2014-10-09T07:18:27.000Z&quot;
+                           }
+                },
+                {
+                        &quot;fid&quot;:4,
+                        &quot;food_name&quot;:&quot;花菜&quot;,
+                        &quot;shop_price&quot;:&quot;1.0&quot;
+                        &quot;food_status&quot;: {
+                                   &quot;sold_number&quot;: 0
+                                   &quot;updated_at&quot;: &quot;2014-10-09T07:18:27.000Z&quot;
+                           }
+                }
+        ]
+ }
+]</pre>
+
+<h2 id="method-i-restaurants-label-%E8%AF%BB%E5%8F%96%E9%A4%90%E9%A6%86%E8%AE%A2%E5%8D%95%E5%88%97%E8%A1%A8">读取餐馆订单列表<span><a href="#method-i-restaurants-label-%E8%AF%BB%E5%8F%96%E9%A4%90%E9%A6%86%E8%AE%A2%E5%8D%95%E5%88%97%E8%A1%A8">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<pre>读取餐馆订单列表</pre>
+
+<h4 id="method-i-restaurants-label-GET">GET<span><a href="#method-i-restaurants-label-GET">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>restaurants/{:restaurant_id}/orders</pre>
+
+<h4 id="method-i-restaurants-label-Params">Params<span><a href="#method-i-restaurants-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-%7B%3Arestaurant_id%7D%3A">{:restaurant_id}:<span><a href="#method-i-restaurants-label-%7B%3Arestaurant_id%7D%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐厅id</pre>
+
+<h6 id="method-i-restaurants-label-access_token%3A">access_token:<span><a href="#method-i-restaurants-label-access_token%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐厅管理人员的 access_token</pre>
+
+<h6 id="method-i-restaurants-label-id%3A">id:<span><a href="#method-i-restaurants-label-id%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>可选，订单编号，默认为当前订单最大编号</pre>
+
+<h6 id="method-i-restaurants-label-count%3A">count:<span><a href="#method-i-restaurants-label-count%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>可选，显示条数，默认为 10</pre>
+
+<h4 id="method-i-restaurants-label-Response+Status+Code">Response Status Code<span><a href="#method-i-restaurants-label-Response+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>200</pre>
+
+<h4 id="method-i-restaurants-label-Response+Body">Response Body<span><a href="#method-i-restaurants-label-Response+Body">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-order_id%3A">order_id:<span><a href="#method-i-restaurants-label-order_id%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>订单编号。</pre>
+
+<h6 id="method-i-restaurants-label-ship_type%3A">ship_type:<span><a href="#method-i-restaurants-label-ship_type%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>快递方式，默认是 0。</pre>
+
+<h6 id="method-i-restaurants-label-order_type%3A">order_type:<span><a href="#method-i-restaurants-label-order_type%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>订单状态，0 是未确认， 1 是已确认。</pre>
+
+<h6 id="method-i-restaurants-label-is_ticket%3A">is_ticket:<span><a href="#method-i-restaurants-label-is_ticket%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>小票状态，0 是不需要， 1 是需要。</pre>
+
+<h6 id="method-i-restaurants-label-is_receipt%3A">is_receipt:<span><a href="#method-i-restaurants-label-is_receipt%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>发票状态，0 是不需要， 1 是需要。</pre>
+
+<h6 id="method-i-restaurants-label-is_now%3A">is_now:<span><a href="#method-i-restaurants-label-is_now%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>立即送状态，0 不是， 1 是。</pre>
+
+<h6 id="method-i-restaurants-label-phone_number%3A">phone_number:<span><a href="#method-i-restaurants-label-phone_number%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>下单人手机号</pre>
+
+<h6 id="method-i-restaurants-label-phone_number%3A">phone_number:<span><a href="#method-i-restaurants-label-phone_number%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>下单人手机号</pre>
+
+<h6 id="method-i-restaurants-label-order_remark">order_remark<span><a href="#method-i-restaurants-label-order_remark">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>订单备注</pre>
+
+<h6 id="method-i-restaurants-label-shipping_address%3A">shipping_address:<span><a href="#method-i-restaurants-label-shipping_address%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>收货地址</pre>
+
+<h6 id="method-i-restaurants-label-food_count%3A">food_count:<span><a href="#method-i-restaurants-label-food_count%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>预订的的菜品个数</pre>
+
+<h6 id="method-i-restaurants-label-total_price%3A">total_price:<span><a href="#method-i-restaurants-label-total_price%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>订单总价</pre>
+
+<h6 id="method-i-restaurants-label-actual_total_price%3A">actual_total_price:<span><a href="#method-i-restaurants-label-actual_total_price%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>订单实际总价</pre>
+
+<h6 id="method-i-restaurants-label-created_at%3A">created_at:<span><a href="#method-i-restaurants-label-created_at%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>订单创建时间(时间格式 iso8601, &quot;yyyy-MM-dd&#39;T&#39;HH:mm:ssZ&quot;)</pre>
+
+<h6 id="method-i-restaurants-label-updated_at%3A">updated_at:<span><a href="#method-i-restaurants-label-updated_at%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>订单更新时间(时间格式 iso8601, &quot;yyyy-MM-dd&#39;T&#39;HH:mm:ssZ&quot;)</pre>
+
+<h6 id="method-i-restaurants-label-shipping_at%3A">shipping_at:<span><a href="#method-i-restaurants-label-shipping_at%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>预计收货时间(时间格式 iso8601, &quot;yyyy-MM-dd&#39;T&#39;HH:mm:ssZ&quot;)</pre>
+
+<h4 id="method-i-restaurants-label-Response+Body+Example%3A%28id%3A+3%2Ccount%3A+2%29">Response Body Example:(id: 3,count: 2)<span><a href="#method-i-restaurants-label-Response+Body+Example%3A%28id%3A+3%2Ccount%3A+2%29">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>[
+        {
+                order_id: 2
+                ship_type: 0
+                order_type: 0
+                phone_number: &quot;12.00000&quot;
+                food_count: 2
+                shipping_user: &quot;哈哈1&quot;
+                shipping_address: &quot;123&quot;
+                order_remark: &quot;无&quot;
+                total_price: &quot;11.0&quot;
+                actual_total_price: &quot;2014.0&quot;
+                created_at: &quot;2014-09-16T10:20:41Z&quot;
+                updated_at: &quot;2014-09-16T10:20:41Z&quot;
+                shipping_at: &quot;2014-09-16T10:20:41Z&quot;
+        },
+        {
+                order_id: 1
+                ship_type: 0
+                order_type: 0
+                phone_number: &quot;12.00000&quot;
+                food_count: 2
+                shipping_user: &quot;哈哈2&quot;
+                shipping_address: &quot;123&quot;
+                order_remark: &quot;无&quot;
+                total_price: &quot;11.0&quot;
+                actual_total_price: &quot;2014.0&quot;
+                created_at: &quot;2014-09-16T10:20:41Z&quot;
+                updated_at: &quot;2014-09-16T10:20:41Z&quot;
+                shipping_at: &quot;2014-09-16T10:20:41Z&quot;
+        }
+]</pre>
+
+<h4 id="method-i-restaurants-label-Error+Status+Code">Error Status Code<span><a href="#method-i-restaurants-label-Error+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-401%3A">401:<span><a href="#method-i-restaurants-label-401%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>帐号验证错误，用户名或密码错误</pre>
+
+<h2 id="method-i-restaurants-label-%E8%AF%BB%E5%8F%96%E9%A4%90%E9%A6%86%E6%9F%90%E6%9D%A1%E8%AE%A2%E5%8D%95">读取餐馆某条订单<span><a href="#method-i-restaurants-label-%E8%AF%BB%E5%8F%96%E9%A4%90%E9%A6%86%E6%9F%90%E6%9D%A1%E8%AE%A2%E5%8D%95">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<pre>读取餐馆某条订单</pre>
+
+<h4 id="method-i-restaurants-label-GET">GET<span><a href="#method-i-restaurants-label-GET">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>restaurants/{:restaurant_id}/orders/{:order_id}</pre>
+
+<h4 id="method-i-restaurants-label-Params">Params<span><a href="#method-i-restaurants-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-%7B%3Arestaurant_id%7D%3A">{:restaurant_id}:<span><a href="#method-i-restaurants-label-%7B%3Arestaurant_id%7D%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐厅id</pre>
+
+<h6 id="method-i-restaurants-label-%7B%3Aorder_id%7D%3A">{:order_id}:<span><a href="#method-i-restaurants-label-%7B%3Aorder_id%7D%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>订单id</pre>
+
+<h6 id="method-i-restaurants-label-access_token%3A">access_token:<span><a href="#method-i-restaurants-label-access_token%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐厅管理人员的 access_token</pre>
+
+<h4 id="method-i-restaurants-label-Response+Status+Code">Response Status Code<span><a href="#method-i-restaurants-label-Response+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>200</pre>
+
+<h4 id="method-i-restaurants-label-Response+Body">Response Body<span><a href="#method-i-restaurants-label-Response+Body">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-count%3A">count:<span><a href="#method-i-restaurants-label-count%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>菜品个数</pre>
+
+<h6 id="method-i-restaurants-label-total_price%3A">total_price:<span><a href="#method-i-restaurants-label-total_price%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>当前菜品总价</pre>
+
+<h6 id="method-i-restaurants-label-actual_total_price%3A">actual_total_price:<span><a href="#method-i-restaurants-label-actual_total_price%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>当前菜品实际总价</pre>
+
+<h6 id="method-i-restaurants-label-food%3A">food:<span><a href="#method-i-restaurants-label-food%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<h6 id="method-i-restaurants-label-food_name%3A">food_name:<span><a href="#method-i-restaurants-label-food_name%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>菜品名字</pre>
+
+<h6 id="method-i-restaurants-label-shop_price%3A">shop_price:<span><a href="#method-i-restaurants-label-shop_price%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>菜品价格</pre>
+
+<h4 id="method-i-restaurants-label-Response+Body+Example%3A">Response Body Example:<span><a href="#method-i-restaurants-label-Response+Body+Example%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>[
+        {
+                count: 4
+                total_price: &quot;180.0&quot;
+                actual_total_price: &quot;180.0&quot;
+                food: 
+                {
+                        food_name: &quot;nbb&quot;
+                        shop_price: &quot;5.0&quot;
+                }
+        },
+        {
+                count: 4
+                total_price: &quot;180.0&quot;
+                actual_total_price: &quot;180.0&quot;
+                food: 
+                {
+                        food_name: &quot;克隆&quot;
+                        shop_price: &quot;5.0&quot;
+                }
+        }
+]</pre>
+
+<h6 id="method-i-restaurants-label-401%3A">401:<span><a href="#method-i-restaurants-label-401%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>帐号验证错误，用户名或密码错误</pre>
+
+<h2 id="method-i-restaurants-label-%E7%A1%AE%E8%AE%A4%E9%A4%90%E9%A6%86%E6%9F%90%E6%9D%A1%E8%AE%A2%E5%8D%95">确认餐馆某条订单<span><a href="#method-i-restaurants-label-%E7%A1%AE%E8%AE%A4%E9%A4%90%E9%A6%86%E6%9F%90%E6%9D%A1%E8%AE%A2%E5%8D%95">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<pre>确认餐馆某条订单</pre>
+
+<h4 id="method-i-restaurants-label-PUT">PUT<span><a href="#method-i-restaurants-label-PUT">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>restaurants/{:restaurant_id}/orders/{:order_id}/check_order</pre>
+
+<h4 id="method-i-restaurants-label-Params">Params<span><a href="#method-i-restaurants-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-%7B%3Arestaurant_id%7D%3A">{:restaurant_id}:<span><a href="#method-i-restaurants-label-%7B%3Arestaurant_id%7D%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐厅id</pre>
+
+<h6 id="method-i-restaurants-label-%7B%3Aorder_id%7D%3A">{:order_id}:<span><a href="#method-i-restaurants-label-%7B%3Aorder_id%7D%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>订单id</pre>
+
+<h6 id="method-i-restaurants-label-access_token%3A">access_token:<span><a href="#method-i-restaurants-label-access_token%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐厅管理人员的 access_token</pre>
+
+<h4 id="method-i-restaurants-label-Response+Status+Code">Response Status Code<span><a href="#method-i-restaurants-label-Response+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>200</pre>
+
+<h4 id="method-i-restaurants-label-Response+Body">Response Body<span><a href="#method-i-restaurants-label-Response+Body">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-response_status%3A">response_status:<span><a href="#method-i-restaurants-label-response_status%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>&quot;This order was checked&quot;</pre>
+
+<h6 id="method-i-restaurants-label-401%3A">401:<span><a href="#method-i-restaurants-label-401%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>帐号验证错误，用户名或密码错误</pre>
+
+<h6 id="method-i-restaurants-label-404%3A">404:<span><a href="#method-i-restaurants-label-404%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>没有找到相应的订单</pre>
+
+<h2 id="method-i-restaurants-label-%E8%AF%BB%E5%8F%96%E9%A4%90%E9%A6%86%E8%AE%BE%E7%BD%AE">读取餐馆设置<span><a href="#method-i-restaurants-label-%E8%AF%BB%E5%8F%96%E9%A4%90%E9%A6%86%E8%AE%BE%E7%BD%AE">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<pre>读取餐馆设置</pre>
+
+<h4 id="method-i-restaurants-label-GET">GET<span><a href="#method-i-restaurants-label-GET">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>restaurants/{:restaurant_id}/setting</pre>
+
+<h4 id="method-i-restaurants-label-Params">Params<span><a href="#method-i-restaurants-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-%7B%3Arestaurant_id%7D%3A">{:restaurant_id}:<span><a href="#method-i-restaurants-label-%7B%3Arestaurant_id%7D%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐厅id</pre>
+
+<h6 id="method-i-restaurants-label-access_token%3A">access_token:<span><a href="#method-i-restaurants-label-access_token%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐厅管理人员的 access_token</pre>
+
+<h4 id="method-i-restaurants-label-Response+Status+Code">Response Status Code<span><a href="#method-i-restaurants-label-Response+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>200</pre>
+
+<h4 id="method-i-restaurants-label-Response+Body">Response Body<span><a href="#method-i-restaurants-label-Response+Body">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-board%3A">board:<span><a href="#method-i-restaurants-label-board%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆公告</pre>
+
+<h6 id="method-i-restaurants-label-close_hour%3A">close_hour:<span><a href="#method-i-restaurants-label-close_hour%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆关闭时的小时数，默认是 23。假如餐馆关闭时间是 22:02，close_hour 就是 22</pre>
+
+<h6 id="method-i-restaurants-label-close_min%3A">close_min:<span><a href="#method-i-restaurants-label-close_min%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆关闭时的分钟数，默认是 59。假如餐馆关闭时间是 22:02，close_min 就是 2</pre>
+
+<h6 id="method-i-restaurants-label-start_shipping_fee%3A">start_shipping_fee:<span><a href="#method-i-restaurants-label-start_shipping_fee%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>起送价, 默认是 10 元</pre>
+
+<h6 id="method-i-restaurants-label-shipping_fee%3A">shipping_fee:<span><a href="#method-i-restaurants-label-shipping_fee%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>送餐费， 默认是 0 元</pre>
+
+<h6 id="method-i-restaurants-label-shipping_time%3A">shipping_time:<span><a href="#method-i-restaurants-label-shipping_time%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>送达时间, 默认 30分钟</pre>
+
+<h6 id="method-i-restaurants-label-shipping_phone_number%3A">shipping_phone_number:<span><a href="#method-i-restaurants-label-shipping_phone_number%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>配送电话号码</pre>
+
+<h6 id="method-i-restaurants-label-is_sms%3A">is_sms:<span><a href="#method-i-restaurants-label-is_sms%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>短信接单，0 表示不启用，1 表示启用，默认为 0</pre>
+
+<h6 id="method-i-restaurants-label-is_client%3A">is_client:<span><a href="#method-i-restaurants-label-is_client%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>客户端接单，0 表示不启用，1 表示启用，默认为 1</pre>
+
+<h6 id="method-i-restaurants-label-checked_at%3A">checked_at:<span><a href="#method-i-restaurants-label-checked_at%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>商家签到时间，商家当天签到后就开店, 如果没签到就表示没开店</pre>
+
+<h6 id="method-i-restaurants-label-401%3A">401:<span><a href="#method-i-restaurants-label-401%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>帐号验证错误，用户名或密码错误</pre>
+
+<h6 id="method-i-restaurants-label-404%3A">404:<span><a href="#method-i-restaurants-label-404%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>没有找到相应的订单</pre>
+
+<h2 id="method-i-restaurants-label-%E6%9B%B4%E6%96%B0%E9%A4%90%E9%A6%86%E5%BC%80%E5%BA%97%E7%8A%B6%E6%80%81">更新餐馆开店状态<span><a href="#method-i-restaurants-label-%E6%9B%B4%E6%96%B0%E9%A4%90%E9%A6%86%E5%BC%80%E5%BA%97%E7%8A%B6%E6%80%81">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<pre>更新餐馆开店状态</pre>
+
+<h4 id="method-i-restaurants-label-PUT">PUT<span><a href="#method-i-restaurants-label-PUT">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>restaurants/{:restaurant_id}/is_open</pre>
+
+<h4 id="method-i-restaurants-label-Params">Params<span><a href="#method-i-restaurants-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-%7B%3Arestaurant_id%7D%3A">{:restaurant_id}:<span><a href="#method-i-restaurants-label-%7B%3Arestaurant_id%7D%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐厅id</pre>
+
+<h6 id="method-i-restaurants-label-access_token%3A">access_token:<span><a href="#method-i-restaurants-label-access_token%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐厅管理人员的 access_token</pre>
+
+<h4 id="method-i-restaurants-label-Response+Status+Code">Response Status Code<span><a href="#method-i-restaurants-label-Response+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>200</pre>
+
+<h4 id="method-i-restaurants-label-Response+Body">Response Body<span><a href="#method-i-restaurants-label-Response+Body">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-response_status%3A">response_status:<span><a href="#method-i-restaurants-label-response_status%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>&quot;restaurant was opened&quot; 或者 &quot;restaurant was closed&quot;</pre>
+
+<h6 id="method-i-restaurants-label-401%3A">401:<span><a href="#method-i-restaurants-label-401%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>帐号验证错误，用户名或密码错误</pre>
+
+<h6 id="method-i-restaurants-label-404%3A">404:<span><a href="#method-i-restaurants-label-404%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>没有找到相应的订单</pre>
+
+<h2 id="method-i-restaurants-label-%E6%9B%B4%E6%96%B0%E9%A4%90%E9%A6%86%E5%85%B3%E5%BA%97%E6%97%B6%E9%97%B4">更新餐馆关店时间<span><a href="#method-i-restaurants-label-%E6%9B%B4%E6%96%B0%E9%A4%90%E9%A6%86%E5%85%B3%E5%BA%97%E6%97%B6%E9%97%B4">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<pre>更新餐馆关店时间</pre>
+
+<h4 id="method-i-restaurants-label-PUT">PUT<span><a href="#method-i-restaurants-label-PUT">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>restaurants/{:restaurant_id}/close_time</pre>
+
+<h4 id="method-i-restaurants-label-Params">Params<span><a href="#method-i-restaurants-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-%7B%3Arestaurant_id%7D%3A">{:restaurant_id}:<span><a href="#method-i-restaurants-label-%7B%3Arestaurant_id%7D%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐厅id</pre>
+
+<h6 id="method-i-restaurants-label-access_token%3A">access_token:<span><a href="#method-i-restaurants-label-access_token%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐厅管理人员的 access_token</pre>
+
+<h6 id="method-i-restaurants-label-close_hour%3A">close_hour:<span><a href="#method-i-restaurants-label-close_hour%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆关闭时的小时数，假如餐馆关闭时间是 22:02，close_hour 就是 22</pre>
+
+<h6 id="method-i-restaurants-label-close_min%3A">close_min:<span><a href="#method-i-restaurants-label-close_min%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆关闭时的小时数，假如餐馆关闭时间是 22:02，close_hour 就是 2</pre>
+
+<h4 id="method-i-restaurants-label-Response+Status+Code">Response Status Code<span><a href="#method-i-restaurants-label-Response+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>200</pre>
+
+<h4 id="method-i-restaurants-label-Response+Body">Response Body<span><a href="#method-i-restaurants-label-Response+Body">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-response_status%3A">response_status:<span><a href="#method-i-restaurants-label-response_status%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>&quot;close time was updated&quot;</pre>
+
+<h6 id="method-i-restaurants-label-401%3A">401:<span><a href="#method-i-restaurants-label-401%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>帐号验证错误，用户名或密码错误</pre>
+
+<h6 id="method-i-restaurants-label-404%3A">404:<span><a href="#method-i-restaurants-label-404%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>没有找到相应的订单</pre>
+
+<h2 id="method-i-restaurants-label-%E6%9B%B4%E6%96%B0%E9%A4%90%E9%A6%86%E5%85%AC%E5%91%8A">更新餐馆公告<span><a href="#method-i-restaurants-label-%E6%9B%B4%E6%96%B0%E9%A4%90%E9%A6%86%E5%85%AC%E5%91%8A">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<pre>更新餐馆公告</pre>
+
+<h4 id="method-i-restaurants-label-PUT">PUT<span><a href="#method-i-restaurants-label-PUT">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>restaurants/{:restaurant_id}/board</pre>
+
+<h4 id="method-i-restaurants-label-Params">Params<span><a href="#method-i-restaurants-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-%7B%3Arestaurant_id%7D%3A">{:restaurant_id}:<span><a href="#method-i-restaurants-label-%7B%3Arestaurant_id%7D%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐厅id</pre>
+
+<h6 id="method-i-restaurants-label-access_token%3A">access_token:<span><a href="#method-i-restaurants-label-access_token%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐厅管理人员的 access_token</pre>
+
+<h6 id="method-i-restaurants-label-board%3A">board:<span><a href="#method-i-restaurants-label-board%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>商店公告</pre>
+
+<h4 id="method-i-restaurants-label-Response+Status+Code">Response Status Code<span><a href="#method-i-restaurants-label-Response+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>200</pre>
+
+<h4 id="method-i-restaurants-label-Response+Body">Response Body<span><a href="#method-i-restaurants-label-Response+Body">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-response_status%3A">response_status:<span><a href="#method-i-restaurants-label-response_status%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>&quot;board was updated&quot;</pre>
+
+<h6 id="method-i-restaurants-label-401%3A">401:<span><a href="#method-i-restaurants-label-401%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>帐号验证错误，用户名或密码错误</pre>
+
+<h6 id="method-i-restaurants-label-404%3A">404:<span><a href="#method-i-restaurants-label-404%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>没有找到相应的订单</pre>
+
+<h2 id="method-i-restaurants-label-%E6%9B%B4%E6%96%B0%E9%A4%90%E9%A6%86%E8%B5%B7%E9%80%81%E4%BB%B7">更新餐馆起送价<span><a href="#method-i-restaurants-label-%E6%9B%B4%E6%96%B0%E9%A4%90%E9%A6%86%E8%B5%B7%E9%80%81%E4%BB%B7">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<pre>更新餐馆起送价</pre>
+
+<h4 id="method-i-restaurants-label-PUT">PUT<span><a href="#method-i-restaurants-label-PUT">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>restaurants/{:restaurant_id}/start_shipping_fee</pre>
+
+<h4 id="method-i-restaurants-label-Params">Params<span><a href="#method-i-restaurants-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-%7B%3Arestaurant_id%7D%3A">{:restaurant_id}:<span><a href="#method-i-restaurants-label-%7B%3Arestaurant_id%7D%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐厅id</pre>
+
+<h6 id="method-i-restaurants-label-access_token%3A">access_token:<span><a href="#method-i-restaurants-label-access_token%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐厅管理人员的 access_token</pre>
+
+<h6 id="method-i-restaurants-label-start_shipping_fee%3A">start_shipping_fee:<span><a href="#method-i-restaurants-label-start_shipping_fee%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>起送价</pre>
+
+<h4 id="method-i-restaurants-label-Response+Status+Code">Response Status Code<span><a href="#method-i-restaurants-label-Response+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>200</pre>
+
+<h4 id="method-i-restaurants-label-Response+Body">Response Body<span><a href="#method-i-restaurants-label-Response+Body">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-response_status%3A">response_status:<span><a href="#method-i-restaurants-label-response_status%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>&quot;start_shipping_fee was updated&quot;</pre>
+
+<h6 id="method-i-restaurants-label-401%3A">401:<span><a href="#method-i-restaurants-label-401%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>帐号验证错误，用户名或密码错误</pre>
+
+<h6 id="method-i-restaurants-label-404%3A">404:<span><a href="#method-i-restaurants-label-404%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>没有找到相应的订单</pre>
+
+<h2 id="method-i-restaurants-label-%E6%9B%B4%E6%96%B0%E9%A4%90%E9%A6%86%E9%80%81%E9%A4%90%E8%B4%B9">更新餐馆送餐费<span><a href="#method-i-restaurants-label-%E6%9B%B4%E6%96%B0%E9%A4%90%E9%A6%86%E9%80%81%E9%A4%90%E8%B4%B9">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<pre>更新餐馆送餐费</pre>
+
+<h4 id="method-i-restaurants-label-PUT">PUT<span><a href="#method-i-restaurants-label-PUT">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>restaurants/{:restaurant_id}/shipping_fee</pre>
+
+<h4 id="method-i-restaurants-label-Params">Params<span><a href="#method-i-restaurants-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-%7B%3Arestaurant_id%7D%3A">{:restaurant_id}:<span><a href="#method-i-restaurants-label-%7B%3Arestaurant_id%7D%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐厅id</pre>
+
+<h6 id="method-i-restaurants-label-access_token%3A">access_token:<span><a href="#method-i-restaurants-label-access_token%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐厅管理人员的 access_token</pre>
+
+<h6 id="method-i-restaurants-label-shipping_fee%3A">shipping_fee:<span><a href="#method-i-restaurants-label-shipping_fee%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>送餐费</pre>
+
+<h4 id="method-i-restaurants-label-Response+Status+Code">Response Status Code<span><a href="#method-i-restaurants-label-Response+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>200</pre>
+
+<h4 id="method-i-restaurants-label-Response+Body">Response Body<span><a href="#method-i-restaurants-label-Response+Body">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-response_status%3A">response_status:<span><a href="#method-i-restaurants-label-response_status%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>&quot;shipping_fee was updated&quot;</pre>
+
+<h6 id="method-i-restaurants-label-401%3A">401:<span><a href="#method-i-restaurants-label-401%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>帐号验证错误，用户名或密码错误</pre>
+
+<h6 id="method-i-restaurants-label-404%3A">404:<span><a href="#method-i-restaurants-label-404%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>没有找到相应的订单</pre>
+
+<h2 id="method-i-restaurants-label-%E6%9B%B4%E6%96%B0%E9%A4%90%E9%A6%86%E9%85%8D%E9%80%81%E6%97%B6%E9%97%B4">更新餐馆配送时间<span><a href="#method-i-restaurants-label-%E6%9B%B4%E6%96%B0%E9%A4%90%E9%A6%86%E9%85%8D%E9%80%81%E6%97%B6%E9%97%B4">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<pre>更新餐馆配送时间</pre>
+
+<h4 id="method-i-restaurants-label-PUT">PUT<span><a href="#method-i-restaurants-label-PUT">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>restaurants/{:restaurant_id}/shipping_time</pre>
+
+<h4 id="method-i-restaurants-label-Params">Params<span><a href="#method-i-restaurants-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-%7B%3Arestaurant_id%7D%3A">{:restaurant_id}:<span><a href="#method-i-restaurants-label-%7B%3Arestaurant_id%7D%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐厅id</pre>
+
+<h6 id="method-i-restaurants-label-access_token%3A">access_token:<span><a href="#method-i-restaurants-label-access_token%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐厅管理人员的 access_token</pre>
+
+<h6 id="method-i-restaurants-label-shipping_time%3A">shipping_time:<span><a href="#method-i-restaurants-label-shipping_time%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>送餐时间</pre>
+
+<h4 id="method-i-restaurants-label-Response+Status+Code">Response Status Code<span><a href="#method-i-restaurants-label-Response+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>200</pre>
+
+<h4 id="method-i-restaurants-label-Response+Body">Response Body<span><a href="#method-i-restaurants-label-Response+Body">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-response_status%3A">response_status:<span><a href="#method-i-restaurants-label-response_status%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>&quot;shipping_time was updated&quot;</pre>
+
+<h6 id="method-i-restaurants-label-401%3A">401:<span><a href="#method-i-restaurants-label-401%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>帐号验证错误，用户名或密码错误</pre>
+
+<h6 id="method-i-restaurants-label-404%3A">404:<span><a href="#method-i-restaurants-label-404%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>没有找到相应的订单</pre>
+
+<h2 id="method-i-restaurants-label-%E6%9B%B4%E6%96%B0%E9%A4%90%E9%A6%86%E9%80%81%E9%A4%90%E7%94%B5%E8%AF%9D">更新餐馆送餐电话<span><a href="#method-i-restaurants-label-%E6%9B%B4%E6%96%B0%E9%A4%90%E9%A6%86%E9%80%81%E9%A4%90%E7%94%B5%E8%AF%9D">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<pre>更新餐馆送餐电话</pre>
+
+<h4 id="method-i-restaurants-label-PUT">PUT<span><a href="#method-i-restaurants-label-PUT">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>restaurants/{:restaurant_id}/shipping_phone_number</pre>
+
+<h4 id="method-i-restaurants-label-Params">Params<span><a href="#method-i-restaurants-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-%7B%3Arestaurant_id%7D%3A">{:restaurant_id}:<span><a href="#method-i-restaurants-label-%7B%3Arestaurant_id%7D%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐厅id</pre>
+
+<h6 id="method-i-restaurants-label-access_token%3A">access_token:<span><a href="#method-i-restaurants-label-access_token%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐厅管理人员的 access_token</pre>
+
+<h6 id="method-i-restaurants-label-shipping_phone_number%3A">shipping_phone_number:<span><a href="#method-i-restaurants-label-shipping_phone_number%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>送餐电话</pre>
+
+<h4 id="method-i-restaurants-label-Response+Status+Code">Response Status Code<span><a href="#method-i-restaurants-label-Response+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>200</pre>
+
+<h4 id="method-i-restaurants-label-Response+Body">Response Body<span><a href="#method-i-restaurants-label-Response+Body">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-response_status%3A">response_status:<span><a href="#method-i-restaurants-label-response_status%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>&quot;phone_number was updated&quot;</pre>
+
+<h6 id="method-i-restaurants-label-401%3A">401:<span><a href="#method-i-restaurants-label-401%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>帐号验证错误，用户名或密码错误</pre>
+
+<h6 id="method-i-restaurants-label-404%3A">404:<span><a href="#method-i-restaurants-label-404%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>没有找到相应的订单</pre>
+
+<h2 id="method-i-restaurants-label-%E6%9B%B4%E6%96%B0%E9%A4%90%E9%A6%86%E7%9F%AD%E4%BF%A1%E6%8E%A5%E5%8D%95%E7%8A%B6%E6%80%81">更新餐馆短信接单状态<span><a href="#method-i-restaurants-label-%E6%9B%B4%E6%96%B0%E9%A4%90%E9%A6%86%E7%9F%AD%E4%BF%A1%E6%8E%A5%E5%8D%95%E7%8A%B6%E6%80%81">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<pre>更新餐馆短信接单状态</pre>
+
+<h4 id="method-i-restaurants-label-PUT">PUT<span><a href="#method-i-restaurants-label-PUT">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>restaurants/{:restaurant_id}/is_sms</pre>
+
+<h4 id="method-i-restaurants-label-Params">Params<span><a href="#method-i-restaurants-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-%7B%3Arestaurant_id%7D%3A">{:restaurant_id}:<span><a href="#method-i-restaurants-label-%7B%3Arestaurant_id%7D%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐厅id</pre>
+
+<h6 id="method-i-restaurants-label-access_token%3A">access_token:<span><a href="#method-i-restaurants-label-access_token%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐厅管理人员的 access_token</pre>
+
+<h4 id="method-i-restaurants-label-Response+Status+Code">Response Status Code<span><a href="#method-i-restaurants-label-Response+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>200</pre>
+
+<h4 id="method-i-restaurants-label-Response+Body">Response Body<span><a href="#method-i-restaurants-label-Response+Body">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-response_status%3A">response_status:<span><a href="#method-i-restaurants-label-response_status%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>&quot;sms push service is active&quot;  或者 &quot;sms push service is inactive&quot;</pre>
+
+<h6 id="method-i-restaurants-label-401%3A">401:<span><a href="#method-i-restaurants-label-401%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>帐号验证错误，用户名或密码错误</pre>
+
+<h6 id="method-i-restaurants-label-404%3A">404:<span><a href="#method-i-restaurants-label-404%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>没有找到相应的订单</pre>
+
+<h2 id="method-i-restaurants-label-%E6%9B%B4%E6%96%B0%E9%A4%90%E9%A6%86%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%8D%95%E7%8A%B6%E6%80%81">更新餐馆客户端接单状态<span><a href="#method-i-restaurants-label-%E6%9B%B4%E6%96%B0%E9%A4%90%E9%A6%86%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%8E%A5%E5%8D%95%E7%8A%B6%E6%80%81">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<pre>更新餐馆客户端接单状态</pre>
+
+<h4 id="method-i-restaurants-label-PUT">PUT<span><a href="#method-i-restaurants-label-PUT">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>restaurants/{:restaurant_id}/is_client</pre>
+
+<h4 id="method-i-restaurants-label-Params">Params<span><a href="#method-i-restaurants-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-%7B%3Arestaurant_id%7D%3A">{:restaurant_id}:<span><a href="#method-i-restaurants-label-%7B%3Arestaurant_id%7D%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐厅id</pre>
+
+<h6 id="method-i-restaurants-label-access_token%3A">access_token:<span><a href="#method-i-restaurants-label-access_token%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐厅管理人员的 access_token</pre>
+
+<h4 id="method-i-restaurants-label-Response+Status+Code">Response Status Code<span><a href="#method-i-restaurants-label-Response+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>200</pre>
+
+<h4 id="method-i-restaurants-label-Response+Body">Response Body<span><a href="#method-i-restaurants-label-Response+Body">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-restaurants-label-response_status%3A">response_status:<span><a href="#method-i-restaurants-label-response_status%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>&quot;client push service is active&quot;  或者 &quot;client push service is inactive&quot;</pre>
+
+<h6 id="method-i-restaurants-label-401%3A">401:<span><a href="#method-i-restaurants-label-401%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>帐号验证错误，用户名或密码错误</pre>
+
+<h6 id="method-i-restaurants-label-404%3A">404:<span><a href="#method-i-restaurants-label-404%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>没有找到相应的订单</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="restaurants-source">
+            
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://rdoc.rubyforge.org">RDoc</a> 4.1.1.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+
