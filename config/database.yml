@@ -1,18 +1,18 @@
 production:
   adapter: em_mysql2
+  host: 10.121.42.214
   encoding: utf8mb4
-  reconnect: false
+  reconnect: true
   pool: 5
   database: backend
   username: backend
-  password: 'ba6af5e27fcceca'
-  host: "10.121.42.214"
+  password: '9844340557a75d2'
   port: 3306
 
 development:
   adapter: em_mysql2
   encoding: utf8mb4
-  reconnect: false
+  reconnect: true
   database: ebdb
   pool: 5
   username: root
@@ -23,7 +23,7 @@ development:
 test:
   adapter: em_mysql2
   encoding: utf8mb4
-  reconnect: false
+  reconnect: true
   database: ebdb
   pool: 5
   username: root

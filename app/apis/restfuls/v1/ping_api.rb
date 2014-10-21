@@ -25,7 +25,6 @@ module Restfuls
       }
       present data
     end
-  	
 
     post '/authenticate_promotioner' do 
          authenticate_promotioner!

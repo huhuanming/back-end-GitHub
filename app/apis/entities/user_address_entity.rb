@@ -1,6 +1,7 @@
 module Restfuls
 	module APIEntities
 		class UserAddress < Grape::Entity
+      	  expose :id, as: :address_id
       	  expose :shipping_user, as: :shipping_user
       	  expose :shipping_address, as: :shipping_address
           expose :phone_number, as: :phone_number

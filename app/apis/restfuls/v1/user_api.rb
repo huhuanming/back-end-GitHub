@@ -150,12 +150,14 @@ module Restfuls
 		# ==== Response Body Example:
 		#	[
 		#		{
+		#  			"address_id" : 2
 		#			"shipping_user" : "2888",
   		#			"shipping_address" : "交大",
   		#			"phone_number" : "123456789",
   		#			"is_default" : "1"
   		#		},
 		#		{
+		#  			"address_id" : 3
 		#			"shipping_user" : "1234234",
   		#			"shipping_address" : "交大",
   		#			"phone_number" : "123456789",
@@ -184,6 +186,7 @@ module Restfuls
 		# 	是否是默认收货地址
 		# ==== Response Body Example:
 		#		{
+		#  			"address_id" : 3
 		#			"shipping_user" : "2888",
   		#			"shipping_address" : "交大",
   		#			"phone_number" : "123456789",
@@ -526,12 +529,8 @@ module Restfuls
 							 error!("access_token is invalid", 401) if this_address.user_id != params[:user_id].to_i
 
 							address_with_default = UserAddress.where(:user_id => params[:user_id])
-												 				  .where(:is_default => 1)
-																  .first
-							if address_with_default.nil?
-								address_with_default.is_default = 0
-								address_with_default.save
-							end
+												 		      .where(:is_default => 1)
+												 		      .update_all("is_default = 0")
 							this_address.is_default = 1
 							this_address.save
 						    present:'response_status', 'this address was default'

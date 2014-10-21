@@ -117,7 +117,7 @@
           <span class="method-name">menus</span><span
             class="method-args">()</span>
           
-          <!-- <span class="method-click-advice">click to toggle source</span> -->
+          <span class="method-click-advice">click to toggle source</span>
           
         </div>
         
@@ -178,7 +178,58 @@
 
           
           <div class="method-source-code" id="menus-source">
-            
+            <pre><span class="ruby-comment"># File app/apis/restfuls/v1/menu_api.rb, line 36</span>
+<span class="ruby-identifier">resource</span> <span class="ruby-value">:menus</span> <span class="ruby-keyword">do</span>
+        <span class="ruby-identifier">desc</span> <span class="ruby-string">&quot;Create or update food menu for this restaurant&quot;</span>
+        <span class="ruby-identifier">post</span> <span class="ruby-keyword">do</span>      
+                <span class="ruby-identifier">authenticate_supervisor!</span>
+                <span class="ruby-identifier">restaurant_id</span> = <span class="ruby-identifier">current_supervisor</span>.<span class="ruby-identifier">restaurant</span>.<span class="ruby-identifier">id</span>
+                <span class="ruby-keyword">begin</span>
+                <span class="ruby-identifier">menu</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:menu_json</span>])
+            <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Exception</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;menu_json is invalid&quot;</span>, <span class="ruby-value">502</span>)
+            <span class="ruby-keyword">end</span>
+
+            <span class="ruby-keyword">begin</span>
+               <span class="ruby-identifier">types</span> = <span class="ruby-identifier">menu</span>.<span class="ruby-identifier">keys</span>
+            <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Exception</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;menu_json is invalid&quot;</span>, <span class="ruby-value">502</span>)
+            <span class="ruby-keyword">end</span>
+                
+                <span class="ruby-identifier">types</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">type_name</span><span class="ruby-operator">|</span>
+                        <span class="ruby-identifier">the_type</span> = <span class="ruby-constant">FoodType</span>.<span class="ruby-identifier">find_or_initialize_by</span>(<span class="ruby-value">:type_name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">type_name</span>)
+                        <span class="ruby-keyword">if</span> <span class="ruby-identifier">the_type</span>.<span class="ruby-identifier">restaurant_id</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">the_type</span>.<span class="ruby-identifier">restaurant_id</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">restaurant_id</span>
+                                <span class="ruby-identifier">the_type</span> = <span class="ruby-constant">FoodType</span>.<span class="ruby-identifier">new</span>
+                                <span class="ruby-identifier">the_type</span>.<span class="ruby-identifier">type_name</span> = <span class="ruby-identifier">type_name</span>
+                                <span class="ruby-identifier">the_type</span>.<span class="ruby-identifier">restaurant_id</span> = <span class="ruby-identifier">restaurant_id</span>
+                                <span class="ruby-identifier">the_type</span>.<span class="ruby-identifier">save</span>
+                        <span class="ruby-keyword">end</span>
+                        <span class="ruby-identifier">the_food_of_type</span> = <span class="ruby-identifier">menu</span>[<span class="ruby-identifier">type_name</span>]
+                    <span class="ruby-keyword">begin</span>
+                            <span class="ruby-identifier">food_names</span> = <span class="ruby-identifier">the_food_of_type</span>.<span class="ruby-identifier">keys</span>
+                    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Exception</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+                        <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;menu_json is invalid&quot;</span>, <span class="ruby-value">502</span>)
+                    <span class="ruby-keyword">end</span>
+                        <span class="ruby-identifier">food_names</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">food_name</span><span class="ruby-operator">|</span>
+                                <span class="ruby-identifier">food</span> = <span class="ruby-identifier">the_food_of_type</span>[<span class="ruby-identifier">food_name</span>]
+                                <span class="ruby-identifier">the_food</span> = <span class="ruby-constant">Food</span>.<span class="ruby-identifier">find_or_initialize_by</span>(<span class="ruby-value">:food_name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">food_name</span>)
+                                <span class="ruby-identifier">the_food</span>.<span class="ruby-identifier">food_type_id</span> = <span class="ruby-identifier">the_type</span>.<span class="ruby-identifier">id</span>
+                                <span class="ruby-identifier">price</span> = <span class="ruby-identifier">food</span>[<span class="ruby-string">&quot;price&quot;</span>]
+                                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;menu_json is invalid&quot;</span>, <span class="ruby-value">502</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">price</span>.<span class="ruby-identifier">nil?</span>
+                                <span class="ruby-identifier">the_food</span>.<span class="ruby-identifier">shop_price</span> = <span class="ruby-identifier">price</span>
+                                <span class="ruby-identifier">the_food</span>.<span class="ruby-identifier">save</span>
+                        <span class="ruby-keyword">end</span>
+                        <span class="ruby-constant">Food</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:food_type_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">the_type</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">where</span>.<span class="ruby-identifier">not</span>(<span class="ruby-value">:food_name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">food_names</span>).<span class="ruby-identifier">update_all</span>(<span class="ruby-value">:food_type_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">-1</span>)
+                <span class="ruby-keyword">end</span>
+                <span class="ruby-identifier">ids</span> = <span class="ruby-constant">FoodType</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:restaurant_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">restaurant_id</span>).<span class="ruby-identifier">where</span>.<span class="ruby-identifier">not</span>(<span class="ruby-value">:type_name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">types</span>).<span class="ruby-identifier">pluck</span>(<span class="ruby-value">:id</span>)
+                <span class="ruby-keyword">if</span> <span class="ruby-identifier">ids</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+                        <span class="ruby-constant">Food</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:food_type_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ids</span>).<span class="ruby-identifier">update_all</span>(<span class="ruby-value">:food_type_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">-1</span>)
+                        <span class="ruby-constant">FoodType</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ids</span>).<span class="ruby-identifier">delete_all</span>
+                <span class="ruby-keyword">end</span>
+                <span class="ruby-identifier">present</span><span class="ruby-value">:&#39;response_status&#39;</span>, <span class="ruby-string">&#39;successed to update menu of this restaurant&#39;</span>
+        <span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>

@@ -117,7 +117,7 @@
           <span class="method-name">restaurants</span><span
             class="method-args">()</span>
           
-          <!-- <span class="method-click-advice">click to toggle source</span> -->
+          <span class="method-click-advice">click to toggle source</span>
           
         </div>
         
@@ -290,7 +290,7 @@
 
 <h4 id="method-i-restaurants-label-POST">POST<span><a href="#method-i-restaurants-label-POST">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
 
-<pre>{:restaurant_id}/orders</pre>
+<pre>/restaurants/{:restaurant_id}/orders</pre>
 
 <h4 id="method-i-restaurants-label-Params">Params<span><a href="#method-i-restaurants-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
 
@@ -352,7 +352,7 @@
 
 <h4 id="method-i-restaurants-label-POST">POST<span><a href="#method-i-restaurants-label-POST">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
 
-<pre>{:restaurant_id}/comments</pre>
+<pre>/restaurants/{:restaurant_id}/comments</pre>
 
 <h4 id="method-i-restaurants-label-Params">Params<span><a href="#method-i-restaurants-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
 
@@ -388,7 +388,7 @@
 
 <h4 id="method-i-restaurants-label-GET">GET<span><a href="#method-i-restaurants-label-GET">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
 
-<pre>{:restaurant_id}/comments</pre>
+<pre>/restaurants/{:restaurant_id}/comments</pre>
 
 <h4 id="method-i-restaurants-label-Params">Params<span><a href="#method-i-restaurants-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
 
@@ -1543,7 +1543,425 @@
 
           
           <div class="method-source-code" id="restaurants-source">
-            
+            <pre><span class="ruby-comment"># File app/apis/restfuls/v1/restaurant_api.rb, line 834</span>
+<span class="ruby-identifier">resource</span> <span class="ruby-value">:restaurants</span> <span class="ruby-keyword">do</span>
+        <span class="ruby-identifier">desc</span> <span class="ruby-string">&quot;Create a restaurant&quot;</span>
+        <span class="ruby-identifier">post</span> <span class="ruby-keyword">do</span>      
+                <span class="ruby-identifier">authenticate_promotioner!</span>
+                <span class="ruby-identifier">promotioner</span> = <span class="ruby-identifier">current_promotioner</span>
+                <span class="ruby-identifier">restaurant</span> = <span class="ruby-constant">Restaurant</span>.<span class="ruby-identifier">new</span>(
+                                <span class="ruby-string">&#39;promotioner_id&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">promotioner</span>.<span class="ruby-identifier">id</span>,
+                                <span class="ruby-string">&#39;restaurant_name&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:restaurant_name</span>],
+                                <span class="ruby-string">&#39;back_account&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:back_account</span>],
+                                <span class="ruby-string">&#39;phone_number&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:phone_number</span>],
+                                <span class="ruby-string">&#39;zone_id&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">promotioner</span>.<span class="ruby-identifier">zone_id</span>
+                        )
+                <span class="ruby-keyword">begin</span>
+                <span class="ruby-identifier">restaurant</span>.<span class="ruby-identifier">save</span>
+            <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Exception</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;Data is invalid or exist&quot;</span>, <span class="ruby-value">501</span>)
+            <span class="ruby-keyword">end</span>
+                <span class="ruby-identifier">restaurant_linsece</span> = <span class="ruby-constant">RestaurantLinsece</span>.<span class="ruby-identifier">new</span>(
+                                <span class="ruby-string">&#39;restaurant_id&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">restaurant</span>.<span class="ruby-identifier">id</span>,
+                                <span class="ruby-string">&#39;linsece&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:linsece</span>],
+                                <span class="ruby-string">&#39;id_card_front&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:id_card_front</span>],
+                                <span class="ruby-string">&#39;id_card_reverse&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:id_card_reverse</span>]
+                        )
+                <span class="ruby-keyword">begin</span>
+                <span class="ruby-identifier">restaurant_linsece</span>.<span class="ruby-identifier">save</span>
+            <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Exception</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+             <span class="ruby-identifier">restaurant</span>.<span class="ruby-identifier">delete</span>
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;Data is invalid or exist&quot;</span>, <span class="ruby-value">501</span>)
+            <span class="ruby-keyword">end</span>
+                <span class="ruby-identifier">restaurant_address</span> = <span class="ruby-constant">RestaurantAddress</span>.<span class="ruby-identifier">new</span>(
+                                <span class="ruby-string">&#39;restaurant_id&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">restaurant</span>.<span class="ruby-identifier">id</span>,
+                                <span class="ruby-string">&#39;address&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:address</span>],
+                                <span class="ruby-string">&#39;radius&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:radius</span>],
+                                <span class="ruby-string">&#39;longitude&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:longitude</span>],
+                                <span class="ruby-string">&#39;latitude&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:latitude</span>],
+                                <span class="ruby-string">&#39;coordinate_x1&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:coordinate_x1</span>],
+                                <span class="ruby-string">&#39;coordinate_x2&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:coordinate_x2</span>],
+                                <span class="ruby-string">&#39;coordinate_y1&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:coordinate_y1</span>],
+                                <span class="ruby-string">&#39;coordinate_y2&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:coordinate_y2</span>],
+                        )
+                <span class="ruby-keyword">begin</span>
+                <span class="ruby-identifier">restaurant_address</span>.<span class="ruby-identifier">save</span>
+            <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Exception</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+             <span class="ruby-identifier">restaurant</span>.<span class="ruby-identifier">delete</span>
+             <span class="ruby-identifier">restaurant_linsece</span>.<span class="ruby-identifier">delete</span>
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;Data is invalid or exist&quot;</span>, <span class="ruby-value">501</span>)
+            <span class="ruby-keyword">end</span>
+
+            <span class="ruby-identifier">string_length</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:phone_number</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">length</span>
+            <span class="ruby-identifier">supervisor_password</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:phone_number</span>].<span class="ruby-identifier">to_s</span>[<span class="ruby-identifier">string_length</span><span class="ruby-operator">-</span><span class="ruby-value">4</span>,<span class="ruby-identifier">string_length</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>]
+                <span class="ruby-identifier">supervisor</span> = <span class="ruby-constant">Supervisor</span>.<span class="ruby-identifier">new</span>(
+                                <span class="ruby-string">&#39;restaurant_id&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">restaurant</span>.<span class="ruby-identifier">id</span>,
+                                <span class="ruby-string">&#39;phone_number&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:phone_number</span>],
+                                <span class="ruby-string">&#39;nick_name&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:supervisor_name</span>],
+                                <span class="ruby-string">&#39;password&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">MD5</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-constant">Digest</span><span class="ruby-operator">::</span><span class="ruby-constant">MD5</span>.<span class="ruby-identifier">hexdigest</span>(<span class="ruby-identifier">supervisor_password</span>))
+                        )
+
+                <span class="ruby-keyword">begin</span>
+                <span class="ruby-identifier">supervisor</span>.<span class="ruby-identifier">save</span>
+            <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Exception</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+             <span class="ruby-identifier">restaurant</span>.<span class="ruby-identifier">delete</span>
+                        <span class="ruby-identifier">restaurant_linsece</span>.<span class="ruby-identifier">delete</span>
+                        <span class="ruby-identifier">restaurant_address</span>.<span class="ruby-identifier">delete</span>
+                        <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;Data is invaild&quot;</span>, <span class="ruby-value">501</span>) 
+            <span class="ruby-keyword">end</span>
+
+
+                <span class="ruby-keyword">begin</span>
+                <span class="ruby-constant">RestaurantStatus</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:restaurant_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">restaurant</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:shipping_phone_number</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:phone_number</span>], <span class="ruby-value">:checked_at</span> =<span class="ruby-operator">&gt;</span> (<span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>.<span class="ruby-identifier">day</span>))
+            <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Exception</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+             <span class="ruby-identifier">supervisor</span>.<span class="ruby-identifier">delete</span>
+             <span class="ruby-identifier">restaurant</span>.<span class="ruby-identifier">delete</span>
+                        <span class="ruby-identifier">restaurant_linsece</span>.<span class="ruby-identifier">delete</span>
+                        <span class="ruby-identifier">restaurant_address</span>.<span class="ruby-identifier">delete</span>
+                        <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;Data is invaild&quot;</span>, <span class="ruby-value">501</span>) 
+            <span class="ruby-keyword">end</span>
+                <span class="ruby-identifier">present</span><span class="ruby-value">:&#39;response_status&#39;</span>, <span class="ruby-string">&#39;successed to create a restaurant&#39;</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-comment">#根据你的位置读取餐馆列表</span>
+        <span class="ruby-identifier">desc</span> <span class="ruby-string">&quot;Get restaurant with your location and orders&quot;</span>
+        <span class="ruby-identifier">params</span> <span class="ruby-keyword">do</span>
+                <span class="ruby-identifier">requires</span> <span class="ruby-value">:longitude</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">String</span>
+                <span class="ruby-identifier">requires</span> <span class="ruby-value">:latitude</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">String</span>
+                <span class="ruby-identifier">optional</span> <span class="ruby-value">:order_type</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">Integer</span>, <span class="ruby-identifier">default</span><span class="ruby-operator">:</span> <span class="ruby-value">0</span>, <span class="ruby-identifier">values</span><span class="ruby-operator">:</span> [<span class="ruby-value">0</span>, <span class="ruby-value">1</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>]
+                <span class="ruby-identifier">optional</span> <span class="ruby-value">:restaurant_type</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">Integer</span>, <span class="ruby-identifier">default</span><span class="ruby-operator">:</span> <span class="ruby-value">0</span>, <span class="ruby-identifier">values</span><span class="ruby-operator">:</span> [<span class="ruby-value">0</span>, <span class="ruby-value">1</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>, <span class="ruby-value">4</span>, <span class="ruby-value">5</span>, <span class="ruby-value">6</span>]
+                <span class="ruby-identifier">optional</span> <span class="ruby-value">:page</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">Integer</span>, <span class="ruby-identifier">default</span><span class="ruby-operator">:</span> <span class="ruby-value">0</span>
+                <span class="ruby-identifier">optional</span> <span class="ruby-value">:count</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">Integer</span>, <span class="ruby-identifier">default</span><span class="ruby-operator">:</span> <span class="ruby-value">10</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">get</span> <span class="ruby-keyword">do</span>
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;bad boy!&quot;</span>, <span class="ruby-value">401</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>] <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:count</span>] <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
+                <span class="ruby-identifier">restaurants</span> = <span class="ruby-constant">Restaurant</span>.<span class="ruby-identifier">which_restaurant_type</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:restaurant_type</span>])
+                                                                .<span class="ruby-identifier">near_by</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:longitude</span>], <span class="ruby-identifier">params</span>[<span class="ruby-value">:latitude</span>])
+                                                                .<span class="ruby-identifier">opened</span>
+                                                                .<span class="ruby-identifier">order_by</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:order_type</span>], <span class="ruby-identifier">params</span>[<span class="ruby-value">:longitude</span>], <span class="ruby-identifier">params</span>[<span class="ruby-value">:latitude</span>])
+                                                                .<span class="ruby-identifier">page_with</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>], <span class="ruby-identifier">params</span>[<span class="ruby-value">:count</span>])
+                <span class="ruby-identifier">present</span> <span class="ruby-identifier">restaurants</span>, <span class="ruby-identifier">with</span><span class="ruby-operator">:</span> <span class="ruby-constant">APIEntities</span><span class="ruby-operator">::</span><span class="ruby-constant">Restaurant</span>
+        <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment">#搜索菜名</span>
+        <span class="ruby-identifier">desc</span> <span class="ruby-string">&quot;search food&quot;</span>
+    <span class="ruby-identifier">params</span> <span class="ruby-keyword">do</span>
+                <span class="ruby-identifier">requires</span> <span class="ruby-value">:longitude</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">String</span>
+                <span class="ruby-identifier">requires</span> <span class="ruby-value">:latitude</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">String</span>
+                <span class="ruby-identifier">requires</span> <span class="ruby-value">:food_name</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">String</span>
+        <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">get</span> <span class="ruby-string">&#39;/search_food&#39;</span> <span class="ruby-keyword">do</span>
+                <span class="ruby-identifier">restaurant_ids</span> = <span class="ruby-constant">Restaurant</span>.<span class="ruby-identifier">near_by</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:longitude</span>], <span class="ruby-identifier">params</span>[<span class="ruby-value">:latitude</span>]).<span class="ruby-identifier">opened</span>.<span class="ruby-identifier">pluck</span>(<span class="ruby-value">:id</span>)
+                <span class="ruby-identifier">food_types_ids</span> = <span class="ruby-constant">FoodType</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:restaurant_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">restaurant_ids</span>).<span class="ruby-identifier">pluck</span>(<span class="ruby-value">:id</span>)
+                <span class="ruby-identifier">foods</span> = <span class="ruby-constant">Food</span>.<span class="ruby-identifier">select</span>(
+                                                        <span class="ruby-string">&quot;foods.id as fid&quot;</span>,
+                                                        <span class="ruby-string">&quot;foods.food_name&quot;</span>,
+                                                        <span class="ruby-string">&quot;foods.shop_price&quot;</span>,
+                                                        <span class="ruby-string">&quot;food_types.restaurant_id as rid&quot;</span>,
+                                                        <span class="ruby-string">&quot;restaurants.restaurant_name&quot;</span>,
+                                                        <span class="ruby-string">&quot;restaurants.restaurant_avatar&quot;</span>
+                                                        )
+                                        .<span class="ruby-identifier">joins</span>(<span class="ruby-string">&quot;LEFT JOIN restaurants on restaurants.id = food_types.restaurant_id&quot;</span>)
+                                        .<span class="ruby-identifier">joins</span>(<span class="ruby-value">:food_type</span>).<span class="ruby-identifier">where</span>(<span class="ruby-value">:food_type_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">food_types_ids</span>).<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;food_name like ?&quot;</span>, <span class="ruby-string">&quot;%&quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">params</span>[<span class="ruby-value">:food_name</span>]<span class="ruby-operator">+</span><span class="ruby-string">&quot;%&quot;</span>)
+              <span class="ruby-identifier">present</span> <span class="ruby-identifier">foods</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment">#搜索菜名</span>
+        <span class="ruby-identifier">desc</span> <span class="ruby-string">&quot;shake and get a food&quot;</span>
+    <span class="ruby-identifier">params</span> <span class="ruby-keyword">do</span>
+                <span class="ruby-identifier">requires</span> <span class="ruby-value">:longitude</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">String</span>
+                <span class="ruby-identifier">requires</span> <span class="ruby-value">:latitude</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">String</span>
+        <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">get</span> <span class="ruby-string">&#39;/shake_to_food&#39;</span> <span class="ruby-keyword">do</span>
+                <span class="ruby-identifier">restaurant_ids</span> = <span class="ruby-constant">Restaurant</span>.<span class="ruby-identifier">near_by</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:longitude</span>], <span class="ruby-identifier">params</span>[<span class="ruby-value">:latitude</span>]).<span class="ruby-identifier">opened</span>.<span class="ruby-identifier">pluck</span>(<span class="ruby-value">:id</span>)
+                <span class="ruby-identifier">food_types_ids</span> = <span class="ruby-constant">FoodType</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:restaurant_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">restaurant_ids</span>).<span class="ruby-identifier">pluck</span>(<span class="ruby-value">:id</span>)
+                <span class="ruby-identifier">foods</span> = <span class="ruby-constant">Food</span>.<span class="ruby-identifier">select</span>(
+                                                        <span class="ruby-string">&quot;foods.id as fid&quot;</span>,
+                                                        <span class="ruby-string">&quot;foods.food_name&quot;</span>,
+                                                        <span class="ruby-string">&quot;foods.shop_price&quot;</span>,
+                                                        <span class="ruby-string">&quot;food_types.restaurant_id as rid&quot;</span>,
+                                                        <span class="ruby-string">&quot;restaurants.restaurant_name&quot;</span>,
+                                                        <span class="ruby-string">&quot;restaurants.restaurant_avatar&quot;</span>
+                                                        )
+                                        .<span class="ruby-identifier">joins</span>(<span class="ruby-string">&quot;LEFT JOIN restaurants on restaurants.id = food_types.restaurant_id&quot;</span>)
+                                        .<span class="ruby-identifier">joins</span>(<span class="ruby-value">:food_type</span>).<span class="ruby-identifier">where</span>(<span class="ruby-value">:food_type_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">food_types_ids</span>)
+                <span class="ruby-identifier">posion</span> = <span class="ruby-identifier">rand</span>(<span class="ruby-value">0</span><span class="ruby-operator">..</span>(<span class="ruby-identifier">foods</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>))
+              <span class="ruby-identifier">present</span> <span class="ruby-identifier">foods</span>[<span class="ruby-identifier">posion</span>]
+    <span class="ruby-keyword">end</span>
+
+
+        <span class="ruby-comment">#根据 餐馆id 读取餐馆</span>
+        <span class="ruby-identifier">desc</span> <span class="ruby-string">&quot;Get restaurant profile&quot;</span>
+        <span class="ruby-identifier">get</span> <span class="ruby-string">&quot;:restaurant_id&quot;</span> <span class="ruby-keyword">do</span>
+                <span class="ruby-identifier">food_types</span> = <span class="ruby-constant">Restaurant</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:restaurant_id</span>])
+                <span class="ruby-identifier">present</span> <span class="ruby-identifier">food_types</span>, <span class="ruby-identifier">with</span><span class="ruby-operator">:</span> <span class="ruby-constant">APIEntities</span><span class="ruby-operator">::</span><span class="ruby-constant">RestaurantProfile</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-identifier">get</span> <span class="ruby-string">&quot;:restaurant_id/menu&quot;</span> <span class="ruby-keyword">do</span>
+                <span class="ruby-identifier">menu</span> = <span class="ruby-constant">FoodType</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:restaurant_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:restaurant_id</span>])
+                <span class="ruby-identifier">present</span> <span class="ruby-identifier">menu</span>, <span class="ruby-identifier">with</span><span class="ruby-operator">:</span> <span class="ruby-constant">APIEntities</span><span class="ruby-operator">::</span><span class="ruby-constant">Menu</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-identifier">get</span> <span class="ruby-string">&quot;:restaurant_id/menus&quot;</span> <span class="ruby-keyword">do</span>
+                <span class="ruby-identifier">menus</span> = <span class="ruby-constant">FoodType</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:restaurant_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:restaurant_id</span>])
+                <span class="ruby-identifier">present</span> <span class="ruby-identifier">menus</span>, <span class="ruby-identifier">with</span><span class="ruby-operator">:</span> <span class="ruby-constant">APIEntities</span><span class="ruby-operator">::</span><span class="ruby-constant">Menu</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-identifier">get</span> <span class="ruby-string">&quot;:restaurant_id/orders&quot;</span> <span class="ruby-keyword">do</span>
+                <span class="ruby-identifier">authenticate_supervisor!</span>
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;supervisor is invaild&quot;</span>, <span class="ruby-value">401</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_supervisor</span>.<span class="ruby-identifier">restaurant_id</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:restaurant_id</span>].<span class="ruby-identifier">to_i</span>
+                <span class="ruby-identifier">order</span> = <span class="ruby-constant">Order</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:restaurant_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:restaurant_id</span>]).<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;id &lt; ?&quot;</span>, <span class="ruby-identifier">params</span>[<span class="ruby-value">:id</span>]<span class="ruby-operator">||</span> (<span class="ruby-constant">Order</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">id</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)).<span class="ruby-identifier">limit</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:count</span>]<span class="ruby-operator">||</span><span class="ruby-value">10</span>).<span class="ruby-identifier">order</span>(<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-value">:desc</span>)
+                <span class="ruby-identifier">present</span> <span class="ruby-identifier">order</span>, <span class="ruby-identifier">with</span><span class="ruby-operator">:</span> <span class="ruby-constant">APIEntities</span><span class="ruby-operator">::</span><span class="ruby-constant">Order</span>
+        <span class="ruby-keyword">end</span>
+
+
+        <span class="ruby-identifier">get</span> <span class="ruby-string">&quot;:restaurant_id/orders/:order_id&quot;</span> <span class="ruby-keyword">do</span>
+                <span class="ruby-identifier">authenticate_supervisor!</span>
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;supervisor is invaild&quot;</span>, <span class="ruby-value">401</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_supervisor</span>.<span class="ruby-identifier">restaurant_id</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:restaurant_id</span>].<span class="ruby-identifier">to_i</span> 
+                <span class="ruby-identifier">order_foods</span> = <span class="ruby-constant">OrderFood</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:order_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_id</span>])
+                <span class="ruby-identifier">present</span> <span class="ruby-identifier">order_foods</span>, <span class="ruby-identifier">with</span><span class="ruby-operator">:</span> <span class="ruby-constant">APIEntities</span><span class="ruby-operator">::</span><span class="ruby-constant">OrderFood</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-comment"># 确认订单</span>
+        <span class="ruby-identifier">put</span> <span class="ruby-string">&quot;:restaurant_id/orders/:order_id/check_order&quot;</span> <span class="ruby-keyword">do</span>
+                <span class="ruby-identifier">authenticate_supervisor!</span>
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;supervisor is invaild&quot;</span>, <span class="ruby-value">401</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_supervisor</span>.<span class="ruby-identifier">restaurant_id</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:restaurant_id</span>].<span class="ruby-identifier">to_i</span> 
+                <span class="ruby-identifier">order</span> = <span class="ruby-constant">Order</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_id</span>])
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;not found&quot;</span>, <span class="ruby-value">404</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">order</span>.<span class="ruby-identifier">nil?</span>
+                <span class="ruby-identifier">order</span>.<span class="ruby-identifier">order_type</span> = <span class="ruby-value">1</span>
+                <span class="ruby-identifier">order</span>.<span class="ruby-identifier">save</span>
+                <span class="ruby-identifier">present</span><span class="ruby-value">:&#39;response_status&#39;</span>, <span class="ruby-string">&#39;This order was checked&#39;</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-comment">#读取餐馆设置</span>
+        <span class="ruby-identifier">get</span> <span class="ruby-string">&quot;:restaurant_id/setting&quot;</span> <span class="ruby-keyword">do</span>
+                <span class="ruby-identifier">authenticate_supervisor!</span>
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;supervisor is invaild&quot;</span>, <span class="ruby-value">401</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_supervisor</span>.<span class="ruby-identifier">restaurant_id</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:restaurant_id</span>].<span class="ruby-identifier">to_i</span> 
+                <span class="ruby-identifier">restaurant_status</span> = <span class="ruby-constant">RestaurantStatus</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-value">:restaurant_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:restaurant_id</span>])
+                <span class="ruby-identifier">present</span> <span class="ruby-identifier">restaurant_status</span>, <span class="ruby-identifier">with</span><span class="ruby-operator">:</span> <span class="ruby-constant">APIEntities</span><span class="ruby-operator">::</span><span class="ruby-constant">RestaurantStatus</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-identifier">desc</span> <span class="ruby-string">&quot;创建餐馆订单 Create Order&quot;</span>
+    <span class="ruby-identifier">params</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">requires</span> <span class="ruby-value">:access_token</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">String</span>
+      <span class="ruby-identifier">requires</span> <span class="ruby-value">:foods</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">String</span>
+      <span class="ruby-identifier">requires</span> <span class="ruby-value">:ship_type</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">Integer</span>, <span class="ruby-identifier">default</span><span class="ruby-operator">:</span> <span class="ruby-value">0</span>
+      <span class="ruby-identifier">requires</span> <span class="ruby-value">:order_type</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">Integer</span>, <span class="ruby-identifier">default</span><span class="ruby-operator">:</span> <span class="ruby-value">0</span>
+      <span class="ruby-identifier">requires</span> <span class="ruby-value">:shipping_user</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">String</span>
+      <span class="ruby-identifier">requires</span> <span class="ruby-value">:shipping_address</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">String</span>
+      <span class="ruby-identifier">requires</span> <span class="ruby-value">:phone_number</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">String</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">post</span> <span class="ruby-string">&quot;:restaurant_id/orders&quot;</span> <span class="ruby-keyword">do</span>
+        <span class="ruby-identifier">authenticate_user!</span>
+        <span class="ruby-identifier">this_user</span> = <span class="ruby-identifier">current_user</span>
+        <span class="ruby-keyword">begin</span>
+                      <span class="ruby-identifier">foods</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:foods</span>])
+        <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Exception</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+              <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;food is invalid&quot;</span>, <span class="ruby-value">400</span>)
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">order_sign</span> = <span class="ruby-constant">OrderSign</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:restaurant_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:restaurant_id</span>], <span class="ruby-value">:user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">this_user</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:sign</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{Time.new.to_i}#{this_user.id}&quot;</span>)
+        <span class="ruby-identifier">price</span> = <span class="ruby-value">0</span>
+        <span class="ruby-identifier">foods</span>.<span class="ruby-identifier">each_with_index</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">food</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">this_food</span> = <span class="ruby-constant">Food</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">food</span>[<span class="ruby-string">&quot;fid&quot;</span>])
+          <span class="ruby-identifier">count</span> = <span class="ruby-identifier">food</span>[<span class="ruby-string">&quot;count&quot;</span>].<span class="ruby-identifier">to_i</span>
+          <span class="ruby-identifier">this_food_price</span> = <span class="ruby-identifier">this_food</span>.<span class="ruby-identifier">shop_price</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">count</span>
+
+          <span class="ruby-identifier">this_food_status</span> = <span class="ruby-identifier">this_food</span>.<span class="ruby-identifier">food_status</span>
+          <span class="ruby-identifier">this_food_status</span>.<span class="ruby-identifier">sold_number</span><span class="ruby-operator">+=</span><span class="ruby-identifier">count</span>
+          <span class="ruby-identifier">this_food_status</span>.<span class="ruby-identifier">save</span>
+          
+          <span class="ruby-identifier">order_food</span> = <span class="ruby-constant">OrderFood</span>.<span class="ruby-identifier">new</span>
+          <span class="ruby-identifier">order_food</span>.<span class="ruby-identifier">order_sign_id</span> = <span class="ruby-identifier">order_sign</span>.<span class="ruby-identifier">id</span>
+          <span class="ruby-identifier">order_food</span>.<span class="ruby-identifier">food_name</span> = <span class="ruby-identifier">this_food</span>.<span class="ruby-identifier">food_name</span>
+          <span class="ruby-identifier">order_food</span>.<span class="ruby-identifier">count</span> = <span class="ruby-identifier">food</span>[<span class="ruby-string">&quot;count&quot;</span>]
+          <span class="ruby-identifier">order_food</span>.<span class="ruby-identifier">total_price</span> = <span class="ruby-identifier">this_food_price</span>
+          <span class="ruby-identifier">order_food</span>.<span class="ruby-identifier">actual_total_price</span> = <span class="ruby-identifier">this_food_price</span>
+          <span class="ruby-identifier">order_food</span>.<span class="ruby-identifier">save</span>
+
+          <span class="ruby-identifier">price</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">this_food_price</span>
+        }
+
+        <span class="ruby-identifier">order</span> = <span class="ruby-constant">Order</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-identifier">order</span>.<span class="ruby-identifier">order_sign_id</span> = <span class="ruby-identifier">order_sign</span>.<span class="ruby-identifier">id</span>
+        <span class="ruby-identifier">order</span>.<span class="ruby-identifier">ship_type</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:ship_type</span>]
+        <span class="ruby-identifier">order</span>.<span class="ruby-identifier">order_type</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_type</span>]
+        <span class="ruby-identifier">order</span>.<span class="ruby-identifier">shipping_user</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:shipping_user</span>]
+        <span class="ruby-identifier">order</span>.<span class="ruby-identifier">shipping_address</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:shipping_address</span>]
+        <span class="ruby-identifier">order</span>.<span class="ruby-identifier">phone_number</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:phone_number</span>]
+        <span class="ruby-identifier">order</span>.<span class="ruby-identifier">total_price</span> = <span class="ruby-identifier">price</span>
+        <span class="ruby-identifier">order</span>.<span class="ruby-identifier">actual_total_price</span> = <span class="ruby-identifier">price</span>
+        <span class="ruby-identifier">order</span>.<span class="ruby-identifier">food_count</span> = <span class="ruby-identifier">foods</span>.<span class="ruby-identifier">size</span>
+        <span class="ruby-identifier">order</span>.<span class="ruby-identifier">save</span>
+
+        <span class="ruby-identifier">present</span><span class="ruby-value">:&#39;order_sign&#39;</span>, <span class="ruby-identifier">order_sign</span>.<span class="ruby-identifier">sign</span>
+    <span class="ruby-keyword">end</span>
+
+        <span class="ruby-comment">#更新餐馆开店状态</span>
+        <span class="ruby-identifier">put</span> <span class="ruby-string">&quot;:restaurant_id/is_open&quot;</span> <span class="ruby-keyword">do</span>
+                <span class="ruby-identifier">authenticate_supervisor!</span>
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;supervisor is invaild&quot;</span>, <span class="ruby-value">401</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_supervisor</span>.<span class="ruby-identifier">restaurant_id</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:restaurant_id</span>].<span class="ruby-identifier">to_i</span> 
+                <span class="ruby-identifier">restaurant_status</span> = <span class="ruby-constant">RestaurantStatus</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-value">:restaurant_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:restaurant_id</span>])
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;not found&quot;</span>, <span class="ruby-value">404</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">nil?</span>
+                <span class="ruby-identifier">time_now</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+                <span class="ruby-keyword">if</span> <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">checked_at</span>.<span class="ruby-identifier">to_date</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">time_now</span>.<span class="ruby-identifier">to_date</span>
+                        <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">checked_at</span> = <span class="ruby-identifier">time_now</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>.<span class="ruby-identifier">day</span>
+                        <span class="ruby-identifier">response_body</span> = <span class="ruby-string">&#39;restaurant was closed&#39;</span>
+                <span class="ruby-keyword">else</span>
+                        <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">checked_at</span> = <span class="ruby-identifier">time_now</span>
+                        <span class="ruby-identifier">response_body</span> = <span class="ruby-string">&#39;restaurant was opened&#39;</span>
+                <span class="ruby-keyword">end</span>
+                <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">save</span>
+                <span class="ruby-identifier">present</span><span class="ruby-value">:&#39;response_status&#39;</span>, <span class="ruby-identifier">response_body</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-comment">#更新餐馆关店时间</span>
+        <span class="ruby-identifier">put</span> <span class="ruby-string">&quot;:restaurant_id/close_time&quot;</span> <span class="ruby-keyword">do</span>
+                <span class="ruby-identifier">authenticate_supervisor!</span>
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;params is invalid&quot;</span>, <span class="ruby-value">401</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:close_hour</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:close_min</span>].<span class="ruby-identifier">nil?</span>
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;supervisor is invalid&quot;</span>, <span class="ruby-value">401</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_supervisor</span>.<span class="ruby-identifier">restaurant_id</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:restaurant_id</span>].<span class="ruby-identifier">to_i</span> 
+                <span class="ruby-identifier">restaurant_status</span> = <span class="ruby-constant">RestaurantStatus</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-value">:restaurant_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:restaurant_id</span>])
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;not found&quot;</span>, <span class="ruby-value">404</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">nil?</span>
+                <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">close_hour</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:close_hour</span>]
+                <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">close_min</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:close_min</span>]
+                <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">save</span>
+                <span class="ruby-identifier">present</span><span class="ruby-value">:&#39;response_status&#39;</span>, <span class="ruby-string">&#39;close time was updated&#39;</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-comment">#店铺公告</span>
+        <span class="ruby-identifier">put</span> <span class="ruby-string">&quot;:restaurant_id/board&quot;</span> <span class="ruby-keyword">do</span>
+                <span class="ruby-identifier">authenticate_supervisor!</span>
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;params is invalid&quot;</span>, <span class="ruby-value">401</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:board</span>].<span class="ruby-identifier">nil?</span>
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;supervisor is invaild&quot;</span>, <span class="ruby-value">401</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_supervisor</span>.<span class="ruby-identifier">restaurant_id</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:restaurant_id</span>].<span class="ruby-identifier">to_i</span> 
+                <span class="ruby-identifier">restaurant_status</span> = <span class="ruby-constant">RestaurantStatus</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-value">:restaurant_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:restaurant_id</span>])
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;not found&quot;</span>, <span class="ruby-value">404</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">nil?</span>
+                <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">board</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:board</span>]
+                <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">save</span>
+                <span class="ruby-identifier">present</span><span class="ruby-value">:&#39;response_status&#39;</span>, <span class="ruby-string">&#39;board was updated&#39;</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-comment">#店铺起送价</span>
+        <span class="ruby-identifier">put</span> <span class="ruby-string">&quot;:restaurant_id/start_shipping_fee&quot;</span> <span class="ruby-keyword">do</span>
+                <span class="ruby-identifier">authenticate_supervisor!</span>
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;params is invalid&quot;</span>, <span class="ruby-value">401</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:start_shipping_fee</span>].<span class="ruby-identifier">nil?</span>
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;supervisor is invaild&quot;</span>, <span class="ruby-value">401</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_supervisor</span>.<span class="ruby-identifier">restaurant_id</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:restaurant_id</span>].<span class="ruby-identifier">to_i</span> 
+                <span class="ruby-identifier">restaurant_status</span> = <span class="ruby-constant">RestaurantStatus</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-value">:restaurant_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:restaurant_id</span>])
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;not found&quot;</span>, <span class="ruby-value">404</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">nil?</span>
+                <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">start_shipping_fee</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:start_shipping_fee</span>]
+                <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">save</span>
+                <span class="ruby-identifier">present</span><span class="ruby-value">:&#39;response_status&#39;</span>, <span class="ruby-string">&#39;start_shipping_fee was updated&#39;</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-comment">#店铺送餐费</span>
+        <span class="ruby-identifier">put</span> <span class="ruby-string">&quot;:restaurant_id/shipping_fee&quot;</span> <span class="ruby-keyword">do</span>
+                <span class="ruby-identifier">authenticate_supervisor!</span>
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;params is invalid&quot;</span>, <span class="ruby-value">401</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:shipping_fee</span>].<span class="ruby-identifier">nil?</span>
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;supervisor is invaild&quot;</span>, <span class="ruby-value">401</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_supervisor</span>.<span class="ruby-identifier">restaurant_id</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:restaurant_id</span>].<span class="ruby-identifier">to_i</span> 
+                <span class="ruby-identifier">restaurant_status</span> = <span class="ruby-constant">RestaurantStatus</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-value">:restaurant_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:restaurant_id</span>])
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;not found&quot;</span>, <span class="ruby-value">404</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">nil?</span>
+                <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">shipping_fee</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:shipping_fee</span>]
+                <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">save</span>
+                <span class="ruby-identifier">present</span><span class="ruby-value">:&#39;response_status&#39;</span>, <span class="ruby-string">&#39;shipping_fee was updated&#39;</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-comment">#店铺送餐时间</span>
+        <span class="ruby-identifier">put</span> <span class="ruby-string">&quot;:restaurant_id/shipping_time&quot;</span> <span class="ruby-keyword">do</span>
+                <span class="ruby-identifier">authenticate_supervisor!</span>
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;params is invalid&quot;</span>, <span class="ruby-value">401</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:shipping_time</span>].<span class="ruby-identifier">nil?</span>
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;supervisor is invaild&quot;</span>, <span class="ruby-value">401</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_supervisor</span>.<span class="ruby-identifier">restaurant_id</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:restaurant_id</span>].<span class="ruby-identifier">to_i</span> 
+                <span class="ruby-identifier">restaurant_status</span> = <span class="ruby-constant">RestaurantStatus</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-value">:restaurant_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:restaurant_id</span>])
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;not found&quot;</span>, <span class="ruby-value">404</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">nil?</span>
+                <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">shipping_time</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:shipping_time</span>]
+                <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">save</span>
+                <span class="ruby-identifier">present</span><span class="ruby-value">:&#39;response_status&#39;</span>, <span class="ruby-string">&#39;shipping_time was updated&#39;</span>
+        <span class="ruby-keyword">end</span>
+
+
+        <span class="ruby-comment">#店铺送餐电话</span>
+        <span class="ruby-identifier">put</span> <span class="ruby-string">&quot;:restaurant_id/shipping_phone_number&quot;</span> <span class="ruby-keyword">do</span>
+                <span class="ruby-identifier">authenticate_supervisor!</span>
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;params is invalid&quot;</span>, <span class="ruby-value">401</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:shipping_phone_number</span>].<span class="ruby-identifier">nil?</span>
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;supervisor is invaild&quot;</span>, <span class="ruby-value">401</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_supervisor</span>.<span class="ruby-identifier">restaurant_id</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:restaurant_id</span>].<span class="ruby-identifier">to_i</span> 
+                <span class="ruby-identifier">restaurant_status</span> = <span class="ruby-constant">RestaurantStatus</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-value">:restaurant_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:restaurant_id</span>])
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;not found&quot;</span>, <span class="ruby-value">404</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">nil?</span>
+                <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">shipping_phone_number</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:shipping_phone_number</span>]
+                <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">save</span>
+                <span class="ruby-identifier">present</span><span class="ruby-value">:&#39;response_status&#39;</span>, <span class="ruby-string">&#39;phone_number was updated&#39;</span>
+        <span class="ruby-keyword">end</span>
+
+
+
+        <span class="ruby-comment">#店铺短信接收</span>
+        <span class="ruby-identifier">put</span> <span class="ruby-string">&quot;:restaurant_id/is_sms&quot;</span> <span class="ruby-keyword">do</span>
+                <span class="ruby-identifier">authenticate_supervisor!</span>
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;supervisor is invaild&quot;</span>, <span class="ruby-value">401</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_supervisor</span>.<span class="ruby-identifier">restaurant_id</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:restaurant_id</span>].<span class="ruby-identifier">to_i</span> 
+                <span class="ruby-identifier">restaurant_status</span> = <span class="ruby-constant">RestaurantStatus</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-value">:restaurant_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:restaurant_id</span>])
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;not found&quot;</span>, <span class="ruby-value">404</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">nil?</span>
+                <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">is_sms</span> = <span class="ruby-value">1</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">is_sms</span>.<span class="ruby-identifier">to_i</span>
+                <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">save</span>
+                <span class="ruby-keyword">if</span> <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">is_sms</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+                        <span class="ruby-identifier">response_body</span> = <span class="ruby-string">&#39;sms push service is active&#39;</span>
+                <span class="ruby-keyword">else</span>
+                        <span class="ruby-identifier">response_body</span> = <span class="ruby-string">&#39;sms push service is inactive&#39;</span>
+                <span class="ruby-keyword">end</span>
+                <span class="ruby-identifier">present</span><span class="ruby-value">:&#39;response_status&#39;</span>, <span class="ruby-identifier">response_body</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-comment">#店铺客户端接收</span>
+        <span class="ruby-identifier">put</span> <span class="ruby-string">&quot;:restaurant_id/is_client&quot;</span> <span class="ruby-keyword">do</span>
+                <span class="ruby-identifier">authenticate_supervisor!</span>
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;supervisor is invaild&quot;</span>, <span class="ruby-value">401</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_supervisor</span>.<span class="ruby-identifier">restaurant_id</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:restaurant_id</span>].<span class="ruby-identifier">to_i</span> 
+                <span class="ruby-identifier">restaurant_status</span> = <span class="ruby-constant">RestaurantStatus</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-value">:restaurant_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:restaurant_id</span>])
+                <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;not found&quot;</span>, <span class="ruby-value">404</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">nil?</span>
+                <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">is_client</span> = <span class="ruby-value">1</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">is_client</span>.<span class="ruby-identifier">to_i</span>
+                <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">save</span>
+                <span class="ruby-keyword">if</span> <span class="ruby-identifier">restaurant_status</span>.<span class="ruby-identifier">is_client</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+                        <span class="ruby-identifier">response_body</span> = <span class="ruby-string">&#39;client push service is active&#39;</span>
+                <span class="ruby-keyword">else</span>
+                        <span class="ruby-identifier">response_body</span> = <span class="ruby-string">&#39;client push service is inactive&#39;</span>
+                <span class="ruby-keyword">end</span>
+                <span class="ruby-identifier">present</span><span class="ruby-value">:&#39;response_status&#39;</span>, <span class="ruby-identifier">response_body</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-comment">######餐馆评论</span>
+        <span class="ruby-comment">#创建餐馆评论</span>
+        <span class="ruby-identifier">desc</span> <span class="ruby-string">&quot;create a comment by user for rest&quot;</span>
+    <span class="ruby-identifier">params</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">requires</span> <span class="ruby-value">:access_token</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">String</span>
+      <span class="ruby-identifier">requires</span> <span class="ruby-value">:title</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">String</span>
+      <span class="ruby-identifier">requires</span> <span class="ruby-value">:comment</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">String</span>
+      <span class="ruby-identifier">optional</span> <span class="ruby-value">:point</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">Integer</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">post</span> <span class="ruby-string">&quot;:restaurant_id/comments&quot;</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">authenticate_user!</span>
+      <span class="ruby-identifier">this_user</span> = <span class="ruby-identifier">current_user</span>
+      <span class="ruby-identifier">comment</span> = <span class="ruby-constant">RestaurantComment</span>.<span class="ruby-identifier">create</span>(
+                             <span class="ruby-value">:restaurant_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:restaurant_id</span>],
+                             <span class="ruby-value">:user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">this_user</span>.<span class="ruby-identifier">id</span>,
+                             <span class="ruby-value">:author</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">this_user</span>.<span class="ruby-identifier">nick_name</span>,
+                             <span class="ruby-value">:title</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:title</span>],
+                             <span class="ruby-value">:comment</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:comment</span>],
+                             <span class="ruby-value">:point</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:point</span>]
+                     )
+                <span class="ruby-identifier">present</span><span class="ruby-value">:&#39;cid&#39;</span>, <span class="ruby-identifier">comment</span>.<span class="ruby-identifier">id</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment">#读取餐馆评论</span>
+        <span class="ruby-identifier">desc</span> <span class="ruby-string">&quot;get all comments&quot;</span>
+    <span class="ruby-identifier">params</span> <span class="ruby-keyword">do</span>
+                <span class="ruby-identifier">optional</span> <span class="ruby-value">:cid</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">Integer</span>, <span class="ruby-identifier">default</span><span class="ruby-operator">:</span> <span class="ruby-value">0</span>
+                <span class="ruby-identifier">optional</span> <span class="ruby-value">:count</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">Integer</span>, <span class="ruby-identifier">default</span><span class="ruby-operator">:</span> <span class="ruby-value">10</span>
+                <span class="ruby-identifier">optional</span> <span class="ruby-value">:order</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">Integer</span>, <span class="ruby-identifier">default</span><span class="ruby-operator">:</span> <span class="ruby-value">0</span>
+        <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">get</span> <span class="ruby-string">&quot;:restaurant_id/comments&quot;</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">cid</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:cid</span>]
+      <span class="ruby-identifier">restaurant_last_comment</span> = <span class="ruby-constant">RestaurantComment</span>.<span class="ruby-identifier">last</span>
+      <span class="ruby-identifier">cid</span> = <span class="ruby-identifier">restaurant_last_comment</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">id</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>        <span class="ruby-keyword">if</span> <span class="ruby-identifier">cid</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">restaurant_last_comment</span>
+                <span class="ruby-identifier">comments</span> = <span class="ruby-constant">RestaurantComment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:restaurant_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:restaurant_id</span>]).<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;id &lt; ?&quot;</span>,<span class="ruby-identifier">cid</span>).<span class="ruby-identifier">limit</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:count</span>]).<span class="ruby-identifier">order_by</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:order</span>])
+                <span class="ruby-identifier">present</span> <span class="ruby-identifier">comments</span>, <span class="ruby-identifier">with</span><span class="ruby-operator">:</span> <span class="ruby-constant">APIEntities</span><span class="ruby-operator">::</span><span class="ruby-constant">RestaurantComment</span>
+    <span class="ruby-keyword">end</span>
+
+
+<span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>

@@ -92,7 +92,7 @@ module Restfuls
 		# == 创建餐馆订单
 		# 	用户进行下单操作
 	    # ==== POST
-	    # 	{:restaurant_id}/orders
+	    # 	/restaurants/{:restaurant_id}/orders
 		# ==== Params
 		# ====== access_token:
 		# 	顾客 access_token
@@ -125,7 +125,7 @@ module Restfuls
 		# == 创建餐馆评论
 		# 	创建餐馆评论
 	    # ==== POST
-	    # 	{:restaurant_id}/comments
+	    # 	/restaurants/{:restaurant_id}/comments
 		# ==== Params
 		# ====== access_token:
 		# 	用户的 access_token
@@ -145,7 +145,7 @@ module Restfuls
 		# == 读取餐馆评论
 		# 	读取餐馆评论
 	    # ==== GET
-	    # 	{:restaurant_id}/comments
+	    # 	/restaurants/{:restaurant_id}/comments
 		# ==== Params
 		# ====== cid:
 		# 	当前的cid
