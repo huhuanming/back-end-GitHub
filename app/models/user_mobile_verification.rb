@@ -1,6 +1,6 @@
 require 'em-http-request'
 class UserMobileVerification < ActiveRecord::Base
-	VERIFICATIONCODEURI = "http://101.227.175.19/api/user_sms/send_tpl_sms"
+	VERIFICATIONCODEURI = "http://third-party-api-server.sohuapps.com/api/user_sms/send_tpl_sms"
 	# Examine phone number and failed attemp 
 	def is_valid?
 		return false if self.updated_at.nil?

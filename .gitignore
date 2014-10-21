@@ -46,3 +46,11 @@ app/apis/.DS_Store
 config/.DS_Store
 
 doc/.DS_Store
+
+app/apis/restfuls/.DS_Store
+
+lib/.DS_Store
+
+log/development.log
+
+*.log
