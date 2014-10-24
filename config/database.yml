@@ -13,7 +13,7 @@ development:
   adapter: em_mysql2
   encoding: utf8mb4
   reconnect: true
-  database: ebdb
+  database: backend
   pool: 5
   username: root
   password: 'lib217217'

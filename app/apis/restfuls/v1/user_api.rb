@@ -20,6 +20,7 @@ module Restfuls
     	# * 获取验证码
     	# * 获取收货地址
     	# * 获取默认收货地址
+    	# * 获取用户订单
     	# == D
     	# * 删除收货地址
     	# == Other
@@ -193,6 +194,85 @@ module Restfuls
   		#			"is_default" : "1"
   		#		}
   		#
+  		# == 获取用户订单
+  		#  获取用户已完成或未完成订单
+	    # ==== GET
+	    # 	/users/{:user_id}/orders
+		# ==== Params
+		# ====== access_token:
+		# 	用户的 access token
+		# ====== oid(可选):
+		# 	oid 为0或空时返回最新的数据，为其他值时，返回比 oid 小的值， 默认为 0
+		# ====== count(可选):
+		# 	返回的订单条数，默认为 10
+		# ====== is_finished(可选):
+		# 	订单是否完成, 0 是未完成，1 是已完成, 默认为 0
+	    # ==== Response Status Code
+		# 	200
+	    # ==== Response Body
+		# ====== oid:
+		# 	订单 id
+		# ====== order_sign:
+		# 	订单编号
+		# ====== created_at:
+		# 	订单创建时间
+		# ====== updated_at:
+		# 	订单更新时间
+		# ====== restaurant_name:
+		# 	餐馆名字
+		# ====== phone_number:
+		# 	餐馆电话
+		# ====== shipping_user:
+		# 	收货人
+		# ====== shipping_address:
+		# 	收货地址
+		# ====== phone_number:
+		# 	收货人电话号码
+		# ====== total_price:
+		# 	总价
+		# ====== actual_total_price:
+		# 	实际订单总价
+		# ====== order_type:
+		# 	订单状态，0 是下单，1 是商家已确认，2 已完成
+		# ==== Response Body Example:
+		#   [
+		#	  	{
+		#  			oid: "14",
+		#			order_sign: "14137908411",
+		#			created_at: "2014-10-07T09:17:43.000Z",
+		#			updated_at: "2014-10-07T09:17:43.000Z",
+		#			restaurant: {
+		#				restaurant_name: "懒洋洋绝味面",
+		#				phone_number: "13538381054"
+		#			},
+		#			order_info: {
+		#				shipping_user: "陈小二",
+		#				shipping_address: "犀浦校园路",
+		#				phone_number: "13281828743",
+		#				total_price: "24.0",
+		#				actual_total_price: "24.0",
+		#				order_type: 0
+		#			}
+		#	 },
+		#	 {
+		#  			oid: "13",
+		#			order_sign: "14137908371",
+		#			created_at: "2014-10-07T09:17:43.000Z",
+		#			updated_at: "2014-10-07T09:17:43.000Z",
+		#			restaurant: {
+		#				restaurant_name: "懒洋洋绝味面",
+		#				phone_number: "13538381054"
+		#			},
+		#			order_info: {
+		#				shipping_user: "陈小二",
+		#				shipping_address: "犀浦校园路",
+		#				phone_number: "13281828743",
+		#				total_price: "48.0",
+		#				actual_total_price: "48.0",
+		#				order_type: 0
+		#			}
+		#		}
+		#	]
   		#
 		# == 删除收货地址
 		# 	删除用户收货地址
@@ -403,15 +483,47 @@ module Restfuls
 
 			namespace ":user_id" do
 				desc "get a user profile"
+				params do
+					requires :access_token, type: String
+				end
+				get 'profile' do
+					authenticate_user!
+					present current_user, with: APIEntities::UserProfile
+				end
+
+				namespace "orders" do
+					desc "get user orders 获取用户订单"
+					params do
+						requires :access_token, type: String
+						optional :oid, type: Integer, default: 0
+						optional :count, type: Integer, default: 10
+						optional :is_finished, type: Integer, default: 0 ,values: [0, 1]
+					end
+					get do
+						authenticate_user!
+						id = params[:oid]
+						id = OrderSign.last.id if id < 1
+						order_signs = current_user.order_signs
+												  .where(:is_finished => params[:is_finished])
+												  .where("id <= ?", id)
+												  .limit(params[:count])
+												  .order("id DESC")
+						present order_signs, with: APIEntities::OrderSign
+					end
+
+					desc "get one user's order"
 					params do
 						requires :access_token, type: String
 					end
-					get 'profile' do
-						 authenticate_user!
-						 present current_user, with: APIEntities::UserProfile
+					get ':order_id' do
+						authenticate_user!
+						order_sign = OrderSign.find_by_id(:sign => params[:order_id])
+						error!("bad boys", 401) if order_sign.user_id != current_user.id
+						present order_sign, with: APIEntities::OrderSign
 					end
+				end
 
-					namespace "addresses" do
+				namespace "addresses" do
 
 						desc "read delivery addresses for user"
 						params do
