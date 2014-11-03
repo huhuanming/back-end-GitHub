@@ -168,6 +168,21 @@ module Restfuls
 		# ====== response_status:
 		# 	success to updated
 		#
+		# == 更新用户名
+		# 	更新用户的昵称
+	    # ==== PUT
+	    # 	/users/{:user_id}/name
+		# ==== Params
+		# ====== access_token:
+		# 	用户的 access token
+		# ====== name:
+		# 	用户的新昵称
+	    # ==== Response Status Code
+		# 	200
+	    # ==== Response Body
+		# ====== response_status:
+		# 	success to updated user name
+		#
 		# == 获取收货地址
 		# 	获取用户收货地址
 	    # ==== GET
@@ -616,6 +631,33 @@ module Restfuls
 				get 'profile' do
 					authenticate_user!
 					present current_user, with: APIEntities::UserProfile
+				end
+
+				desc "updated a user name 更新用户名"
+				params do
+					requires :access_token, type: String
+					requires :name, type: String
+				end
+				put 'name' do
+					authenticate_user!
+					user = current_user
+					user.nick_name = params[:name]
+					user.save
+					present:"response_status", "success to updated user name"
+				end
+
+
+				desc "updated a user phone_number 更新手机号"
+				params do
+					requires :access_token, type: String
+					requires :phone_number, type: String
+				end
+				put 'phone_number' do
+					authenticate_user!
+					user = current_user
+					user.phone_number = params[:phone_number]
+					user.save
+					present:"response_status", "success to updated phone_number"
 				end
 
 				namespace "orders" do
