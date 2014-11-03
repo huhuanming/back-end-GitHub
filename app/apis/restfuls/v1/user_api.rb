@@ -13,11 +13,13 @@ module Restfuls
 		# == C
 		# * 创建帐号
 		# * 创建收货地址
+		# * 创建第三方登陆账号
     	# == U
     	# * 更新收货地址
     	# * 更新默认收货地址
     	# * 更新用户名
     	# * 更新手机号
+    	# * 更新用户密码
     	# == R
     	# * 获取用户信息资料
     	# * 获取验证码
@@ -27,9 +29,12 @@ module Restfuls
     	# * 获取用户订单详情
     	# == D
     	# * 删除收货地址
+    	# * 删除第三方登陆账号
     	# == Other
     	# * 登录帐号
     	# * 登陆账号（第三方登陆）
+    	# * 绑定用户与推送
+    	# * 反馈意见
 		#
 		#
 		# == 创建帐号
@@ -183,6 +188,82 @@ module Restfuls
 		# ====== response_status:
 		# 	success to updated user name
 		#
+		# == 绑定用户与推送
+		# 	绑定用户与推送
+	    # ==== Post
+	    # 	/users/bind_push
+		# ==== Params
+		# ====== access_token:
+		# 	用户的 access token
+		# ====== push_id:
+		# 	极光推送 id
+	    # ==== Response Status Code
+		# 	201
+	    # ==== Response Body
+		# ====== response_status:
+		# 	success to bind
+		#
+		# == 反馈意见
+		# 	反馈意见
+	    # ==== Post
+	    # 	/users/feedback
+		# ==== Params
+		# ====== access_token:(可选，最好有。便于统计)
+		# 	用户的 access token
+	    # ==== Response Status Code
+		# 	201
+	    # ==== Response Body
+		# ====== response_status:
+		# 	success to feedback
+		#
+		# == 更新用户密码
+		# 	更新用户密码
+	    # ==== PUT
+	    # 	/users/{:user_id}/password
+		# ==== Params
+		# ====== access_token:
+		# 	用户的 access token
+		# ====== password:
+		# 	用户的新密码(请提交两次 md5 运算后得到的值)
+	    # ==== Response Status Code
+		# 	200
+	    # ==== Response Body
+		# ====== response_status:
+		# 	success to updated user password
+		#
+    	# == 创建第三方登陆账号
+		# 	创建第三方登陆账号
+	    # ==== POST
+	    # 	/users/{:user_id}/oauth
+		# ==== Params
+		# ====== access_token:
+		# 	用户的 access token
+		# ====== uid:
+		# 	第三方账号体系中的用户唯一标识, 一般叫 uid
+		# ====== oauth_token:
+		# 	第三方账号登陆后获取的 Token
+		# ====== oauth_type:
+		# 	第三方账号类型，微博为 0 ，微信为1
+	    # ==== Response Status Code
+		# 	201
+	    # ==== Response Body
+		# ====== response_status:
+		# 	success to bind
+		#
+    	# == 删除第三方登陆账号
+		# 	删除第三方登陆账号
+	    # ==== DELETE
+	    # 	/users/{:user_id}/oauth
+		# ==== Params
+		# ====== access_token:
+		# 	用户的 access token
+		# ====== oauth_type:
+		# 	第三方账号类型，微博为 0 ，微信为1
+	    # ==== Response Status Code
+		# 	200
+	    # ==== Response Body
+		# ====== response_status:
+		# 	success to unbind
 		#
 		# == 更新手机号
 		# 	更新用户手机号，需要验证码，请在使用此接口之前，获取用户验证码一次
@@ -192,7 +273,7 @@ module Restfuls
 		# ====== access_token:
 		# 	用户的 access token
 		# ====== phone_number:
-		# 	用户的新新手机号
+		# 	用户的新手机号
 		# ====== encryption_code
 		# 	验证码计算后获取的值
 	    # ==== Response Status Code
@@ -562,7 +643,7 @@ module Restfuls
 				present new_user, with: APIEntities::UserToken
 			end
 
-			desc "bind push id and user"
+			desc "bind push id and user 绑定用户与推送"
 			params do
 				requires :push_id, type: String
 				requires :access_token, type: String
@@ -571,6 +652,15 @@ module Restfuls
 				authenticate_user!
 				UserPush.create(:user_id => current_user.id, :push_id => params[:push_id])
 				present:"response_status", "success to bind"
+			end
+
+			desc "反馈意见"
+			params do
+				optional :access_token, type: String
+			end
+			post "/feedback" do
+				
+				present:"response_status", "success to feedback"
 			end
 
 			desc "Login customer account with third party oauth service"
@@ -664,6 +754,18 @@ module Restfuls
 					present:"response_status", "success to updated user name"
 				end
 
+				desc "updated a user password 更新用户密码"
+				params do
+					requires :access_token, type: String
+					requires :password, type: String
+				end
+				put 'password' do
+					authenticate_user!
+					user = current_user
+					user.password = params[:password]
+					user.save
+					present:"response_status", "success to updated user password"
+				end
 
 				desc "updated a user phone_number 更新手机号"
 				params do
@@ -681,6 +783,59 @@ module Restfuls
 					user.phone_number = params[:phone_number]
 					user.save
 					present:"response_status", "success to updated phone number"
+				end
+
+				desc "创建第三方登陆账号"
+				params do
+					requires :access_token, type: String
+					requires :uid, type: String
+					requires :oauth_token, type: String
+					requires :oauth_type, type: String
+				end
+				post 'oauth' do
+					authenticate_user!
+					uri = URI.parse("https://api.weibo.com/2/users/show.json")
+					
+					http_params = Hash.new
+					http_params["appkey"] = "2285991897"
+					http_params["access_token"] = params[:oauth_token]
+					http_params["uid"] = params[:uid]
+					uri.query = URI.encode_www_form(http_params)
+					http = Net::HTTP.new(uri.host, uri.port)
+					http.use_ssl = true
+					http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+					http_request = Net::HTTP::Get.new(uri.request_uri)
+
+					response = JSON.parse(http.request(http_request).body)
+
+					error!("failed to login weibo", 401) if response["id"].nil?
+
+					the_oauth_user = OauthUser.find_by(:uid => params["uid"])
+					the_oauth_user.delete
+
+					the_user = current_user
+					the_user.save
+					the_oauth_user = OauthUser.new
+					the_oauth_user.user_id = the_user.id
+					the_oauth_user.uid = params["uid"]
+					the_oauth_user.oauth_type = params[:oauth_type]
+					the_oauth_user.save
+					
+					present:"response_status", "success to bind"
+				end
+
+				desc "unbind  删除第三方登陆账号"
+				params do
+					requires :access_token, type: String
+					requires :oauth_type, type: Integer, default: 0 ,values: [0, 1]
+				end
+				delete 'oauth' do
+					authenticate_user!
+					oauth_users = current_user.oauth_users
+					if oauth_users.size != 0
+						oauth_users.where(:oauth_type => params[:oauth_type]).delete_all
+					end
+					present:"response_status", "success to unbind"
 				end
 
 				namespace "orders" do

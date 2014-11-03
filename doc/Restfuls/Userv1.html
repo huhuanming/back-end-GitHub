@@ -140,10 +140,16 @@
 <p>更新收货地址</p>
 </li><li>
 <p>更新默认收货地址</p>
+</li><li>
+<p>更新用户名</p>
+</li><li>
+<p>更新手机号</p>
 </li></ul>
 
 <h2 id="method-i-users-label-R">R<span><a href="#method-i-users-label-R">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 <ul><li>
+<p>获取用户信息资料</p>
+</li><li>
 <p>获取验证码</p>
 </li><li>
 <p>获取收货地址</p>
@@ -241,6 +247,58 @@
 <h6 id="method-i-users-label-502%3A">502:<span><a href="#method-i-users-label-502%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
 
 <pre>该手机号已被注册</pre>
+
+<h2 id="method-i-users-label-%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF%E8%B5%84%E6%96%99">获取用户信息资料<span><a href="#method-i-users-label-%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF%E8%B5%84%E6%96%99">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<pre>获取用户的信息资料</pre>
+
+<h4 id="method-i-users-label-GET">GET<span><a href="#method-i-users-label-GET">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>/users/{user_id}/profile</pre>
+
+<h4 id="method-i-users-label-Params">Params<span><a href="#method-i-users-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-users-label-access_token%3A">access_token:<span><a href="#method-i-users-label-access_token%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>user 的 access_token</pre>
+
+<h4 id="method-i-users-label-Response+Status+Code">Response Status Code<span><a href="#method-i-users-label-Response+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>200</pre>
+
+<h4 id="method-i-users-label-Response+Body">Response Body<span><a href="#method-i-users-label-Response+Body">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-users-label-name%3A">name:<span><a href="#method-i-users-label-name%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>用户名</pre>
+
+<h6 id="method-i-users-label-avatar%3A">avatar:<span><a href="#method-i-users-label-avatar%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>用户头像</pre>
+
+<h6 id="method-i-users-label-phone_number%3A">phone_number:<span><a href="#method-i-users-label-phone_number%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>用户手机号</pre>
+
+<h6 id="method-i-users-label-oauth_type%3A">oauth_type:<span><a href="#method-i-users-label-oauth_type%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>0 是新浪微博， 1是 微信, 一个用户可能存在多个第三方登陆账号</pre>
+
+<h4 id="method-i-users-label-Response+Body+Example%3A">Response Body Example:<span><a href="#method-i-users-label-Response+Body+Example%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>{
+        name: &quot;打开方式有点不对啊&quot;,
+        avatar: &quot;restaurant_avatar&quot;,
+phone_number: &quot;没有号码&quot;,
+        oauth: [
+        {
+                        oauth_type: 0
+                },
+        {
+                        oauth_type: 1
+                }
+        ]
+}</pre>
 
 <h2 id="method-i-users-label-%E8%8E%B7%E5%8F%96%E9%AA%8C%E8%AF%81%E7%A0%81">获取验证码<span><a href="#method-i-users-label-%E8%8E%B7%E5%8F%96%E9%AA%8C%E8%AF%81%E7%A0%81">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 
@@ -355,6 +413,66 @@
 <h6 id="method-i-users-label-response_status%3A">response_status:<span><a href="#method-i-users-label-response_status%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
 
 <pre>success to updated</pre>
+
+<h2 id="method-i-users-label-%E6%9B%B4%E6%96%B0%E7%94%A8%E6%88%B7%E5%90%8D">更新用户名<span><a href="#method-i-users-label-%E6%9B%B4%E6%96%B0%E7%94%A8%E6%88%B7%E5%90%8D">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<pre>更新用户的昵称</pre>
+
+<h4 id="method-i-users-label-PUT">PUT<span><a href="#method-i-users-label-PUT">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>/users/{:user_id}/name</pre>
+
+<h4 id="method-i-users-label-Params">Params<span><a href="#method-i-users-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-users-label-access_token%3A">access_token:<span><a href="#method-i-users-label-access_token%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>用户的 access token</pre>
+
+<h6 id="method-i-users-label-name%3A">name:<span><a href="#method-i-users-label-name%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>用户的新昵称</pre>
+
+<h4 id="method-i-users-label-Response+Status+Code">Response Status Code<span><a href="#method-i-users-label-Response+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>200</pre>
+
+<h4 id="method-i-users-label-Response+Body">Response Body<span><a href="#method-i-users-label-Response+Body">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-users-label-response_status%3A">response_status:<span><a href="#method-i-users-label-response_status%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>success to updated user name</pre>
+
+<h2 id="method-i-users-label-%E6%9B%B4%E6%96%B0%E6%89%8B%E6%9C%BA%E5%8F%B7">更新手机号<span><a href="#method-i-users-label-%E6%9B%B4%E6%96%B0%E6%89%8B%E6%9C%BA%E5%8F%B7">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<pre>更新用户手机号，需要验证码，请在使用此接口之前，获取用户验证码一次</pre>
+
+<h4 id="method-i-users-label-PUT">PUT<span><a href="#method-i-users-label-PUT">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>/users/{:user_id}/phone_number</pre>
+
+<h4 id="method-i-users-label-Params">Params<span><a href="#method-i-users-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-users-label-access_token%3A">access_token:<span><a href="#method-i-users-label-access_token%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>用户的 access token</pre>
+
+<h6 id="method-i-users-label-phone_number%3A">phone_number:<span><a href="#method-i-users-label-phone_number%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>用户的新新手机号</pre>
+
+<h6 id="method-i-users-label-encryption_code">encryption_code<span><a href="#method-i-users-label-encryption_code">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>验证码计算后获取的值</pre>
+
+<h4 id="method-i-users-label-Response+Status+Code">Response Status Code<span><a href="#method-i-users-label-Response+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>200</pre>
+
+<h4 id="method-i-users-label-Response+Body">Response Body<span><a href="#method-i-users-label-Response+Body">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-users-label-response_status%3A">response_status:<span><a href="#method-i-users-label-response_status%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>success to updated phone number</pre>
 
 <h2 id="method-i-users-label-%E8%8E%B7%E5%8F%96%E6%94%B6%E8%B4%A7%E5%9C%B0%E5%9D%80">获取收货地址<span><a href="#method-i-users-label-%E8%8E%B7%E5%8F%96%E6%94%B6%E8%B4%A7%E5%9C%B0%E5%9D%80">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 
@@ -903,7 +1021,7 @@
 
           
           <div class="method-source-code" id="users-source">
-            <pre><span class="ruby-comment"># File app/apis/restfuls/v1/user_api.rb, line 466</span>
+            <pre><span class="ruby-comment"># File app/apis/restfuls/v1/user_api.rb, line 536</span>
 <span class="ruby-identifier">resource</span> <span class="ruby-value">:users</span> <span class="ruby-keyword">do</span>
 
         <span class="ruby-identifier">desc</span> <span class="ruby-string">&quot;Create a customer account&quot;</span>
@@ -1001,7 +1119,7 @@
                 <span class="ruby-identifier">present</span> <span class="ruby-identifier">this_user</span>, <span class="ruby-identifier">with</span><span class="ruby-operator">:</span> <span class="ruby-constant">APIEntities</span><span class="ruby-operator">::</span><span class="ruby-constant">UserToken</span>
         <span class="ruby-keyword">end</span>
 
-        <span class="ruby-identifier">desc</span> <span class="ruby-string">&quot;Get a mobile verification code&quot;</span>
+        <span class="ruby-identifier">desc</span> <span class="ruby-string">&quot;Get a mobile verification code 获取验证码&quot;</span>
         <span class="ruby-identifier">params</span> <span class="ruby-keyword">do</span>
                 <span class="ruby-identifier">requires</span> <span class="ruby-value">:phone_number</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">String</span>
         <span class="ruby-keyword">end</span>
@@ -1013,13 +1131,45 @@
         <span class="ruby-keyword">end</span>
 
         <span class="ruby-identifier">namespace</span> <span class="ruby-string">&quot;:user_id&quot;</span> <span class="ruby-keyword">do</span>
-                <span class="ruby-identifier">desc</span> <span class="ruby-string">&quot;get a user profile&quot;</span>
+                <span class="ruby-identifier">desc</span> <span class="ruby-string">&quot;get a user profile 获取用户信息资料&quot;</span>
                 <span class="ruby-identifier">params</span> <span class="ruby-keyword">do</span>
                         <span class="ruby-identifier">requires</span> <span class="ruby-value">:access_token</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">String</span>
                 <span class="ruby-keyword">end</span>
                 <span class="ruby-identifier">get</span> <span class="ruby-string">&#39;profile&#39;</span> <span class="ruby-keyword">do</span>
                         <span class="ruby-identifier">authenticate_user!</span>
                         <span class="ruby-identifier">present</span> <span class="ruby-identifier">current_user</span>, <span class="ruby-identifier">with</span><span class="ruby-operator">:</span> <span class="ruby-constant">APIEntities</span><span class="ruby-operator">::</span><span class="ruby-constant">UserProfile</span>
+                <span class="ruby-keyword">end</span>
+
+                <span class="ruby-identifier">desc</span> <span class="ruby-string">&quot;updated a user name 更新用户名&quot;</span>
+                <span class="ruby-identifier">params</span> <span class="ruby-keyword">do</span>
+                        <span class="ruby-identifier">requires</span> <span class="ruby-value">:access_token</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">String</span>
+                        <span class="ruby-identifier">requires</span> <span class="ruby-value">:name</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">String</span>
+                <span class="ruby-keyword">end</span>
+                <span class="ruby-identifier">put</span> <span class="ruby-string">&#39;name&#39;</span> <span class="ruby-keyword">do</span>
+                        <span class="ruby-identifier">authenticate_user!</span>
+                        <span class="ruby-identifier">user</span> = <span class="ruby-identifier">current_user</span>
+                        <span class="ruby-identifier">user</span>.<span class="ruby-identifier">nick_name</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:name</span>]
+                        <span class="ruby-identifier">user</span>.<span class="ruby-identifier">save</span>
+                        <span class="ruby-identifier">present</span><span class="ruby-value">:&quot;response_status&quot;</span>, <span class="ruby-string">&quot;success to updated user name&quot;</span>
+                <span class="ruby-keyword">end</span>
+
+
+                <span class="ruby-identifier">desc</span> <span class="ruby-string">&quot;updated a user phone_number 更新手机号&quot;</span>
+                <span class="ruby-identifier">params</span> <span class="ruby-keyword">do</span>
+                        <span class="ruby-identifier">requires</span> <span class="ruby-value">:access_token</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">String</span>
+                        <span class="ruby-identifier">requires</span> <span class="ruby-value">:phone_number</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">String</span>
+                        <span class="ruby-identifier">requires</span> <span class="ruby-value">:encryption_code</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">String</span>
+                <span class="ruby-keyword">end</span>
+                <span class="ruby-identifier">put</span> <span class="ruby-string">&#39;phone_number&#39;</span> <span class="ruby-keyword">do</span>
+                        <span class="ruby-identifier">authenticate_user!</span>
+                        <span class="ruby-identifier">user_mobile_verification</span> = <span class="ruby-constant">UserMobileVerification</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-value">:phone_number</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:phone_number</span>])
+                        <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;Verification code is not found with the phone number&quot;</span>, <span class="ruby-value">404</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">user_mobile_verification</span>.<span class="ruby-identifier">nil?</span>
+                        <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;Only can try 5 times in 24 hours&quot;</span>, <span class="ruby-value">406</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">user_mobile_verification</span>.<span class="ruby-identifier">is_valid?</span>
+                        <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;Verification code is invalid&quot;</span>, <span class="ruby-value">401</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">user_mobile_verification</span>.<span class="ruby-identifier">not_verify?</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:encryption_code</span>])
+                        <span class="ruby-identifier">user</span> = <span class="ruby-identifier">current_user</span>
+                        <span class="ruby-identifier">user</span>.<span class="ruby-identifier">phone_number</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:phone_number</span>]
+                        <span class="ruby-identifier">user</span>.<span class="ruby-identifier">save</span>
+                        <span class="ruby-identifier">present</span><span class="ruby-value">:&quot;response_status&quot;</span>, <span class="ruby-string">&quot;success to updated phone number&quot;</span>
                 <span class="ruby-keyword">end</span>
 
                 <span class="ruby-identifier">namespace</span> <span class="ruby-string">&quot;orders&quot;</span> <span class="ruby-keyword">do</span>
