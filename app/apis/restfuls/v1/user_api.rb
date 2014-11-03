@@ -183,6 +183,24 @@ module Restfuls
 		# ====== response_status:
 		# 	success to updated user name
 		#
+		#
+		# == 更新手机号
+		# 	更新用户手机号，需要验证码，请在使用此接口之前，获取用户验证码一次
+	    # ==== PUT
+	    # 	/users/{:user_id}/phone_number
+		# ==== Params
+		# ====== access_token:
+		# 	用户的 access token
+		# ====== phone_number:
+		# 	用户的新新手机号
+		# ====== encryption_code
+		# 	验证码计算后获取的值
+	    # ==== Response Status Code
+		# 	200
+	    # ==== Response Body
+		# ====== response_status:
+		# 	success to updated phone number
+		#
 		# == 获取收货地址
 		# 	获取用户收货地址
 	    # ==== GET
@@ -612,7 +630,7 @@ module Restfuls
 				present this_user, with: APIEntities::UserToken
 			end
 
-			desc "Get a mobile verification code"
+			desc "Get a mobile verification code 获取验证码"
 			params do
 				requires :phone_number, type: String
 			end
@@ -651,13 +669,18 @@ module Restfuls
 				params do
 					requires :access_token, type: String
 					requires :phone_number, type: String
+					requires :encryption_code, type: String
 				end
 				put 'phone_number' do
 					authenticate_user!
+					user_mobile_verification = UserMobileVerification.find_by(:phone_number => params[:phone_number])
+					error!("Verification code is not found with the phone number", 404) if user_mobile_verification.nil?
+					error!("Only can try 5 times in 24 hours", 406) if user_mobile_verification.is_valid?
+					error!("Verification code is invalid", 401) if user_mobile_verification.not_verify?(params[:encryption_code])
 					user = current_user
 					user.phone_number = params[:phone_number]
 					user.save
-					present:"response_status", "success to updated phone_number"
+					present:"response_status", "success to updated phone number"
 				end
 
 				namespace "orders" do
