@@ -50,8 +50,8 @@ class UserMobileVerification < ActiveRecord::Base
 		if self.updated_at.nil?
 		
 		else
-			duration_time = Time.now.to_i - self.updated_at.to_i
-			return false if duration_time < 60
+			# duration_time = Time.now.to_i - self.updated_at.to_i
+			# return false if duration_time < 60
 		end
 
 		self.verification_code = rand(100000..999999).to_s

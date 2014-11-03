@@ -21,6 +21,7 @@ module Restfuls
     	# * 获取收货地址
     	# * 获取默认收货地址
     	# * 获取用户订单
+    	# * 获取用户订单详情
     	# == D
     	# * 删除收货地址
     	# == Other
@@ -218,6 +219,8 @@ module Restfuls
 		# 	订单创建时间
 		# ====== updated_at:
 		# 	订单更新时间
+		# ====== rid:
+		# 	餐馆 id
 		# ====== restaurant_name:
 		# 	餐馆名字
 		# ====== phone_number:
@@ -242,6 +245,7 @@ module Restfuls
 		#			created_at: "2014-10-07T09:17:43.000Z",
 		#			updated_at: "2014-10-07T09:17:43.000Z",
 		#			restaurant: {
+		# 				rid: "2",
 		#				restaurant_name: "懒洋洋绝味面",
 		#				phone_number: "13538381054"
 		#			},
@@ -260,6 +264,7 @@ module Restfuls
 		#			created_at: "2014-10-07T09:17:43.000Z",
 		#			updated_at: "2014-10-07T09:17:43.000Z",
 		#			restaurant: {
+		# 				rid: "1",
 		#				restaurant_name: "懒洋洋绝味面",
 		#				phone_number: "13538381054"
 		#			},
@@ -273,6 +278,91 @@ module Restfuls
 		#			}
 		#		}
 		#	]
+  		#
+  		#
+  		# == 获取用户订单详情
+  		#  获取用户该订单详情
+	    # ==== GET
+	    # 	/users/{:user_id}/orders/{:oid}
+		# ==== Params
+		# ====== access_token:
+		# 	用户的 access token
+		# ====== oid:
+		# 	oid
+	    # ==== Response Status Code
+		# 	200
+	    # ==== Response Body
+		# ====== oid:
+		# 	订单 id
+		# ====== order_sign:
+		# 	订单编号
+		# ====== created_at:
+		# 	订单创建时间
+		# ====== updated_at:
+		# 	订单更新时间
+		# ====== food_name:
+		# 	食物名字
+		# ====== count:
+		# 	食物数量
+		# ====== rid:
+		# 	餐馆 id
+		# ====== restaurant_name:
+		# 	餐馆名字
+		# ====== phone_number（在restaurant中）:
+		# 	餐馆电话号码
+		# ====== shipping_user:
+		# 	收货人
+		# ====== shipping_address:
+		# 	收货地址
+		# ====== shipping_at:
+		# 	送餐到底时间
+		# ====== shipping_fee:
+		# 	送餐费
+		# ====== phone_number(在order_info中):
+		# 	客户的电话号码
+		# ====== total_price:
+		# 	总价
+		# ====== actual_total_price:
+		# 	实际订单总价
+		# ====== order_type:
+		# 	订单状态，0 是下单，1 是商家已确认，2 已完成
+		# ====== is_ticket:
+		# 	是否要发票
+		# ====== is_receipt:
+		# 	订单状态，0 是下单，1 是商家已确认，2 已完成
+		# ====== is_now:
+		# 	订单状态，0 是下单，1 是商家已确认，2 已完成
+		# ==== Response Body Example:
+		#	{
+		#		oid: 12,
+		#		order_sign: "14143993678",
+		#		created_at: "2014-10-27T08:42:47Z",
+		#		updated_at: "2014-10-27T08:42:47Z",
+		#		order_foods: [
+		#			{
+		#				food_name: "杂酱面",
+		#				count: 1
+		#			}
+		#		],
+		#		restaurant: {
+		#			rid: 10,
+		#			restaurant_name: "懒洋洋绝味面",
+		#			phone_number: "13538381054"
+		#		},
+		#		order_info: {
+		#			shipping_user: "秦源懋",
+		#			shipping_address: "046031",
+		#			shipping_at: "2014-10-27T17:28:57.000Z",
+		#			shipping_fee: "0.0",
+		#			phone_number: "18200272893",
+		#			total_price: "7.0",
+		#			actual_total_price: "7.0",
+		#			order_type: 0,
+		#			is_ticket: 0,
+		#			is_receipt: 0,
+		#			is_now: 0
+		#		}
+		#	}
   		#
 		# == 删除收货地址
 		# 	删除用户收货地址
@@ -517,9 +607,9 @@ module Restfuls
 					end
 					get ':order_id' do
 						authenticate_user!
-						order_sign = OrderSign.find_by_id(:sign => params[:order_id])
+						order_sign = OrderSign.find_by_id(params[:order_id])
 						error!("bad boys", 401) if order_sign.user_id != current_user.id
-						present order_sign, with: APIEntities::OrderSign
+						present order_sign, with: APIEntities::OrderSignDetail
 					end
 				end
 

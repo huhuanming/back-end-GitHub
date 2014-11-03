@@ -151,6 +151,8 @@
 <p>获取默认收货地址</p>
 </li><li>
 <p>获取用户订单</p>
+</li><li>
+<p>获取用户订单详情</p>
 </li></ul>
 
 <h2 id="method-i-users-label-D">D<span><a href="#method-i-users-label-D">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
@@ -503,6 +505,10 @@
 
 <pre>订单更新时间</pre>
 
+<h6 id="method-i-users-label-rid%3A">rid:<span><a href="#method-i-users-label-rid%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆 id</pre>
+
 <h6 id="method-i-users-label-restaurant_name%3A">restaurant_name:<span><a href="#method-i-users-label-restaurant_name%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
 
 <pre>餐馆名字</pre>
@@ -544,6 +550,7 @@
                   created_at: &quot;2014-10-07T09:17:43.000Z&quot;,
                   updated_at: &quot;2014-10-07T09:17:43.000Z&quot;,
                   restaurant: {
+                          rid: &quot;2&quot;,
                           restaurant_name: &quot;懒洋洋绝味面&quot;,
                           phone_number: &quot;13538381054&quot;
                   },
@@ -562,6 +569,7 @@
                   created_at: &quot;2014-10-07T09:17:43.000Z&quot;,
                   updated_at: &quot;2014-10-07T09:17:43.000Z&quot;,
                   restaurant: {
+                          rid: &quot;1&quot;,
                           restaurant_name: &quot;懒洋洋绝味面&quot;,
                           phone_number: &quot;13538381054&quot;
                   },
@@ -575,6 +583,143 @@
                   }
           }
   ]</pre>
+
+<h2 id="method-i-users-label-%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E8%AE%A2%E5%8D%95%E8%AF%A6%E6%83%85">获取用户订单详情<span><a href="#method-i-users-label-%E8%8E%B7%E5%8F%96%E7%94%A8%E6%88%B7%E8%AE%A2%E5%8D%95%E8%AF%A6%E6%83%85">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<pre>获取用户该订单详情</pre>
+
+<h4 id="method-i-users-label-GET">GET<span><a href="#method-i-users-label-GET">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>/users/{:user_id}/orders/{:oid}</pre>
+
+<h4 id="method-i-users-label-Params">Params<span><a href="#method-i-users-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-users-label-access_token%3A">access_token:<span><a href="#method-i-users-label-access_token%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>用户的 access token</pre>
+
+<h6 id="method-i-users-label-oid%3A">oid:<span><a href="#method-i-users-label-oid%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>oid</pre>
+
+<h4 id="method-i-users-label-Response+Status+Code">Response Status Code<span><a href="#method-i-users-label-Response+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>200</pre>
+
+<h4 id="method-i-users-label-Response+Body">Response Body<span><a href="#method-i-users-label-Response+Body">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-users-label-oid%3A">oid:<span><a href="#method-i-users-label-oid%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>订单 id</pre>
+
+<h6 id="method-i-users-label-order_sign%3A">order_sign:<span><a href="#method-i-users-label-order_sign%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>订单编号</pre>
+
+<h6 id="method-i-users-label-created_at%3A">created_at:<span><a href="#method-i-users-label-created_at%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>订单创建时间</pre>
+
+<h6 id="method-i-users-label-updated_at%3A">updated_at:<span><a href="#method-i-users-label-updated_at%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>订单更新时间</pre>
+
+<h6 id="method-i-users-label-food_name%3A">food_name:<span><a href="#method-i-users-label-food_name%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>食物名字</pre>
+
+<h6 id="method-i-users-label-count%3A">count:<span><a href="#method-i-users-label-count%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>食物数量</pre>
+
+<h6 id="method-i-users-label-rid%3A">rid:<span><a href="#method-i-users-label-rid%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆 id</pre>
+
+<h6 id="method-i-users-label-restaurant_name%3A">restaurant_name:<span><a href="#method-i-users-label-restaurant_name%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆名字</pre>
+
+<h6 id="method-i-users-label-phone_number%EF%BC%88%E5%9C%A8restaurant%E4%B8%AD%EF%BC%89%3A">phone_number（在restaurant中）:<span><a href="#method-i-users-label-phone_number%EF%BC%88%E5%9C%A8restaurant%E4%B8%AD%EF%BC%89%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>餐馆电话号码</pre>
+
+<h6 id="method-i-users-label-shipping_user%3A">shipping_user:<span><a href="#method-i-users-label-shipping_user%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>收货人</pre>
+
+<h6 id="method-i-users-label-shipping_address%3A">shipping_address:<span><a href="#method-i-users-label-shipping_address%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>收货地址</pre>
+
+<h6 id="method-i-users-label-shipping_at%3A">shipping_at:<span><a href="#method-i-users-label-shipping_at%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>送餐到底时间</pre>
+
+<h6 id="method-i-users-label-shipping_fee%3A">shipping_fee:<span><a href="#method-i-users-label-shipping_fee%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>送餐费</pre>
+
+<h6 id="method-i-users-label-phone_number%28%E5%9C%A8order_info%E4%B8%AD%29%3A">phone_number(在order_info中):<span><a href="#method-i-users-label-phone_number%28%E5%9C%A8order_info%E4%B8%AD%29%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>客户的电话号码</pre>
+
+<h6 id="method-i-users-label-total_price%3A">total_price:<span><a href="#method-i-users-label-total_price%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>总价</pre>
+
+<h6 id="method-i-users-label-actual_total_price%3A">actual_total_price:<span><a href="#method-i-users-label-actual_total_price%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>实际订单总价</pre>
+
+<h6 id="method-i-users-label-order_type%3A">order_type:<span><a href="#method-i-users-label-order_type%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>订单状态，0 是下单，1 是商家已确认，2 已完成</pre>
+
+<h6 id="method-i-users-label-is_ticket%3A">is_ticket:<span><a href="#method-i-users-label-is_ticket%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>是否要发票</pre>
+
+<h6 id="method-i-users-label-is_receipt%3A">is_receipt:<span><a href="#method-i-users-label-is_receipt%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>订单状态，0 是下单，1 是商家已确认，2 已完成</pre>
+
+<h6 id="method-i-users-label-is_now%3A">is_now:<span><a href="#method-i-users-label-is_now%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>订单状态，0 是下单，1 是商家已确认，2 已完成</pre>
+
+<h4 id="method-i-users-label-Response+Body+Example%3A">Response Body Example:<span><a href="#method-i-users-label-Response+Body+Example%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>{
+        oid: 12,
+        order_sign: &quot;14143993678&quot;,
+        created_at: &quot;2014-10-27T08:42:47Z&quot;,
+        updated_at: &quot;2014-10-27T08:42:47Z&quot;,
+        order_foods: [
+                {
+                        food_name: &quot;杂酱面&quot;,
+                        count: 1
+                }
+        ],
+        restaurant: {
+                rid: 10,
+                restaurant_name: &quot;懒洋洋绝味面&quot;,
+                phone_number: &quot;13538381054&quot;
+        },
+        order_info: {
+                shipping_user: &quot;秦源懋&quot;,
+                shipping_address: &quot;046031&quot;,
+                shipping_at: &quot;2014-10-27T17:28:57.000Z&quot;,
+                shipping_fee: &quot;0.0&quot;,
+                phone_number: &quot;18200272893&quot;,
+                total_price: &quot;7.0&quot;,
+                actual_total_price: &quot;7.0&quot;,
+                order_type: 0,
+                is_ticket: 0,
+                is_receipt: 0,
+                is_now: 0
+        }
+}</pre>
 
 <h2 id="method-i-users-label-%E5%88%A0%E9%99%A4%E6%94%B6%E8%B4%A7%E5%9C%B0%E5%9D%80">删除收货地址<span><a href="#method-i-users-label-%E5%88%A0%E9%99%A4%E6%94%B6%E8%B4%A7%E5%9C%B0%E5%9D%80">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 
@@ -758,7 +903,7 @@
 
           
           <div class="method-source-code" id="users-source">
-            <pre><span class="ruby-comment"># File app/apis/restfuls/v1/user_api.rb, line 376</span>
+            <pre><span class="ruby-comment"># File app/apis/restfuls/v1/user_api.rb, line 466</span>
 <span class="ruby-identifier">resource</span> <span class="ruby-value">:users</span> <span class="ruby-keyword">do</span>
 
         <span class="ruby-identifier">desc</span> <span class="ruby-string">&quot;Create a customer account&quot;</span>
@@ -878,7 +1023,7 @@
                 <span class="ruby-keyword">end</span>
 
                 <span class="ruby-identifier">namespace</span> <span class="ruby-string">&quot;orders&quot;</span> <span class="ruby-keyword">do</span>
-                        <span class="ruby-identifier">desc</span> <span class="ruby-string">&quot;get user orders&quot;</span>
+                        <span class="ruby-identifier">desc</span> <span class="ruby-string">&quot;get user orders 获取用户订单&quot;</span>
                         <span class="ruby-identifier">params</span> <span class="ruby-keyword">do</span>
                                 <span class="ruby-identifier">requires</span> <span class="ruby-value">:access_token</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">String</span>
                                 <span class="ruby-identifier">optional</span> <span class="ruby-value">:oid</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">Integer</span>, <span class="ruby-identifier">default</span><span class="ruby-operator">:</span> <span class="ruby-value">0</span>
@@ -891,7 +1036,7 @@
                                 <span class="ruby-identifier">id</span> = <span class="ruby-constant">OrderSign</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">id</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">id</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">1</span>
                                 <span class="ruby-identifier">order_signs</span> = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">order_signs</span>
                                                                                   .<span class="ruby-identifier">where</span>(<span class="ruby-value">:is_finished</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:is_finished</span>])
-                                                                                  .<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;id &lt; ?&quot;</span>, <span class="ruby-identifier">id</span>)
+                                                                                  .<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;id &lt;= ?&quot;</span>, <span class="ruby-identifier">id</span>)
                                                                                   .<span class="ruby-identifier">limit</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:count</span>])
                                                                                   .<span class="ruby-identifier">order</span>(<span class="ruby-string">&quot;id DESC&quot;</span>)
                                 <span class="ruby-identifier">present</span> <span class="ruby-identifier">order_signs</span>, <span class="ruby-identifier">with</span><span class="ruby-operator">:</span> <span class="ruby-constant">APIEntities</span><span class="ruby-operator">::</span><span class="ruby-constant">OrderSign</span>
@@ -903,9 +1048,9 @@
                         <span class="ruby-keyword">end</span>
                         <span class="ruby-identifier">get</span> <span class="ruby-string">&#39;:order_id&#39;</span> <span class="ruby-keyword">do</span>
                                 <span class="ruby-identifier">authenticate_user!</span>
-                                <span class="ruby-identifier">order_sign</span> = <span class="ruby-constant">OrderSign</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-value">:sign</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:order_id</span>])
+                                <span class="ruby-identifier">order_sign</span> = <span class="ruby-constant">OrderSign</span>.<span class="ruby-identifier">find_by_id</span>(<span class="ruby-identifier">params</span>[<span class="ruby-value">:order_id</span>])
                                 <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;bad boys&quot;</span>, <span class="ruby-value">401</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">order_sign</span>.<span class="ruby-identifier">user_id</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>
-                                <span class="ruby-identifier">present</span> <span class="ruby-identifier">order_sign</span>, <span class="ruby-identifier">with</span><span class="ruby-operator">:</span> <span class="ruby-constant">APIEntities</span><span class="ruby-operator">::</span><span class="ruby-constant">OrderSign</span>
+                                <span class="ruby-identifier">present</span> <span class="ruby-identifier">order_sign</span>, <span class="ruby-identifier">with</span><span class="ruby-operator">:</span> <span class="ruby-constant">APIEntities</span><span class="ruby-operator">::</span><span class="ruby-constant">OrderSignDetail</span>
                         <span class="ruby-keyword">end</span>
                 <span class="ruby-keyword">end</span>
 

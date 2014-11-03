@@ -1078,6 +1078,7 @@ module Restfuls
 		        order.total_price = price
 		        order.actual_total_price = price
 		        order.food_count = foods.size
+		        order.shipping_at = Time.now + 30.minutes
 		        order.save
 
 		        present:'order_sign', order_sign.sign
@@ -1242,7 +1243,7 @@ module Restfuls
 		    get ":restaurant_id/comments" do
 		    	cid = params[:cid]
 		    	restaurant_last_comment = RestaurantComment.last
-		    	cid = restaurant_last_comment.last.id + 1	if cid == 0 && restaurant_last_comment
+		    	cid = restaurant_last_comment.id + 1	if cid == 0 && restaurant_last_comment
 				comments = RestaurantComment.where(:restaurant_id => params[:restaurant_id]).where("id < ?",cid).limit(params[:count]).order_by(params[:order])
 				present comments, with: APIEntities::RestaurantComment
 		    end

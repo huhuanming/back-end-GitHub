@@ -26,7 +26,7 @@ namespace :deploy do
 	    	
 	  		require 'fileutils'
 
-	  		FileUtils.rm_r '../back-end-souhu/app/app/'
+	  		FileUtils.rm_r '../back-end-souhu/app/app'
 			FileUtils.copy_entry('app', '../back-end-souhu/app/app')
 
 	  		FileUtils.rm_r '../back-end-souhu/app/config'
