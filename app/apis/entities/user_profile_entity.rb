@@ -5,7 +5,7 @@ module Restfuls
           expose :oauth_type, as: :oauth_type
     end
     class UserProfile < Grape::Entity
-          expose :nick_name, as: :token
+          expose :nick_name, as: :name
           expose :avatar, as: :avatar
           expose :phone_number, as: :phone_number
           expose :oauth_users, as: :oauth, using: Restfuls::APIEntities::UserProfileOauth

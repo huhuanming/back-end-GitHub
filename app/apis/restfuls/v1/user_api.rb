@@ -16,7 +16,10 @@ module Restfuls
     	# == U
     	# * 更新收货地址
     	# * 更新默认收货地址
+    	# * 更新用户名
+    	# * 更新手机号
     	# == R
+    	# * 获取用户信息资料
     	# * 获取验证码
     	# * 获取收货地址
     	# * 获取默认收货地址
@@ -70,6 +73,40 @@ module Restfuls
 		# 	数据存储错误
 		# ====== 502:
 		# 	该手机号已被注册
+		#
+		# == 获取用户信息资料
+		# 	获取用户的信息资料
+	    # ==== GET
+	    # 	/users/{user_id}/profile
+		# ==== Params
+		# ====== access_token:
+		# 	user 的 access_token
+	    # ==== Response Status Code
+		# 	200
+	    # ==== Response Body
+		# ====== name:
+		# 	用户名
+		# ====== avatar:
+		# 	用户头像
+		# ====== phone_number:
+		# 	用户手机号
+		# ====== oauth_type:
+		# 	0 是新浪微博， 1是 微信, 一个用户可能存在多个第三方登陆账号
+		#
+		# ==== Response Body Example:
+		# 		{
+		#  			name: "打开方式有点不对啊",
+		# 			avatar: "restaurant_avatar",
+		#   		phone_number: "没有号码",
+		# 			oauth: [
+		#   			{
+		# 					oauth_type: 0
+		# 				},
+		#   			{
+		# 					oauth_type: 1
+		# 				}
+		# 			]
+		# 		}
 		#
 		# == 获取验证码
 		# 	获取用户验证码
@@ -572,7 +609,7 @@ module Restfuls
 			end
 
 			namespace ":user_id" do
-				desc "get a user profile"
+				desc "get a user profile 获取用户信息资料"
 				params do
 					requires :access_token, type: String
 				end
