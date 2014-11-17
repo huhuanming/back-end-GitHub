@@ -133,6 +133,8 @@
 <p>创建帐号</p>
 </li><li>
 <p>创建收货地址</p>
+</li><li>
+<p>创建第三方登陆账号</p>
 </li></ul>
 
 <h2 id="method-i-users-label-U">U<span><a href="#method-i-users-label-U">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
@@ -144,6 +146,8 @@
 <p>更新用户名</p>
 </li><li>
 <p>更新手机号</p>
+</li><li>
+<p>更新用户密码</p>
 </li></ul>
 
 <h2 id="method-i-users-label-R">R<span><a href="#method-i-users-label-R">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
@@ -164,6 +168,8 @@
 <h2 id="method-i-users-label-D">D<span><a href="#method-i-users-label-D">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 <ul><li>
 <p>删除收货地址</p>
+</li><li>
+<p>删除第三方登陆账号</p>
 </li></ul>
 
 <h2 id="method-i-users-label-Other">Other<span><a href="#method-i-users-label-Other">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
@@ -171,6 +177,10 @@
 <p>登录帐号</p>
 </li><li>
 <p>登陆账号（第三方登陆）</p>
+</li><li>
+<p>绑定用户与推送</p>
+</li><li>
+<p>反馈意见</p>
 </li></ul>
 
 <h2 id="method-i-users-label-%E5%88%9B%E5%BB%BA%E5%B8%90%E5%8F%B7">创建帐号<span><a href="#method-i-users-label-%E5%88%9B%E5%BB%BA%E5%B8%90%E5%8F%B7">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
@@ -442,6 +452,150 @@ phone_number: &quot;没有号码&quot;,
 
 <pre>success to updated user name</pre>
 
+<h2 id="method-i-users-label-%E7%BB%91%E5%AE%9A%E7%94%A8%E6%88%B7%E4%B8%8E%E6%8E%A8%E9%80%81">绑定用户与推送<span><a href="#method-i-users-label-%E7%BB%91%E5%AE%9A%E7%94%A8%E6%88%B7%E4%B8%8E%E6%8E%A8%E9%80%81">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<pre>绑定用户与推送</pre>
+
+<h4 id="method-i-users-label-Post">Post<span><a href="#method-i-users-label-Post">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>/users/bind_push</pre>
+
+<h4 id="method-i-users-label-Params">Params<span><a href="#method-i-users-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-users-label-access_token%3A">access_token:<span><a href="#method-i-users-label-access_token%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>用户的 access token</pre>
+
+<h6 id="method-i-users-label-push_id%3A">push_id:<span><a href="#method-i-users-label-push_id%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>极光推送 id</pre>
+
+<h4 id="method-i-users-label-Response+Status+Code">Response Status Code<span><a href="#method-i-users-label-Response+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>201</pre>
+
+<h4 id="method-i-users-label-Response+Body">Response Body<span><a href="#method-i-users-label-Response+Body">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-users-label-response_status%3A">response_status:<span><a href="#method-i-users-label-response_status%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>success to bind</pre>
+
+<h2 id="method-i-users-label-%E5%8F%8D%E9%A6%88%E6%84%8F%E8%A7%81">反馈意见<span><a href="#method-i-users-label-%E5%8F%8D%E9%A6%88%E6%84%8F%E8%A7%81">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<pre>反馈意见</pre>
+
+<h4 id="method-i-users-label-Post">Post<span><a href="#method-i-users-label-Post">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>/users/feedback</pre>
+
+<h4 id="method-i-users-label-Params">Params<span><a href="#method-i-users-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-users-label-access_token%3A%28%E5%8F%AF%E9%80%89%EF%BC%8C%E6%9C%80%E5%A5%BD%E6%9C%89%E3%80%82%E4%BE%BF%E4%BA%8E%E7%BB%9F%E8%AE%A1%29">access_token:(可选，最好有。便于统计)<span><a href="#method-i-users-label-access_token%3A%28%E5%8F%AF%E9%80%89%EF%BC%8C%E6%9C%80%E5%A5%BD%E6%9C%89%E3%80%82%E4%BE%BF%E4%BA%8E%E7%BB%9F%E8%AE%A1%29">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>用户的 access token</pre>
+
+<h4 id="method-i-users-label-Response+Status+Code">Response Status Code<span><a href="#method-i-users-label-Response+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>201</pre>
+
+<h4 id="method-i-users-label-Response+Body">Response Body<span><a href="#method-i-users-label-Response+Body">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-users-label-response_status%3A">response_status:<span><a href="#method-i-users-label-response_status%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>success to feedback</pre>
+
+<h2 id="method-i-users-label-%E6%9B%B4%E6%96%B0%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81">更新用户密码<span><a href="#method-i-users-label-%E6%9B%B4%E6%96%B0%E7%94%A8%E6%88%B7%E5%AF%86%E7%A0%81">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<pre>更新用户密码</pre>
+
+<h4 id="method-i-users-label-PUT">PUT<span><a href="#method-i-users-label-PUT">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>/users/{:user_id}/password</pre>
+
+<h4 id="method-i-users-label-Params">Params<span><a href="#method-i-users-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-users-label-access_token%3A">access_token:<span><a href="#method-i-users-label-access_token%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>用户的 access token</pre>
+
+<h6 id="method-i-users-label-password%3A">password:<span><a href="#method-i-users-label-password%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>用户的新密码(请提交两次 md5 运算后得到的值)</pre>
+
+<h4 id="method-i-users-label-Response+Status+Code">Response Status Code<span><a href="#method-i-users-label-Response+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>200</pre>
+
+<h4 id="method-i-users-label-Response+Body">Response Body<span><a href="#method-i-users-label-Response+Body">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-users-label-response_status%3A">response_status:<span><a href="#method-i-users-label-response_status%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>success to updated user password</pre>
+
+<h2 id="method-i-users-label-%E5%88%9B%E5%BB%BA%E7%AC%AC%E4%B8%89%E6%96%B9%E7%99%BB%E9%99%86%E8%B4%A6%E5%8F%B7">创建第三方登陆账号<span><a href="#method-i-users-label-%E5%88%9B%E5%BB%BA%E7%AC%AC%E4%B8%89%E6%96%B9%E7%99%BB%E9%99%86%E8%B4%A6%E5%8F%B7">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<pre>创建第三方登陆账号</pre>
+
+<h4 id="method-i-users-label-POST">POST<span><a href="#method-i-users-label-POST">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>/users/{:user_id}/oauth</pre>
+
+<h4 id="method-i-users-label-Params">Params<span><a href="#method-i-users-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-users-label-access_token%3A">access_token:<span><a href="#method-i-users-label-access_token%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>用户的 access token</pre>
+
+<h6 id="method-i-users-label-uid%3A">uid:<span><a href="#method-i-users-label-uid%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>第三方账号体系中的用户唯一标识, 一般叫 uid</pre>
+
+<h6 id="method-i-users-label-oauth_token%3A">oauth_token:<span><a href="#method-i-users-label-oauth_token%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>第三方账号登陆后获取的 Token</pre>
+
+<h6 id="method-i-users-label-oauth_type%3A">oauth_type:<span><a href="#method-i-users-label-oauth_type%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>第三方账号类型，微博为 0 ，微信为1</pre>
+
+<h4 id="method-i-users-label-Response+Status+Code">Response Status Code<span><a href="#method-i-users-label-Response+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>201</pre>
+
+<h4 id="method-i-users-label-Response+Body">Response Body<span><a href="#method-i-users-label-Response+Body">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-users-label-response_status%3A">response_status:<span><a href="#method-i-users-label-response_status%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>success to bind</pre>
+
+<h2 id="method-i-users-label-%E5%88%A0%E9%99%A4%E7%AC%AC%E4%B8%89%E6%96%B9%E7%99%BB%E9%99%86%E8%B4%A6%E5%8F%B7">删除第三方登陆账号<span><a href="#method-i-users-label-%E5%88%A0%E9%99%A4%E7%AC%AC%E4%B8%89%E6%96%B9%E7%99%BB%E9%99%86%E8%B4%A6%E5%8F%B7">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
+
+<pre>删除第三方登陆账号</pre>
+
+<h4 id="method-i-users-label-DELETE">DELETE<span><a href="#method-i-users-label-DELETE">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>/users/{:user_id}/oauth</pre>
+
+<h4 id="method-i-users-label-Params">Params<span><a href="#method-i-users-label-Params">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-users-label-access_token%3A">access_token:<span><a href="#method-i-users-label-access_token%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>用户的 access token</pre>
+
+<h6 id="method-i-users-label-oauth_type%3A">oauth_type:<span><a href="#method-i-users-label-oauth_type%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>第三方账号类型，微博为 0 ，微信为1</pre>
+
+<h4 id="method-i-users-label-Response+Status+Code">Response Status Code<span><a href="#method-i-users-label-Response+Status+Code">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<pre>200</pre>
+
+<h4 id="method-i-users-label-Response+Body">Response Body<span><a href="#method-i-users-label-Response+Body">&para;</a> <a href="#documentation">&uarr;</a></span></h4>
+
+<h6 id="method-i-users-label-response_status%3A">response_status:<span><a href="#method-i-users-label-response_status%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
+
+<pre>success to unbind</pre>
+
 <h2 id="method-i-users-label-%E6%9B%B4%E6%96%B0%E6%89%8B%E6%9C%BA%E5%8F%B7">更新手机号<span><a href="#method-i-users-label-%E6%9B%B4%E6%96%B0%E6%89%8B%E6%9C%BA%E5%8F%B7">&para;</a> <a href="#documentation">&uarr;</a></span></h2>
 
 <pre>更新用户手机号，需要验证码，请在使用此接口之前，获取用户验证码一次</pre>
@@ -458,7 +612,7 @@ phone_number: &quot;没有号码&quot;,
 
 <h6 id="method-i-users-label-phone_number%3A">phone_number:<span><a href="#method-i-users-label-phone_number%3A">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
 
-<pre>用户的新新手机号</pre>
+<pre>用户的新手机号</pre>
 
 <h6 id="method-i-users-label-encryption_code">encryption_code<span><a href="#method-i-users-label-encryption_code">&para;</a> <a href="#documentation">&uarr;</a></span></h6>
 
@@ -1021,7 +1175,7 @@ phone_number: &quot;没有号码&quot;,
 
           
           <div class="method-source-code" id="users-source">
-            <pre><span class="ruby-comment"># File app/apis/restfuls/v1/user_api.rb, line 536</span>
+            <pre><span class="ruby-comment"># File app/apis/restfuls/v1/user_api.rb, line 617</span>
 <span class="ruby-identifier">resource</span> <span class="ruby-value">:users</span> <span class="ruby-keyword">do</span>
 
         <span class="ruby-identifier">desc</span> <span class="ruby-string">&quot;Create a customer account&quot;</span>
@@ -1051,7 +1205,7 @@ phone_number: &quot;没有号码&quot;,
                 <span class="ruby-identifier">present</span> <span class="ruby-identifier">new_user</span>, <span class="ruby-identifier">with</span><span class="ruby-operator">:</span> <span class="ruby-constant">APIEntities</span><span class="ruby-operator">::</span><span class="ruby-constant">UserToken</span>
         <span class="ruby-keyword">end</span>
 
-        <span class="ruby-identifier">desc</span> <span class="ruby-string">&quot;bind push id and user&quot;</span>
+        <span class="ruby-identifier">desc</span> <span class="ruby-string">&quot;bind push id and user 绑定用户与推送&quot;</span>
         <span class="ruby-identifier">params</span> <span class="ruby-keyword">do</span>
                 <span class="ruby-identifier">requires</span> <span class="ruby-value">:push_id</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">String</span>
                 <span class="ruby-identifier">requires</span> <span class="ruby-value">:access_token</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">String</span>
@@ -1060,6 +1214,15 @@ phone_number: &quot;没有号码&quot;,
                 <span class="ruby-identifier">authenticate_user!</span>
                 <span class="ruby-constant">UserPush</span>.<span class="ruby-identifier">create</span>(<span class="ruby-value">:user_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>, <span class="ruby-value">:push_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:push_id</span>])
                 <span class="ruby-identifier">present</span><span class="ruby-value">:&quot;response_status&quot;</span>, <span class="ruby-string">&quot;success to bind&quot;</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-identifier">desc</span> <span class="ruby-string">&quot;反馈意见&quot;</span>
+        <span class="ruby-identifier">params</span> <span class="ruby-keyword">do</span>
+                <span class="ruby-identifier">optional</span> <span class="ruby-value">:access_token</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">String</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">post</span> <span class="ruby-string">&quot;/feedback&quot;</span> <span class="ruby-keyword">do</span>
+                
+                <span class="ruby-identifier">present</span><span class="ruby-value">:&quot;response_status&quot;</span>, <span class="ruby-string">&quot;success to feedback&quot;</span>
         <span class="ruby-keyword">end</span>
 
         <span class="ruby-identifier">desc</span> <span class="ruby-string">&quot;Login customer account with third party oauth service&quot;</span>
@@ -1153,6 +1316,18 @@ phone_number: &quot;没有号码&quot;,
                         <span class="ruby-identifier">present</span><span class="ruby-value">:&quot;response_status&quot;</span>, <span class="ruby-string">&quot;success to updated user name&quot;</span>
                 <span class="ruby-keyword">end</span>
 
+                <span class="ruby-identifier">desc</span> <span class="ruby-string">&quot;updated a user password 更新用户密码&quot;</span>
+                <span class="ruby-identifier">params</span> <span class="ruby-keyword">do</span>
+                        <span class="ruby-identifier">requires</span> <span class="ruby-value">:access_token</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">String</span>
+                        <span class="ruby-identifier">requires</span> <span class="ruby-value">:password</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">String</span>
+                <span class="ruby-keyword">end</span>
+                <span class="ruby-identifier">put</span> <span class="ruby-string">&#39;password&#39;</span> <span class="ruby-keyword">do</span>
+                        <span class="ruby-identifier">authenticate_user!</span>
+                        <span class="ruby-identifier">user</span> = <span class="ruby-identifier">current_user</span>
+                        <span class="ruby-identifier">user</span>.<span class="ruby-identifier">password</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:password</span>]
+                        <span class="ruby-identifier">user</span>.<span class="ruby-identifier">save</span>
+                        <span class="ruby-identifier">present</span><span class="ruby-value">:&quot;response_status&quot;</span>, <span class="ruby-string">&quot;success to updated user password&quot;</span>
+                <span class="ruby-keyword">end</span>
 
                 <span class="ruby-identifier">desc</span> <span class="ruby-string">&quot;updated a user phone_number 更新手机号&quot;</span>
                 <span class="ruby-identifier">params</span> <span class="ruby-keyword">do</span>
@@ -1170,6 +1345,59 @@ phone_number: &quot;没有号码&quot;,
                         <span class="ruby-identifier">user</span>.<span class="ruby-identifier">phone_number</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:phone_number</span>]
                         <span class="ruby-identifier">user</span>.<span class="ruby-identifier">save</span>
                         <span class="ruby-identifier">present</span><span class="ruby-value">:&quot;response_status&quot;</span>, <span class="ruby-string">&quot;success to updated phone number&quot;</span>
+                <span class="ruby-keyword">end</span>
+
+                <span class="ruby-identifier">desc</span> <span class="ruby-string">&quot;创建第三方登陆账号&quot;</span>
+                <span class="ruby-identifier">params</span> <span class="ruby-keyword">do</span>
+                        <span class="ruby-identifier">requires</span> <span class="ruby-value">:access_token</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">String</span>
+                        <span class="ruby-identifier">requires</span> <span class="ruby-value">:uid</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">String</span>
+                        <span class="ruby-identifier">requires</span> <span class="ruby-value">:oauth_token</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">String</span>
+                        <span class="ruby-identifier">requires</span> <span class="ruby-value">:oauth_type</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">String</span>
+                <span class="ruby-keyword">end</span>
+                <span class="ruby-identifier">post</span> <span class="ruby-string">&#39;oauth&#39;</span> <span class="ruby-keyword">do</span>
+                        <span class="ruby-identifier">authenticate_user!</span>
+                        <span class="ruby-identifier">uri</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-string">&quot;https://api.weibo.com/2/users/show.json&quot;</span>)
+                        
+                        <span class="ruby-identifier">http_params</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+                        <span class="ruby-identifier">http_params</span>[<span class="ruby-string">&quot;appkey&quot;</span>] = <span class="ruby-string">&quot;2285991897&quot;</span>
+                        <span class="ruby-identifier">http_params</span>[<span class="ruby-string">&quot;access_token&quot;</span>] = <span class="ruby-identifier">params</span>[<span class="ruby-value">:oauth_token</span>]
+                        <span class="ruby-identifier">http_params</span>[<span class="ruby-string">&quot;uid&quot;</span>] = <span class="ruby-identifier">params</span>[<span class="ruby-value">:uid</span>]
+                        <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">query</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">encode_www_form</span>(<span class="ruby-identifier">http_params</span>)
+                        <span class="ruby-identifier">http</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">uri</span>.<span class="ruby-identifier">host</span>, <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">port</span>)
+                        <span class="ruby-identifier">http</span>.<span class="ruby-identifier">use_ssl</span> = <span class="ruby-keyword">true</span>
+                        <span class="ruby-identifier">http</span>.<span class="ruby-identifier">verify_mode</span> = <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">SSL</span><span class="ruby-operator">::</span><span class="ruby-constant">VERIFY_NONE</span>
+                        <span class="ruby-identifier">http_request</span> = <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span><span class="ruby-operator">::</span><span class="ruby-constant">Get</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">uri</span>.<span class="ruby-identifier">request_uri</span>)
+
+                        <span class="ruby-identifier">response</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">http</span>.<span class="ruby-identifier">request</span>(<span class="ruby-identifier">http_request</span>).<span class="ruby-identifier">body</span>)
+
+                        <span class="ruby-identifier">error!</span>(<span class="ruby-string">&quot;failed to login weibo&quot;</span>, <span class="ruby-value">401</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">response</span>[<span class="ruby-string">&quot;id&quot;</span>].<span class="ruby-identifier">nil?</span>
+
+                        <span class="ruby-identifier">the_oauth_user</span> = <span class="ruby-constant">OauthUser</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-value">:uid</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-string">&quot;uid&quot;</span>])
+                        <span class="ruby-identifier">the_oauth_user</span>.<span class="ruby-identifier">delete</span>
+
+                        <span class="ruby-identifier">the_user</span> = <span class="ruby-identifier">current_user</span>
+                        <span class="ruby-identifier">the_user</span>.<span class="ruby-identifier">save</span>
+                        <span class="ruby-identifier">the_oauth_user</span> = <span class="ruby-constant">OauthUser</span>.<span class="ruby-identifier">new</span>
+                        <span class="ruby-identifier">the_oauth_user</span>.<span class="ruby-identifier">user_id</span> = <span class="ruby-identifier">the_user</span>.<span class="ruby-identifier">id</span>
+                        <span class="ruby-identifier">the_oauth_user</span>.<span class="ruby-identifier">uid</span> = <span class="ruby-identifier">params</span>[<span class="ruby-string">&quot;uid&quot;</span>]
+                        <span class="ruby-identifier">the_oauth_user</span>.<span class="ruby-identifier">oauth_type</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:oauth_type</span>]
+                        <span class="ruby-identifier">the_oauth_user</span>.<span class="ruby-identifier">save</span>
+                        
+                        <span class="ruby-identifier">present</span><span class="ruby-value">:&quot;response_status&quot;</span>, <span class="ruby-string">&quot;success to bind&quot;</span>
+                <span class="ruby-keyword">end</span>
+
+                <span class="ruby-identifier">desc</span> <span class="ruby-string">&quot;unbind  删除第三方登陆账号&quot;</span>
+                <span class="ruby-identifier">params</span> <span class="ruby-keyword">do</span>
+                        <span class="ruby-identifier">requires</span> <span class="ruby-value">:access_token</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">String</span>
+                        <span class="ruby-identifier">requires</span> <span class="ruby-value">:oauth_type</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">Integer</span>, <span class="ruby-identifier">default</span><span class="ruby-operator">:</span> <span class="ruby-value">0</span> ,<span class="ruby-identifier">values</span><span class="ruby-operator">:</span> [<span class="ruby-value">0</span>, <span class="ruby-value">1</span>]
+                <span class="ruby-keyword">end</span>
+                <span class="ruby-identifier">delete</span> <span class="ruby-string">&#39;oauth&#39;</span> <span class="ruby-keyword">do</span>
+                        <span class="ruby-identifier">authenticate_user!</span>
+                        <span class="ruby-identifier">oauth_users</span> = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">oauth_users</span>
+                        <span class="ruby-keyword">if</span> <span class="ruby-identifier">oauth_users</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
+                                <span class="ruby-identifier">oauth_users</span>.<span class="ruby-identifier">where</span>(<span class="ruby-value">:oauth_type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:oauth_type</span>]).<span class="ruby-identifier">delete_all</span>
+                        <span class="ruby-keyword">end</span>
+                        <span class="ruby-identifier">present</span><span class="ruby-value">:&quot;response_status&quot;</span>, <span class="ruby-string">&quot;success to unbind&quot;</span>
                 <span class="ruby-keyword">end</span>
 
                 <span class="ruby-identifier">namespace</span> <span class="ruby-string">&quot;orders&quot;</span> <span class="ruby-keyword">do</span>
